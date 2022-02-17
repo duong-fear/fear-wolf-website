@@ -1,0 +1,26 @@
+<!-- Section Shop
+				============================================= -->
+				<div id="section-shop" class="section page-section dark bg-transparent m-0">
+					<div class="container clearfix">
+						<div class="row justify-content-between gutter-50">
+							<div class="col-md-6">
+								<div class="h-100 min-vh-50 rounded" style="background: url('https://source.unsplash.com/TU6ztds5LGg') no-repeat center center / cover;"></div>
+							</div>
+							<div class="col-md-6">
+								<div class="overflow-hidden mb-4">
+									<i class="spa-ointment icon-4x color"></i>
+									<h3 class="display-4 color mb-0" data-animate="fadeInUpSmall fast">Our Products</h3>
+								</div>
+								<h5 class="text-white h6 mb-4"><i class="spa-sale1"></i> 40% Discount for Members</h5>
+
+								<p class="text-white-50" data-animate="fadeInUpSmall fast">Ipsa felis in mollis turpis phasellus, repellat! Ducimus porttitor class quod? Iste neque lorem tenetur quisque possimus excepturi error ligula.</p>
+
+								<p class="text-white-50" data-animate="fadeInUpSmall fast" data-delay="200">In morbi risus litora numquam, similique libero ligula nostrum nulla repudiandae proin luctus class varius volutpat! Fringilla fringilla sagittis nunc.</p>
+
+								<div class="overflow-hidden mb-4">
+									<a href="https://amazon.com" data-animate="fadeInUpSmall faster" data-delay="300" class="btn rounded-0 btn-border color"><i class="spa-flowers-feet"></i><span class="px-4">Shop Now</span></a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>

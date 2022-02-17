@@ -1,0 +1,130 @@
+@font-face {
+  font-family: "Blood Crow";
+  src: url("https://www.blood.io/images/fonts/bloodcrow.ttf") format("truetype");
+}
+h1, #logo a {font-family:'Poppins', sans-serif ! important;font-weight:normal ! important;color:red ! important;}
+.heading-block h1 {font-family:'Poppins' ! important;}
+#logo a {font-family:'Blood Crow', sans-serif ! important;}
+h2 {font-family:DM Sans ! important;color:red ! important;}
+#content, #slider {background:black ! important;}
+.slider-caption h2 {font-size:2rem;}
+.dark a.menu-link:hover, .dark a.menu-link:active {color:red ! important;}
+.dark a.menu-link:visited {color:white ! important;}
+.dark #header-wrap, .dark .primary-menu:not(.not-dark) .sub-menu-container, .dark .primary-menu:not(.not-dark) .mega-menu-content {border-top-color:red ! important;}
+.dark #wrapper {background:black;}
+
+.bloodvialhome {width:75%;}
+
+@media (max-width: 1200px) {
+.bloodvial {max-width:67px ! important;left:-85px ! important;top:0 ! important;}
+p.lead {max-width:100%;}
+.bloodvialhome {width:150%;}
+}
+@media (max-width: 1000px) {
+.bloodvial {max-width:112px ! important;left:0px ! important;top:0 ! important;}
+.bloodvialhome {width:50%;}
+}
+@media (max-width: 770px) {
+.bloodvial {max-width:91px ! important;}
+}
+@media (max-width: 500px) {
+.bloodvial {max-width:71px ! important;}
+}
+@media (max-width: 410px) {
+.bloodvial {max-width:51px ! important;left:10px;}
+}
+.red {color:red ! important;}
+.dark #gotoTop:hover {background:red ! important;}
+.bloodinfusedgames .fbox-icon i, .bloodinfusedgames .fbox-icon img {background:none;}
+.bloodinfusedgames .fbox-icon {width:7.5em;height:auto ! important;}
+.bloodinfusedgames .fbox-icon a, .bloodinfusedgames .fbox-icon i, .fbox-icon img {height:auto ! important;}
+.dark .bloodinfusedgames .fbox-content h3 {color:red ! important;}
+.bloodinfusedgames .fbox-icon i, .bloodinfusedgames .fbox-icon img {border-radius: 0 ! important;}
+.red {color:red ! important;}
+.game-icons img {max-width:50px;}
+#oc-clients .owl-item img {opacity:0.8 ! important;}
+#oc-clients .owl-item img:hover {opacity:1 ! important;}
+#oc-clients .owl-item img {height:40px;width:auto ! important;}
+#copyrights a.fearfooter {color:red ! important;}
+.dark .menu-link:hover div {color:red ! important;}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 2), not all, not all, not all, only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
+	#logo a.standard-logo {display:block;font-family:Blood Crow ! important;}
+}
+
+@media (max-width: 800px) {
+.dark #logo a {font-size:20pt ! important;font-family:Blood Crow ! important;}
+.d-none {display:block ! important;}
+.heading-block h1 {font-size:19px ! important;}
+}
+@media (max-width: 991.98px) {
+#logo a.standard-logo {display:block ! important;font-family:Blood Crow ! important;}
+.swiper_wrapper .slider-caption h2 {font-size:14pt;}
+.swiper_wrapper .slider-caption p {font-size:14pt ! important;}
+.slider-caption {padding-top:40px;}
+}
+@media (max-width: 750px) {
+.slider-caption {padding-top:40px;}
+.swiper_wrapper .slider-caption p {font-size:12pt ! important;}
+}
+@media (max-width: 500px) {
+.slider-caption {padding-top:54px;}
+}
+@media (max-width: 450px) {
+.swiper_wrapper .slider-caption h2 {line-height:30px;}
+.slider-caption {padding-top:64px;}
+}
+@media (max-width: 410px) {
+.slider-caption {padding-top:70px;}
+}
+.dark #page-title, #page-title.dark {background:#222;}
+.dark .breadcrumb li.breadcrumb-item a:hover, .dark .breadcrumb li.breadcrumb-item a:visited, .dark .breadcrumb li.breadcrumb-item a:active {color:red ! important;}
+
+.usecase ul.menu-container li.menu-link-1 a div, 
+.usecase ul.menu-container li.menu-link-1 a, 
+.tokenomics ul.menu-container li.menu-link-2 a,
+.casestudy ul.menu-container li.menu-link-4 a,
+.feartoken ul.menu-container li.menu-link-5 a,
+.launchpage ul.menu-container li.menu-link-6 a
+{color:red ! important;}
+.slider-caption p {font-size:14pt;}
+
+
+@media (min-width: 992px){
+.dark #header.transparent-header.full-header #header-wrap, #header.transparent-header.full-header.dark #header-wrap {
+    border-bottom-color: rgba(255,255,255,0.15);
+}
+}
+.dark .transparent-header.full-header .primary-menu .menu-container, .transparent-header.full-header.dark .primary-menu .menu-container {border:none ! important;}
+#footer {border:none ! important;}
+.subpage .section ul li, .section p {margin-bottom:20px;font-size:13pt;}
+.subpage .section ul {margin-top:20px;}
+.subpage h3 {font-size:13pt;color:red;}
+.red {color:red ! important;}
+.subpage .slide-number {display:none;}
+
+.skulllist li {
+    background: url(https://www.blood.io/images/blood-skull.svg) no-repeat;
+    padding-left: 30px;
+    background-size: 20px;
+    list-style: none;
+    text-align: left;
+}
+
+.tokenomics .feature-box img {width:50px;margin-bottom:15px;}
+.tokenomics .feature-box h3 {font-size:20pt;}
+.tokenomics .feature-box h3 .subtitle {font-size:12pt;}
+
+.skulllist {display:inline-block;margin:0 auto;width:auto;}
+#content p {color:#aaa;}
+
+.dark #header-wrap {
+    background-color: #000;
+}
+
+.textcontainer {width:50%;margin:0 auto;}
+
+
+@media (max-width: 992px){
+.textcontainer {width:100%;margin:0 auto;}
+}

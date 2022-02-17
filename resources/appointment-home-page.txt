@@ -1,0 +1,103 @@
+		<!-- Section Appointment
+				============================================= -->
+				<div id="section-appointment" class="section page-section bg-transparent topmargin-lg">
+					<div class="container mw-md">
+						<div class="row align-items-stretch">
+							<div class="col-md-6 min-vh-50 d-flex flex-column">
+								<div class="h-50 rounded mt-2 px-5" style="background: url('wolf/images/price/cosmetic-1.jpg') no-repeat center center / cover;">
+									<div class="vertical-middle over">
+										<div class="overflow-hidden">
+											<div  data-animate="fadeInUpSmall fast" class="text-black-50">Cosmetics</div>
+										</div>
+										<div class="overflow-hidden">
+			 								<h3 data-animate="fadeInUpSmall fast" data-delay="100" class="h3 mb-0 mt-1">Face Cream</h3>
+			 							</div>
+			 							<div class="overflow-hidden">
+			 								<a href="#" data-animate="fadeInUpSmall fast" data-delay="200" class="button button-dark bg-color mt-3">Shop Now</a>
+			 							</div>
+		 							</div>
+								</div>
+								<div class="h-50 rounded text-lg-end px-4 mt-4" style="background: url('wolf/images/price/cosmetic-2.jpg') no-repeat right center / cover;">
+									<div class="vertical-middle">
+										<div class="overflow-hidden">
+											<div  data-animate="fadeInUpSmall fast" class="text-black-50">Spa Products</div>
+										</div>
+										<div class="overflow-hidden">
+			 								<h3 data-animate="fadeInUpSmall fast" data-delay="100" class="h3 mb-0 mt-1">Relieve Stress</h3>
+			 							</div>
+			 							<div class="overflow-hidden">
+			 								<a href="#" data-animate="fadeInUpSmall fast" data-delay="200" class="button button-dark bg-color mt-3">Shop Now</a>
+			 							</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6 mt-5 mt-md-0">
+								<div class="dark">
+									<div class="d-flex align-items-center bottommargin-sm">
+										<i class="spa-leaves h3 icon-stacked text-center border border-light color rounded-circle icon-2x me-3 mb-0"></i>
+										<div>
+											<div class="overflow-hidden">
+												<div class="text-white-50" data-animate="fadeInUpSmall" data-delay="10">Get Instant 40% Discount</div>
+											</div>
+											<div class="overflow-hidden">
+												<h3 class="h3 mb-0 mt-1" data-animate="fadeInUpSmall" data-delay="100">Make an Appointment</h3>
+											</div>
+										</div>
+									</div>
+									<div class="form-widget">
+
+										<div class="form-result"></div>
+
+										<form class="mb-0" id="template-contactform" name="template-contactform" action="include/form.php" method="post">
+
+											<div class="form-process">
+												<div class="css3-spinner">
+													<div class="css3-spinner-scaler"></div>
+												</div>
+											</div>
+
+											<div class="row">
+												<div class="col-md-12 form-group">
+													<input type="text" id="template-contactform-name" name="template-contactform-name" value="" class="form-control form-control-lg bg-transparent color border-light required" placeholder="Your Name" />
+												</div>
+
+												<div class="col-md-12 form-group">
+													<input type="email" id="template-contactform-email" name="template-contactform-email" value="" class="form-control form-control-lg required bg-transparent color border-light" placeholder="Email Address " />
+												</div>
+
+												<div class="col-md-12 form-group">
+													<input type="text" id="template-contactform-phone" name="template-contactform-phone" value="" class="form-control form-control-lg bg-transparent color border-light" placeholder="Contact Number" />
+												</div>
+
+												<div class="col-md-12 form-group">
+													<select id="template-contactform-service" name="template-contactform-service" class="form-select form-select-lg bg-transparent color border-light">
+														<option disabled selected value="">Select Your Service</option>
+														<option value="Swedish Massage">Swedish Massage</option>
+														<option value="Body Scrub">Body Scrub</option>
+														<option value="Couple Massage">Couple Massage</option>
+														<option value="Hot Stone Therapy">Hot Stone Therapy</option>
+													</select>
+												</div>
+
+												<div class="col-md-12 form-group">
+													<input type="text" id="template-contactform-date" name="template-contactform-date" value="" class="form-control form-control-lg bg-transparent color border-light required" placeholder="Select Date &amp; Time.." data-time="true" data-dateFormat="d/m/yy - H:i">
+												</div>
+
+												<div class="col-12 form-group d-none">
+													<input type="text" id="template-contactform-botcheck" name="template-contactform-botcheck" value="" class="form-control form-control-lg bg-transparent color border-light" />
+												</div>
+
+												<div class="col-12">
+													<button type="submit" id="template-contactform-submit" name="template-contactform-submit" value="submit" class="btn rounded-0 btn-border color w-100"><i class="icon-calendar21"></i><span class="flex-grow-1">Buy Now</span></button>
+												</div>
+											</div>
+
+											<input type="hidden" name="prefix" value="template-contactform-">
+
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
