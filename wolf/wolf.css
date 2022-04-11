@@ -1,6 +1,10 @@
 @font-face {
-  font-family: "Surfer Bay";
+  font-family: "Wolfs Bane";
   src: url("https://www.fear.io/images/fonts/surfer-bay.otf") format("truetype");
+}
+@font-face {
+  font-family: "Wolfs Bane";
+  src: url("https://www.fear.io/fonts/wolfsbane2.ttf") format("truetype");
 }
 
 
@@ -19,9 +23,10 @@ h1, h2, h3, h4, h5, h6, #logo a, .menu-link, .mega-menu-style-2 .mega-menu-title
 .line { border-color: transparent !important; }
 
 .bg-color,
-.page-transition-wrap, .css3-spinner { background-color: var(--bgcolor, #2E364F) !important; }
+.page-transition-wrap, .css3-spinner { background-color: var(--bgcolor, #000) !important; }
 
-.css3-spinner > div {  background-color: var(--themecolor, #F1C77A) !important; }
+.css3-spinner > div {  background-color: var(--themecolor, #c0565a) !important; }
+.wrapimage150 {display:inline-block ! important;width:150px ! important;}
 
 .dark body,
 .dark h1,
@@ -46,7 +51,6 @@ h5 { color: #c0565a ! important; }
 
 .dark #header-wrap {
 	background-color: var(--bgcolor, #2E364F);
-    border-bottom-color: rgba(var(--themecolorrgba, 241,199,122), var(--border-opacity, .15));
 }
 
 .menu-link {
@@ -258,15 +262,15 @@ blockquote {
 .owl-carousel .owl-nav [class*=owl-] {
 	opacity: 1 !important;
 	background-color: black;
-	border: 2px solid orange;
-	color: orange;
+	border: 2px solid #c0565a;
+	color: #c0565a;
 	width: 40px;
 	height: 40px;
 	margin: 0px;
 	font-size: 24px;
 }
 
-.owl-carousel .owl-nav button.owl-prev:hover, .owl-carousel .owl-nav button.owl-next:hover {background:orange ! important;color:black ! important;}
+.owl-carousel .owl-nav button.owl-prev:hover, .owl-carousel .owl-nav button.owl-next:hover {background:#c0565a ! important;color:black ! important;}
 
 .wolftraitscarousel img {border-radius:0 ! important;}
 
@@ -337,7 +341,7 @@ blockquote {
 		will-change: inherit;
 	}
 
-	.sticky-header #header-wrap { top: 30px }
+	.sticky-header #header-wrap {top:30px;}
 
 	#header .menu-link {
 		padding-top: 10px !important;
@@ -345,6 +349,8 @@ blockquote {
 	    padding-left: 10px;
 	    padding-right: 10px;
 	}
+	
+.dark .menu-link a:hover {color:#e94b59 ! important;}
 
 	.menu-container > li {
 		counter-increment: step-counter;
@@ -385,31 +391,38 @@ blockquote {
 
 .primary-menu {background:rgba(0,0,0,0.8);position:absolute;right:100px;top:20px;border-radius:10px;z-index:1;}
 #slider {z-index:0;}
-.menu-button-link {padding:5px 10px;color:white;font-family:Surfer Bay;text-transform:uppercase;letter-spacing:2px;font-size:12pt;border-radius:10px ! important;}
+.menu-button-link {padding:5px 10px;color:white;font-family:Wolfs Bane;text-transform:uppercase;letter-spacing:2px;font-size:12pt;border-radius:10px ! important;}
 .menu-item:hover .menu-button-link {color:#ffa800;}
-h2.main-slogan {font-family:Surfer Bay ! important;font-size:60pt;color:#fff ! important;padding:5px 10px;display:inline-block;-webkit-text-stroke: 2px #000;letter-spacing:7px;}
-li.current a {background:none;color:orange ! important;border-radius:10px 0 0 10px ! important;}
+h2.main-slogan {font-family:Wolfs Bane ! important;font-size:27pt;color:#fff ! important;padding:5px 10px;display:inline-block;letter-spacing:3px;text-shadow: -4px 4px 2px #000;}
+li.current a {background:none;color:#c0565a ! important;border-radius:10px 0 0 10px ! important;}
 li.mid-item a {border-radius:0 ! important;}
-li.current .menu-button-link {color:orange ! important;}
-p.maindesc {background:rgba(0,0,0,0.9);padding:10px 10px;font-size:15pt;border-radius:10px;font-family:DM Sans;}
+li.current .menu-button-link {color:#e94b59  ! important;}
+p.maindesc {background:rgba(0,0,0,0.5);padding:10px 14px;font-size:15pt;border-radius:10px;font-family:DM Sans;}
 /*.menu-button-link:hover {background:rgba(250,215,115,0.5);}*/
-p.maindesc a {color:orange;}
-.buttonicon img {width:30px;}
-span.questiontext {font-size:14pt ! important;color:orange ! important;font-family:DM Sans;}
-.bigbutton {background:rgba(0,0,0,0.5);border-radius:10px ! important;}
-#logo a.standard-logo {font-family:Surfer Bay ! important;-webkit-text-stroke: 1px #000;color:#c0565a ;text-shadow: 0 0 5px #000, 0 0 5px #000, 0 0 10px #000, 0 0 20px #000, 0 0 20px #000, 0 0 30px #000, 0 0 30px #000;}
-h2.main-slogan {text-shadow: 0 0 20px rgba(0,0,0, 0.5), 0 0 20px rgba(0,0,0, 0.5), 0 0 20px rgba(0,0,0, 0.5), 0 0 20px rgba(0,0,0, 0.5), 0 0 20px rgba(0,0,0, 0.5), 0 0 20px rgba(0,0,0, 0.5), 0 0 20px rgba(0,0,0, 0.5);}
+p.maindesc a {color:#c4424c;}
+.buttonicon img {width:51px;}
+span.questiontext {font-size:14pt ! important;color:#c4424c ! important;font-family:DM Sans;}
+span.questiontext:hover {color:white ! important;}
+.bigbutton {background:rgba(0,0,0,0.5);border-radius:10px ! important;border:2px solid #c0565a;color:white;}
+.bigbutton2 {margin-right:10px;}
+.bigbutton span.questiontext {color:white ! important;}
+.bigbutton:hover {color:#c0565a;border:2px solid #fff;}
+#logo a.standard-logo {font-family:Wolfs Bane ! important;-webkit-text-stroke: 1px #000;color:#c0565a ;text-shadow: 0 0 5px #000, 0 0 5px #000, 0 0 10px #000, 0 0 20px #000, 0 0 20px #000, 0 0 30px #000, 0 0 30px #000;}
+/* h2.main-slogan {text-shadow: 0 0 20px rgba(0,0,0, 0.5), 0 0 20px rgba(0,0,0, 0.5), 0 0 20px rgba(0,0,0, 0.5), 0 0 20px rgba(0,0,0, 0.5), 0 0 20px rgba(0,0,0, 0.5), 0 0 20px rgba(0,0,0, 0.5), 0 0 20px rgba(0,0,0, 0.5);} */
+h2.main-slogan {text-shadow: -2px 2px 1px #000;}
+
+-2px 2px 1px #000
 #logo a.standard-logo span.textwolf {text-transform:lowercase ! important;margin-left:10px;}
 #logo a.standard-logo span {display:inline-block;}
 #header.transparent-header.dark, #header.transparent-header.dark:not(.sticky-header) #header-wrap {background:none ! important;}
 .dark #header, #header.dark {background:none;}
-h3 {font-family:Surfer Bay ! important;}
+h3 {font-family:Wolfs Bane ! important;}
 #standard-logo span {float:left;height:57px;margin-right:10px;}
-.color {color: #ffaa00 !important;}
+.color {color: #c0565a !important;}
 .stretched #gotoTop {background:#c0565a;}
 .dark #header-wrap {background:none ! important;}
 .title-border::before, .title-border::after {border:none ! important;}
-.wolfheader h2 {color:orange ! important;font-family:Surfer Bay ! important;font-size:40pt;font-weight:normal;letter-spacing:6px;display:block;}
+.wolfheader h2 {color:#c0565a ! important;font-family:Wolfs Bane ! important;font-size:40pt;font-weight:normal;letter-spacing:6px;display:block;}
 .multiplegames h3 {color:#c0565a ! important;display:block;text-align:center;font-size:20pt;font-weight:normal;font-family:DM Sans ! important;}
 .iconleft {display:inline-block;margin-right:10px;}
 .iconleft img {width:20px;}
@@ -417,9 +430,9 @@ li.gamedesc {margin-bottom:15px;color:#ccc;}
 h5.measurementheader {text-align:center;}
 .counter {display:block;text-align:center;}
 .fearwolfdesc p {margin:0;padding:20px 0 0 0;font-size:14pt ! important;}
-h3.featuredgamesheader  {font-size:35pt;}
-#section-games {background:url(../images/fearwolf/fear-wolf-phantom-of-the-opera-background.jpg) no-repeat;background-size:contain;margin-top:40px;}
-.fearwolfdesc a {color:orange;}
+h3.featuredgamesheader  {font-size:28pt;}
+#section-games {background:url(../images/fearwolf/fear-wolf-background-subpage-4.jpg) no-repeat 0 -100px;background-size:cover;padding-top:40px;}
+.fearwolfdesc a {color:#c0565a;}
 .fearwolfdesc a:hover {color:white;}
 
 @media (max-width: 1400px) {
@@ -428,7 +441,7 @@ h3.featuredgamesheader  {font-size:25pt;}
 
 @media (max-width: 1200px) {
 .itsshow {margin-top:20px ! important;}
-h2.main-slogan {font-size:40pt;}
+h2.main-slogan {font-size:27pt;}
 }
 
 .owl-carousel .owl-nav .owl-next {right:-40px;left:auto;}
@@ -449,8 +462,6 @@ p.highlightp {font-size:14pt ! important;}
 .videocon video {width:150% ! important;left:-300px;position:relative;}
 .itsshow {  margin-top: 115px ! important;}
 #logo a {font-size:30px;}
-#logo .fearlogoicon {width:42px ! important;}
-#logo .textfear, #logo .textwolf {margin-top:10px;}
 .multiplegamessection, #section-games {padding-top:0 ! important;}
 h3.featuredgamesheader  {text-align:center;}
 #section-games {background-size:150%;}
@@ -488,7 +499,7 @@ h2.main-slogan {font-size:35pt;}
 .itsshow {margin-top:28px ! important;}
 .videocon video {width:130% ! important;left:-150px;position:relative;}
 h2.main-slogan {color:#fff! important;-webkit-text-stroke:1px black;}
-#logo a.standard-logo {color:orange;}
+#logo a.standard-logo {color:#c0565a;}
 .itsshowtime2 {width:80%;}
 h2.main-slogan {font-size:28pt;}
 .statssec .col-4 {padding-left:7% ! important;}
@@ -506,10 +517,11 @@ p.highlightp {font-size:12pt ! important;}
 #section-games {background-size:200%;}
 }
 
-h3.featuredgamesheader span {color:orange ! important;}
+h3.featuredgamesheader span {color:#fff ! important;display:inline-block;margin-top:10px;}
 h3.featuredgamesheader {text-align:center ! important;}
-h3.featuredgamesheader img {width:54px ! important;}
-p.auctionphrase {font-weight:bold ! important;font-size:22pt ! important;color:white ! important;font-weight:normal ! important;-webkit-text-stroke: 1px #000;text-align:center ! important;display:block ! important;margin-bottom:10px ! important;}
+h3.featuredgamesheader i {display:inline-block;}
+h3.featuredgamesheader img {width:54px ! important;margin-right:10px;}
+p.auctionphrase {font-weight:bold ! important;font-size:16pt ! important;color:white ! important;font-weight:normal ! important;text-align:center ! important;display:block ! important;margin-bottom:10px ! important;}
 
 .fearwolfdesc {display:block;text-align:center;width:100%;overflow:hidden;padding:0 15%;color:#ccc;margin-bottom:40px;}
 .fearwolfdesc p {float:none;}
@@ -533,12 +545,12 @@ img.alignleft {display:block;float:none;margin-bottom:10px ! important;}
 	background: black ! important;
 	padding:3px 10px 3px 3px;
 	border-radius:10px ! important;
-	color:orange ! important;
-	border:3px solid orange;
+	color:#c0565a ! important;
+	border:3px solid #c0565a;
 }
 
 .direwolfvideo:before {padding:0 ! important;display:none ! important;}
-p.orangeword {color:orange;font-style:italic;}
+p.#c0565aword {color:#c0565a;font-style:italic;}
 .gamelist {margin-top:20px;text-align:center;}
 .gamelist li, .gamelist li img {height:60px;width:auto;margin-bottom:20px;}
 .gamelist li {list-style:none;display:inline-block;margin-right:20px;}
@@ -548,37 +560,40 @@ h2.wolfutility {font-size:14pt;text-align:center;margin:0;}
 .headericon img, .headericon span {display:inline-block;margin-right:20px;}
 .headericon img {width:50px ! important;}
 #section-launch .headericon img {width:80px ! important;}
-.headerorange, .headerorange span {color:orange ! important;}
+.header#c0565a, .header#c0565a span {color:#c0565a ! important;}
 .sectionmoon {padding-top:0 ! important;margin-top:0 ! important;}
 #logo {border-right:0 ! important;}
 
-.sectionmoon h3 {color:white ! important;font-weight:normal ! important;-webkit-text-stroke: 1px #000;letter-spacing:4px;text-align:center;}
+.sectionmoon h3 {color:white ! important;font-weight:normal ! important;-webkit-text-stroke: none;letter-spacing:2px;text-align:center;font-family:Wolfs Bane ! important;text-shadow:-3px 3px 3px #000;}
 .wolfnumbers .textoutlineoverride {color:white ! important;font-weight:normal ! important;letter-spacing:2px ! important;font-size:13pt ! important;}
 .sectionmoon h3 span {color:white ! important;}
-.sectionmoon h4 {color:orange ! important;}
+.sectionmoon h4 {color:#c0565a ! important;}
 .wolfnumbers span.op-04 {color:#fff ! important;}
 .wolfnumbers .op-04, .wolfnumbers .h-op-04:hover {opacity:1 ! important;}
 .wolfnumbers span {font-size:11pt ! important;}
 .moonlaunch {background:rgba(0, 0, 0, 0.5) ! important;border:2px solid black ! important;border-radius:20px ! important;}
-.moonlaunch .op-02, .moonlaunch .h-op-02:hover {opacity:1  ! important;line-height:18pt ! important;color:orange ! important;}
-span.numbercounter {background:orange ! important;display:inline-block;padding:2px 5px;color:black ! important;}
+.moonlaunch .op-02, .moonlaunch .h-op-02:hover {opacity:1  ! important;line-height:18pt ! important;color:#c0565a ! important;}
+.moonlaunch .col-3 {text-align:center;}
+.moonlaunch img {display:inline-block;}
+span.numbercounter {background:#c0565a ! important;display:inline-block;padding:2px 5px;color:black ! important;}
 .uppercaseoverride {text-transform:uppercase ! important;}
 span.secondcolor, .statssec .counter {color:#c0565a ! important;}
-span.firstcolor {color:orange ! important;}
+span.firstcolor {color:#c0565a ! important;}
+.button i {margin-right:8px;}
 #section-stats {margin:100px 0;}
 .feature-box {text-align:center;}
 #section-chains .fbox-icon {width:100%;text-align:center;}
 #section-chains .fbox-icon img {display:inline-block;}
-.wolfbutton {border-radius:10px ! important;color:#000 ! important;border:2px solid #000 ! important;background:#ff9100 ! important;display:inline-block ! important;text-transform:capitalize ! important;}
-.wolfbutton:hover {color:#fff ! important;border:2px solid #fff ! important;}
+.wolfbutton {border-radius:10px ! important;color:#fff ! important;border:2px solid #fff ! important;background:#000 ! important;display:inline-block ! important;text-transform:capitalize ! important;font-family:Wolfs Bane;font-size:15pt;font-weight:normal ! important;}
+.wolfbutton:hover {color:#c0565a ! important;border:2px solid #c0565a ! important;}
 .aligncenter {width:100%;text-align:center;}
-.portfolio-desc h3 {color:orange ! important;text-align:center ! important;}
+.portfolio-desc h3 {color:#c0565a ! important;text-align:center ! important;}
 .portfolio-desc h3 a:hover {color:#c0565a;}
 .portfolio-desc span {text-align:center ! important;}
-#section-games {margin-top:80px;}
-h3.meetthewolves {margin-top:70px ! important;margin-bottom:30px ! important;}
-.menu-item button {background:none ! important;color:white ! important;border:none ! important;font-family:Surfer Bay ! important;text-transform:uppercase ! important;padding:5px 10px ! important;}
-.menu-item button:hover {color:orange ! important;}
+#section-games {margin-top:40px;}
+h3.meetthewolves {margin-top:130px ! important;margin-bottom:30px ! important;font-family:Wolfs Bane ! important;}
+.menu-item button {background:none ! important;color:white ! important;border:none ! important;font-family:Wolfs Bane ! important;text-transform:uppercase ! important;padding:5px 10px ! important;}
+.menu-item button:hover {color:#c0565a ! important;}
 #transakLink {padding-right:20px ! important;}
 
 .subpage .content {padding:30px 5%;width:100%;}
@@ -586,8 +601,126 @@ h3.meetthewolves {margin-top:70px ! important;margin-bottom:30px ! important;}
 .subpage .maincon img {margin-bottom:30px;}
 .subpage {background:url(../images/fearwolf/fear-wolf-background-subpage-3.jpg?v3) no-repeat black 0 50px ! important;background-size:100% ! important;}
 .maincon {background:rgba(0,0,0,0.7) ! important;padding:40px 2%;width:100%;border-radius:10px;}
+#header a.menu-link:hover .menu-button-link {color:#c0565a ! important;}
 
+@media (max-width: 1500px) {
+h3.meetthewolves {margin-top:70px ! important;}
+}
+@media (max-width: 1400px) {
+h3.meetthewolves {margin-top:00px ! important;}
+p.maindesc {font-size:13pt;}
+.btn-border.size-lg {--btn-y-padding: 9px;--btn-x-padding: 15px;}
+.itsshowtime2 {width:65%;}
+}
 
 @media (max-width: 1000px) {
 .subpage .maincon {padding:30px 5% ! important;}
+.itsshowtime2 {width:75%;}
+}
+@media (max-width: 840px) {
+.itsshowtime2 {width:85%;}
+.itsshow {padding-left:4%;}
+#logo {padding-left:4%;}
+p.maindesc {width:90% ! important;}
+}
+
+@media (max-width: 700px) {
+.bigbutton2 {margin-bottom:15px;}
+p.maindesc, span.questiontext {font-size:11pt ! important;}
+h2.main-slogan {font-size:29pt;text-shadow:-1px 1px 1px #000;}
+}
+
+@media (max-width: 500px) {
+.wolfnumbers span {font-size:9pt ! important;}
+.mx-3 {margin-right:11px ! important;margin-left:2px ! important;}
+.p-4 {padding:0 ! important;}
+.socialsmall {bottom:-10px;}
+.itsshow {padding-bottom:55px;margin-top:75px ! important;}
+}
+
+@media (max-width: 380px) {
+h2.main-slogan {font-size:25pt;}
+}
+
+@media (max-width: 350px) {
+.mx-3 {margin-right:11px ! important;margin-left:11px ! important;}
+span.questiontext {font-size:10pt ! important;padding:7px ! important;}
+#standard-logo span {height:43px;}
+}
+
+.dark .menu-button-link:hover {color:#c0565a ! important;}
+h3.featuredgamesheader {font-family:Wolfs Bane ! important;text-shadow:-3px 3px 3px #000;}
+.dark #header, #header.dark, .dark #header-wrap, .dark #header, #header.dark {border-bottom-color:transparent ! important;}
+span.wolfred {color:#c0565a ! important;}
+span.wolfred2 {color:#990000 ! important;}
+span.wolfred3 {color:red ! important;}
+span.wolforange {color:orange ! important;}
+span.wolfwhite, .wolfwhite span {color:white ! important;}
+.statssec .wolfwhite span {font-size:22pt ! important;}
+#section-marketing {background-image:url(../images/fear-wolf-tree-wolf-moon-background-2.jpg);background-repeat:no-repeat;background-size:cover;}
+#section-marketing .dark .testi-meta span {color:white ! important;}
+#oc-testi .owl-item {border-right:none ! important;}
+#section-marketing #oc-testi {background-color: rgba(0,0,0, 0.4) !important;}
+
+.smallwolftrats {width:100%;margin-top:20px;text-align:center;}
+.smallwolftrats .col-lg-3, .smallwolftrats .col-lg-2 {display:inline-block;}
+
+p.maindesc {display:inline-block ! important;}
+.whitelist p.maindesc {font-size:12pt ! important;width:auto ! important;display:inline-block ! important;}
+
+.dev-content {width:100%;position:absolute;top:350px;left:7%;}
+.dev-content p {color:white;}
+.dev-content h2.main-slogan {display:block;padding-left:0;}
+.dev-content2 {padding:20px 10px;}
+
+@media (max-width: 1000px) {
+#section-marketing {background-size:contain;}
+.statssec .wolfwhite span {font-size:16pt ! important;}	
+.whitelist p.maindesc {font-size:11pt ! important;width:auto ! important;display:inline-block ! important;}
+.dev-content {top:165px;}
+.dev-content h2.main-slogan {font-size:30pt;}
+}
+
+@media (max-width: 950px) {
+.dev-content {top:90px;left:4%;} 
+}
+@media (max-width: 750px) {
+.dev-content {top:295px;left:4%;} 
+}
+
+@media (max-width: 550px) {
+.whitelist p.maindesc {color:#c0565a ! important;padding-left:0;}
+.dev-content {top:235px;left:4%;} 
+}
+@media (max-width: 450px) {
+.whitelist p.maindesc {color:#c0565a ! important;}
+.dev-content {top:205px;left:4%;} 
+}
+
+@media (max-width: 500px) {
+h2.main-slogan {font-size: 23pt;letter-spacing: 1px;}
+.widget p {font-size:11pt;}
+}
+
+#oc-testi .owl-item.active .testi-meta {line-height:26px;}
+#oc-testi .owl-item.active .testi-meta span {line-height:15px;display:block;margin-top:5px;}
+#related-portfolio .icon-angle-right {line-height: 20px ! important;bottom: 7px;position: absolute;right: 13px;}
+#related-portfolio .icon-angle-left {line-height: 20px ! important;bottom: 7px;position: absolute;left: 13px;}
+.owl-carousel .owl-nav [class*=owl-] {border-radius:21px;}
+.owl-next {right:10px;}
+.owl-carousel .owl-nav .owl-next {right:10px ! important;bottom:100px ! important;}
+.owl-carousel .owl-nav .owl-prev {left:10px ! important;bottom:100px ! important;}
+
+.footernew {overflow:hidden;padding-right:5%;width:95%;color:#ccc;}
+.footerleft {float:left;width:40%;}
+.footerright {float:right;width:40%;text-align:right;}
+.footernew h3 {color:#c0565a;}
+.footernew p {color:#ccc;}
+.dark .footer-widgets-wrap a, .footernew a {color:white;}
+
+
+@media (max-width: 550px) {
+.footerleft {float:left;width:100%;}
+.footerright {float:right;width:100%;text-align:right;margin-top:20px;}
+.footernew {padding:20px 5%;width:90%;}
 }
