@@ -1,9 +1,5 @@
 @font-face {
   font-family: "Wolfs Bane";
-  src: url("https://www.fear.io/images/fonts/surfer-bay.otf") format("truetype");
-}
-@font-face {
-  font-family: "Wolfs Bane";
   src: url("https://www.fear.io/fonts/wolfsbane2.ttf") format("truetype");
 }
 
@@ -671,7 +667,7 @@ p.maindesc {display:inline-block ! important;}
 .dev-content {width:100%;position:absolute;top:350px;left:7%;}
 .dev-content p {color:white;}
 .dev-content h2.main-slogan {display:block;padding-left:0;}
-.dev-content2 {padding:20px 10px;}
+.dev-content2 {padding:20px 1% 20px 0;width:99%;}
 
 @media (max-width: 1000px) {
 #section-marketing {background-size:contain;}
@@ -723,4 +719,23 @@ h2.main-slogan {font-size: 23pt;letter-spacing: 1px;}
 .footerleft {float:left;width:100%;}
 .footerright {float:right;width:100%;text-align:right;margin-top:20px;}
 .footernew {padding:20px 5%;width:90%;}
+}
+
+#copyrights p, #copyrights a {color:#ccc;}
+#copyrights p a:hover, #copyrights a:hover {color:#fff;}
+.dev-content2 p a {color:#c0565a;}
+a.twitterlink {color:#1dabdd ! important;}
+a.discordlink {color:#646ef2 ! important;}
+a.telegramlink {color:#33a9e4 ! important;}
+a.instagramlink {color:#914ac6 ! important;}
+a.youtubelink {color:red ! important;}
+.dev-content2 p a:hover {color:white ! important;}
+.sociallinks a {font-size:17pt ! important;display:inline-block;padding:0 5px;text-shadow: -4px 4px 2px #000;font-family:Wolfs Bane ! important;}
+
+
+@media (max-width: 500px) {
+.dev-content2 p {font-size:11pt;}
+.dev-content h2.main-slogan {font-size:24pt;-webkit-text-stroke:0px;}
+.dev-content {padding:0 3%;width:94%;}
+.dev-content2 {padding:20px 0;}
 }
