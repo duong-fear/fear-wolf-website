@@ -413,7 +413,7 @@ h2.main-slogan {text-shadow: -2px 2px 1px #000;}
 #header.transparent-header.dark, #header.transparent-header.dark:not(.sticky-header) #header-wrap {background:none ! important;}
 .dark #header, #header.dark {background:none;}
 h3 {font-family:Wolfs Bane ! important;}
-#standard-logo span {float:left;height:57px;margin-right:10px;}
+#standard-logo span {float:left;height:63px;margin-right:10px;}
 .color {color: #c0565a !important;}
 .stretched #gotoTop {background:#c0565a;}
 .dark #header-wrap {background:none ! important;}
