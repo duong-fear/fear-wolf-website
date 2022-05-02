@@ -2084,7 +2084,7 @@ window.scwEvents = window.scwEvents || {};
 			if( $slider.length > 0 || $sliderElement.length > 0 ) { SEMICOLON.slider.init(); }
 			if( $portfolio.length > 0 ) { SEMICOLON.portfolio.init(); }
 			SEMICOLON.widget.init();
-			SEMICOLON.documentOnReady.windowscroll();
+			// SEMICOLON.documentOnReady.windowscroll();
 			SEMICOLON.customization.onReady();
 		},
 
