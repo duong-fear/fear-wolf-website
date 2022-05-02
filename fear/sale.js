@@ -117,7 +117,7 @@ const fetchInitialData = async (walletConnected = false) => {
 }
 
 const tabs = [
-    "Pre Sale",
+    "INO Sale",
     "Public Sale",
 ];
 
