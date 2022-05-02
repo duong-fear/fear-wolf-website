@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html dir="ltr" lang="en-US">
+
 <head>
 	<title>Whitelist | Fear Wolf</title>
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 	<meta name="author" content="SemiColonWeb" />
 	<link href="https://fonts.googleapis.com/css2?family=DM+Sans&display=swap" rel="stylesheet" />
-	<link href="https://fonts.googleapis.com/css2?family=Prata&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Prata&family=Roboto:wght@300;400;500;700&display=swap"
+		rel="stylesheet" />
 	<link rel="stylesheet" href="css/bootstrap.css" type="text/css" />
 	<link rel="stylesheet" href="style.css?v2" type="text/css" />
 	<link rel="stylesheet" href="css/dark.css?v3" type="text/css" />
@@ -13,57 +15,116 @@
 	<link rel="stylesheet" href="css/animate.css" type="text/css" />
 	<link rel="stylesheet" href="css/magnific-popup.css" type="text/css" />
 	<link rel="stylesheet" href="css/colors.php?color=F1C77A" type="text/css" />
-	<link rel="stylesheet" href="wolf/css/flatpickr.css">
-    <link rel="shortcut icon" href="images/fearwolf/fear-wolf-icon-dark-2.svg" type="image/x-icon" />
+	<link rel="stylesheet" href="wolf/css/flatpickr.css" />
+	<link rel="shortcut icon" href="images/fearwolf/fear-wolf-icon-dark-2.svg" type="image/x-icon" />
 	<link rel="stylesheet" href="wolf/css/fonts.css" type="text/css" />
-	<link rel="stylesheet" href="wolf/wolf.css?v52" type="text/css" />
+	<link rel="stylesheet" href="wolf/wolf.css?v45" type="text/css" />
 	<link rel="stylesheet" href="wolf/css/fonts/spa-icons.css" type="text/css" />
 	<link rel="stylesheet" href="css/custom.css" type="text/css" />
-	<meta name="viewport" content="width=device-width, initial-scale=1"/>
-	<meta name="description" content="The Fear Wolf is everyone's favourite talk show host on NFTs. Find the latest news on NFTs on his show."/>
+	<link rel="stylesheet" href="fear/whitelist.css" type="text/css" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="description"
+		content="The Fear Wolf is everyone's favourite talk show host on NFTs. Find the latest news on NFTs on his show." />
 	<script src="https://global.transak.com/sdk/v1.1/widget.js" async></script>
+	<script src="js/lodash.js@4.17.21.js"></script>
+	<script src="js/ethers@5.6.2.js"></script>
+	<script src="fear/abi.js"></script>
+	<script src="fear/utils.js"></script>
+	<script src="fear/blockchain.js"></script>
+	<script src="fear/sale.js"></script>
+	<script defer src="js/alpinejs@3.9.6.js"></script>
 	<script>
-    function launchTransak(){let n=new TransakSDK.default({apiKey:"80f00610-32cc-4d01-8eb0-dfc825c2ef53",environment:"PRODUCTION",defaultCryptoCurrency:"FEAR",themeColor:"000000",email:"",redirectURL:"",hostURL:window.location.origin,widgetHeight:"550px",widgetWidth:"450px"});n.init(),n.on(n.EVENTS.TRANSAK_WIDGET_CLOSE,()=>{n.close()})}window.onload=function(){$("#transakLink").on("click",function(){launchTransak()})};
+		document.addEventListener("alpine:init", alpineInit);
+	</script>
+	<script>
+		function launchTransak() {
+			let n = new TransakSDK.default({
+				apiKey: "80f00610-32cc-4d01-8eb0-dfc825c2ef53",
+				environment: "PRODUCTION",
+				defaultCryptoCurrency: "FEAR",
+				themeColor: "000000",
+				email: "",
+				redirectURL: "",
+				hostURL: window.location.origin,
+				widgetHeight: "550px",
+				widgetWidth: "450px",
+			});
+			n.init(),
+				n.on(n.EVENTS.TRANSAK_WIDGET_CLOSE, () => {
+					n.close();
+				});
+		}
+		window.onload = function () {
+			$("#transakLink").on("click", function () {
+				launchTransak();
+			});
+		};
 	</script>
 	<script type="application/ld+json">
-	{
-    "@context": "http://schema.org",
-    "@type": "WebSite",
-    "name": "Fear Wolf: Cross Game NFT with Claws",
-    "url": "https://www.fearwolf.com/",
-    "@id": "#WebSite",
-    "inLanguage": "en-us",
-    "image": "https://www.fear.io/images/fear-wolf.jpg",
-	"sameAs": ["https://www.youtube.com/c/FEARSTUDIOS", "https://twitter.com/fearnfts"],
-	"publisher": "https://www.fearwolf.com/"
-    }
-</script>
+            {
+                "@context": "http://schema.org",
+                "@type": "WebSite",
+                "name": "Fear Wolf: Cross Game NFT with Claws",
+                "url": "https://www.fearwolf.com/",
+                "@id": "#WebSite",
+                "inLanguage": "en-us",
+                "image": "https://www.fear.io/images/fear-wolf.jpg",
+                "sameAs": [
+                    "https://www.youtube.com/c/FEARSTUDIOS",
+                    "https://twitter.com/fearnfts"
+                ],
+                "publisher": "https://www.fearwolf.com/"
+            }
+        </script>
 </head>
 
-<body class="stretched page-transition whitelist">
-<div class="videocon">
-<video loop controls autoplay muted loop poster='videos/fear-wolf-demon-wolf-background.jpg' style="width:100%;" class="featurevideo"><source src='videos/fear-wolf-demon-wolf-background-6.mp4' type='video/mp4' />Your browser does not support the HTML5 video tag. Try updating your browser or using a different one.</video>
-</div>
+<body class="stretched page-transition whitelist" x-data="$store.vm">
+	<template x-if="!!loading.MODAL">
+		<div class="text-fab pointer-none flex items-center justify-center position-fixed h-full w-full loading-modal">
+			<div>
+				<span x-html="loading.MODAL"></span>
+			</div>
+			<div class="spinner-border spinner-border-sm m-2" />
+		</div>
+	</template>
+	<div class="videocon w-full">
+		<video loop nocontrols autoplay muted loop poster="videos/fear-wolf-demon-wolf-background.jpg"
+			style="width: 100%" class="featurevideo">
+			<source src="videos/fear-wolf-demon-wolf-background-6.mp4" type="video/mp4" />
+			Your browser does not support the HTML5 video tag. Try updating
+			your browser or using a different one.
+		</video>
+	</div>
 	<!-- Document Wrapper
 	============================================= -->
 	<div id="wrapper" class="clearfix">
-
 		<!-- Header
 		============================================= -->
 		<header id="header" class="floating-header dark custom-header-size" data-sticky-shrink="false">
-			<div id="header-wrap">
+			<div> <!-- id="header-wrap" -->
 				<div class="container pe-md-0">
 					<div class="header-row">
-
 						<!-- Logo
 						============================================= -->
 						<div id="logo" class="me-lg-4 pe-lg-4">
-							<a href="https://www.fearwolf.com/" class="standard-logo" id="standard-logo" style="height:auto ! important"><!--<span><img src="images/fearwolf/fear-wolf-icon-dark-2.svg" alt="fear wolf icon" style="width:60px;" class="fearlogoicon"/></span>--><span class="textfearwolf"><img src="images/fear-wolf-logo-400.png?v2" alt="Fear Wolf"/></span></a>
+							<a href="https://www.fearwolf.com/" class="standard-logo" id="standard-logo"
+								style="height: auto !important"><span
+									class="textfearwolf"><img src="images/fear-wolf-logo-400.png"
+										alt="Fear Wolf" /></span></a>
 							<!--<a href="https://www.fearwolf.com/" class="retina-logo"><img src="images/fearwolf/fear-wolf-logo.svg" alt="Fear Wolf"></a>-->
-						</div><!-- #logo end -->
+						</div>
+						<!-- #logo end -->
 
 						<div id="primary-menu-trigger">
-							<svg class="svg-trigger" viewBox="0 0 100 100"><path d="m 30,33 h 40 c 3.722839,0 7.5,3.126468 7.5,8.578427 0,5.451959 -2.727029,8.421573 -7.5,8.421573 h -20"></path><path d="m 30,50 h 40"></path><path d="m 70,67 h -40 c 0,0 -7.5,-0.802118 -7.5,-8.365747 0,-7.563629 7.5,-8.634253 7.5,-8.634253 h 20"></path></svg>
+							<svg class="svg-trigger" viewBox="0 0 100 100">
+								<path
+									d="m 30,33 h 40 c 3.722839,0 7.5,3.126468 7.5,8.578427 0,5.451959 -2.727029,8.421573 -7.5,8.421573 h -20">
+								</path>
+								<path d="m 30,50 h 40"></path>
+								<path
+									d="m 70,67 h -40 c 0,0 -7.5,-0.802118 -7.5,-8.365747 0,-7.563629 7.5,-8.634253 7.5,-8.634253 h 20">
+								</path>
+							</svg>
 						</div>
 
 						<!--<div class="header-misc ms-lg-auto">
@@ -73,84 +134,628 @@
 						<!-- Primary Navigation
 						============================================= -->
 						<nav class="primary-menu">
-
 							<ul class="menu-container style-2 one-page-menu">
-								<li class="menu-item border-light"><a class="menu-link" href="index.html#slider" data-easing="easeInOutExpo" data-speed="1250" data-offset="0"><div class="overflow-hidden"><div data-animate="fadeInDownSmall" class="menu-button-link">Home</div></div></a></li>
-								<li class="menu-item border-light mid-item"><a class="menu-link" href="index.html#section-meet" data-easing="easeInOutExpo" data-speed="1250" data-offset="130"><div class="overflow-hidden"><div data-animate="fadeInDownSmall" class="menu-button-link" data-delay="200">Wolves</div></div></a></li>
-								<li class="menu-item border-light mid-item"><a class="menu-link" href="index.html#section-stats" data-easing="easeInOutExpo" data-speed="1250" data-offset="130"><div class="overflow-hidden"><div data-animate="fadeInDownSmall" class="menu-button-link" data-delay="200">Stats</div></div></a></li>
-								<li class="menu-item border-light mid-item"><a class="menu-link" href="index.html#section-games" data-easing="easeInOutExpo" data-speed="1250" data-offset="130"><div class="overflow-hidden"><div data-animate="fadeInDownSmall" class="menu-button-link" data-delay="200">Games</div></div></a></li>
-								<li class="menu-item border-light mid-item"><a class="menu-link" href="index.html#section-launch" data-easing="easeInOutExpo" data-speed="1250" data-offset="0"><div class="overflow-hidden"><div data-animate="fadeInDownSmall" class="menu-button-link" data-delay="400">Launch</div></div></a></li>
-								<li class="menu-item border-light mid-item"><a class="menu-link" href="index.html#section-traits" data-easing="easeInOutExpo" data-speed="1250" data-offset="130"><div class="overflow-hidden"><div data-animate="fadeInDownSmall" class="menu-button-link" data-delay="600">Traits</div></div></a></li>
-								<li class="menu-item border-light mid-item"><a class="menu-link" href="https://forms.gle/bGAae4F5ksjg4DUC8" data-easing="easeInOutExpo" data-speed="1250" data-offset="130" target="_blank"><div class="overflow-hidden"><div data-animate="fadeInDownSmall" class="menu-button-link" data-delay="600">Affiliates</div></div></a></li>
+								<li class="menu-item border-light">
+									<a class="menu-link" href="index.html#slider" data-easing="easeInOutExpo"
+										data-speed="1250" data-offset="0">
+										<div class="overflow-hidden">
+											<div data-animate="fadeInDownSmall" class="menu-button-link">
+												Home
+											</div>
+										</div>
+									</a>
+								</li>
+								<li class="menu-item border-light mid-item">
+									<a class="menu-link" href="index.html#section-meet" data-easing="easeInOutExpo"
+										data-speed="1250" data-offset="130">
+										<div class="overflow-hidden">
+											<div data-animate="fadeInDownSmall" class="menu-button-link"
+												data-delay="200">
+												Wolves
+											</div>
+										</div>
+									</a>
+								</li>
+								<li class="menu-item border-light mid-item">
+									<a class="menu-link" href="index.html#section-stats" data-easing="easeInOutExpo"
+										data-speed="1250" data-offset="130">
+										<div class="overflow-hidden">
+											<div data-animate="fadeInDownSmall" class="menu-button-link"
+												data-delay="200">
+												Stats
+											</div>
+										</div>
+									</a>
+								</li>
+								<li class="menu-item border-light mid-item">
+									<a class="menu-link" href="index.html#section-games" data-easing="easeInOutExpo"
+										data-speed="1250" data-offset="130">
+										<div class="overflow-hidden">
+											<div data-animate="fadeInDownSmall" class="menu-button-link"
+												data-delay="200">
+												Games
+											</div>
+										</div>
+									</a>
+								</li>
+								<li class="menu-item border-light mid-item">
+									<a class="menu-link" href="index.html#section-launch" data-easing="easeInOutExpo"
+										data-speed="1250" data-offset="0">
+										<div class="overflow-hidden">
+											<div data-animate="fadeInDownSmall" class="menu-button-link"
+												data-delay="400">
+												Launch
+											</div>
+										</div>
+									</a>
+								</li>
+								<li class="menu-item border-light mid-item">
+									<a class="menu-link" href="index.html#section-traits" data-easing="easeInOutExpo"
+										data-speed="1250" data-offset="130">
+										<div class="overflow-hidden">
+											<div data-animate="fadeInDownSmall" class="menu-button-link"
+												data-delay="600">
+												Traits
+											</div>
+										</div>
+									</a>
+								</li>
+								<li class="menu-item border-light mid-item">
+									<a class="menu-link" href="https://forms.gle/bGAae4F5ksjg4DUC8"
+										data-easing="easeInOutExpo" data-speed="1250" data-offset="130" target="_blank">
+										<div class="overflow-hidden">
+											<div data-animate="fadeInDownSmall" class="menu-button-link"
+												data-delay="600">
+												Affiliates
+											</div>
+										</div>
+									</a>
+								</li>
 								<!--<li class="menu-item border-light mid-item">
 								<button id="transakLink">Buy Fear</button>
 								</li>-->
 							</ul>
-
 						</nav>
-
 					</div>
 				</div>
 			</div>
-			<div class="header-wrap-clone"></div>
-		</header><!-- #header end -->
+		</header>
+		<!-- #header end -->
 
 		<!-- Hero
 		============================================= -->
 		<section>
 			<div>
-			
-			
-
-				
-				
-				
-				<div class="dev-content">
-								<h2 class="display-3 fw-normal mb-0 main-slogan" data-animate="fadeInUpSmall faster">Whitelist Coming Soon!</h2>
-						
-							
-							
-								<p class="lead mb-0 maindesc" data-animate="fadeInUpSmall faster" data-delay="200">Maximise your chance of getting a Fear Wolf by joining the Whitelist </p>
-					
-					<div class="dev-content2">
-							<p class="sociallinks">Join us on <a href="https://twitter.com/fearnfts" target="_blank" class="twitterlink">Twitter</a>, <a href="https://www.fear.io/discord" target="_blank" class="discordlink">Discord</a>, <a href="https://t.me/fearcoin" target="_blank">Telegram</a>, <a href="https://www.instagram.com/fearnfts/" target="_blank" class="instagramlink">Instagram</a> or <a href="https://www.fear.io/discord" target="_blank" class="youtubelink">Youtube</a> to be notified when the FEAR Wolf Whitelist becomes available.</p>
-					
-					</div>
-					
-					<div class="footernew" style="margin-top:300px;">
-		<div class="footerleft">
-		<h3>About Us:</h3>
-									<address>
-										<p>Fear Wolf is an NFT mascot and property of <a href="https://www.fear.io/" target="_blank" rel="nofollow">Fear.io</a></p>
-									</address>
-									<ul class="list-unstyled">
-										<!--<li class="mb-1"><span class="color op-07">Phone:</span> <span class="font-primary">(1) 8547 632521</span></li>
-										<li class="mb-1"><span class="color op-07">Email:</span> <span class="font-primary">noreply@canvas.com</span></li>-->
-										<li><span class="color op-07">Website:</span> <a href="https://www.fearwolf.com/"> <span class="font-primary">fearwolf.com</span></a></li>
-									</ul>
+				<div class="container pt-5">
+					<div class="row">
+					<div class="col-12 col-md-10 col-xl-9 container whitelist-container text-fab">
+						<div class="row">
+							<template x-if="error != null">
+								<div class="py-2">
+									<div class="py-2 text-bright">
+										<span>❌</span>
+										<span>An error occured. Please try clearing the browser's cache and try again.</span>
 									</div>
-									
-									
-		<div class="footerright">
-		<img src="images/fearwolf/fear-wolf-footer.png" alt="Image" height="50" class="mb-4">
-									<p class="text-white-50 mb-5">Fear Wolf is a multi game &amp; multi chain NFT that focuses on providing owners with maximum entertainment and utility in all Fear's major games and digital content.</p>
-		</div>
-		</div>
-		<div id="gotoTop" class="icon-angle-up" style="display: block;"></div>
-				
+									<div class="py-2">
+										<pre class="mb-0" x-text="_.get(error, 'message')" style="white-space: pre-wrap;font-weight: bold;"></pre>
+										<pre class="mb-0" x-text="_.get(error, 'stack')" style="white-space: pre-wrap;"></pre>
+									</div>
+								</div>
+							</template>
+							<template x-if="!ready && error == null">
+								<div class="py-2">
+									<div class="pt-4 pb-2">
+										<img src="/images/fearwolf/fear-wolf-speed-2.svg" style="width: 10rem;margin: auto;display: block;">
+									</div>
+									<div class="text-center py-2">
+										<span><b>Fetching Stats ...</b></span>
+										<div class="spinner-border spinner-border-sm ml-2" ></div>
+									</div>
+								</div>
+							</template>
+							<template x-if="ready">
+								<div style="padding: 0.75rem;">
+
+									<template x-if="notification">
+										<div class="style-msg" :class="notification.type + 'msg'" style="border-radius: 0.25rem;">
+											<div class="sb-msg">
+												<i class="icon-check" x-show="notification.type == 'success'"></i>
+												<i class="icon-info-sign" x-show="notification.type == 'info'"></i>
+												<i class="icon-remove" x-show="notification.type == 'error'"></i>
+												<!-- <strong x-text="title"></strong> -->
+												<span x-text="notification.message"></span>
+											</div>
+										</div>
+									</template>
+
+									<div class="m-0 tabs tabs-bb clearfix ui-tabs ui-corner-all ui-widget ui-widget-content" id="sales-tab">
+										<div>
+											<ul class="tab-nav clearfix ui-tabs-nav ui-corner-all ui-helper-reset ui-helper-clearfix ui-widget-header"
+												role="tablist">
+												<template x-for="tab in tabs">
+													<li role="tab" tabindex="0"
+														class="select-none ui-tabs-tab ui-corner-top ui-state-default ui-tab"
+														:class="selectedTab == tab && 'ui-tabs-active ui-state-active'"
+														@click="selectedTab = tab; buyAmount = 1;">
+														<a style="display: flex;" role="presentation" tabindex="-1" class="ui-tabs-anchor flex justify-center items-center">
+															<span x-text="tab"></span>
+															<div
+																title="live"
+																class="blob red ml-2"
+																x-show="tab == tabs[0] && epoch >= wsStartEpoch && epoch < publicSaleStartEpoch"
+															></div>
+															<div
+																title="live"
+																class="blob red ml-2"
+																x-show="tab == tabs[1] && epoch >= publicSaleStartEpoch"
+															></div>
+														</a>
+													</li>
+												</template>
+												<!-- connect metamask button -->
+												<div class="flex-auto flex justify-end" x-show="wallet === null">
+													<button
+														@click="blockchain.connectMetamask(fetchUserStats)"
+														class="button button-mini button-teal button-rounded flex justify-center items-center"
+														style="margin: 0.5rem;margin-right: 0rem;"
+														:disabled="noMetamask || loading.CONNECT_WALLET"
+													>
+														<div x-html="metamaskSvg"></div>
+														<span class="ml-2">Connect Wallet</span>
+														<div class="spinner-border spinner-border-sm ml-2" x-show="loading.CONNECT_WALLET"></div>
+													</button>
+												</div>
+												<!-- wallet connected button -->
+												<div class="flex-auto flex justify-end" x-show="wallet !== null">
+													<button
+														class="button button-mini button-dark button-rounded"
+														disabled style="margin: 0.5rem;margin-right: 0rem;"
+													>
+														<i class="icon-wallet" style="margin-right: 0rem;"></i>
+														<span x-text="getShortAddress(wallet)"></span>
+														<span>/</span>
+														<span x-text="formatEther(etherBalanceBN)"></span>
+														<span>ETH</span>
+													</button>
+												</div>
+											</ul>
+										</div>
+										<div class="tab-container">
+											
+											<!-- PRE SALE -->
+											<div class="tab-content clearfix ui-tabs-panel ui-corner-bottom ui-widget-content" role="tabpanel" :class="selectedTab == vm.tabs[0] ? 'd-block' : 'd-none'">
+												<div>
+													<div class="row align-items-center mt-4">
+														<div class="col-3">
+															<div class="counter color text-bright">
+																<span x-text="preSaleRemain" :class="preSaleRemain == 0 && 'text-fff8'"></span>
+															</div>
+															<h5 class="mb-0 font-body text-white-50 measurementheader">Remaining</h5>
+														</div>
+														<div class="col-3">
+															<div class="counter color text-bright">
+																<span x-text="totalReserved" :class="totalReserved == 0 && 'text-fff8'"></span>
+															</div>
+															<h5 class="mb-0 font-body text-white-50 measurementheader">SOLD</h5>
+														</div>
+														<div class="col-3">
+															<div class="counter color text-bright" style="
+																display: inline-flex;
+																justify-content: center;
+																align-items: center;
+																width: 100%;
+															">
+																<span x-text="formatEther(vm.preSalePriceBN)"></span>
+																<i x-html="ethSvg"></i>
+															</div>
+															<h5 class="mb-0 font-body text-white-50 measurementheader">Price</h5>
+														</div>
+														<div class="col-3">
+															<div class="counter color text-bright"><span x-text="preSaleLimit"></span></div>
+															<h5 class="mb-0 font-body text-white-50 measurementheader">per wallet</h5>
+														</div>
+													</div>
+
+													<!-- user's stats -->
+													<div>
+														<div class="divider divider-center m-0 py-3">
+															<span style="color: #ffffff88; font-size: 1rem; font-style: italic;">your stats</span>
+														</div>
+														<div class="row align-items-center my-2">
+															<div class="col-4">
+																<div class="counter color text-bright">
+																	<span x-show="!wallet" class="text-fff8">n/a</span>
+																	<span x-show="wallet">
+																		<span x-show="wsEligible == true">✅</span>
+																		<span x-show="wsEligible == false">❌</span>
+																	</span>
+																</div>
+																<h5 class="mb-0 font-body text-white-50 measurementheader">Whitelisted</h5>
+															</div>
+															<div class="col-4">
+																<div class="counter color">
+																	<span
+																		x-text="reserved == null ? 'n/a' : reserved"
+																		:class="+reserved > 0 ? 'text-bright' : 'text-fff8'"
+																	></span>
+																</div>
+																<h5 class="mb-0 font-body text-white-50 measurementheader">Reserved</h5>
+															</div>
+															<div class="col-4">
+																<div class="counter color">
+																	<span
+																		x-text="claimed == null ? 'n/a' : claimed"
+																		:class="+claimed > 0 ? 'text-bright' : 'text-fff8'"
+																	></span>
+																</div>
+																<h5 class="mb-0 font-body text-white-50 measurementheader">Claimed</h5>
+															</div>
+														</div>
+													</div>
+
+													<div class="divider m-0 py-3" x-show="epoch < wsStartEpoch || epoch >= publicSaleStartEpoch"></div>
+													<div class="divider m-0 py-3 divider-center" x-show="epoch >= wsStartEpoch && epoch < publicSaleStartEpoch">
+														<span style="color: #ffffff88; font-size: 1rem; font-style: italic;">
+															<span>pre-sale</span>
+															<span>ends in</span>
+															<span x-text="countdown(epoch, publicSaleStartEpoch, true)"></span>
+														</span>
+													</div>
+													<!-- buy wolf button -->
+													<template x-if="wallet">
+														<div class="text-center">
+															<!-- when player can still able to buy a wolf -->
+															<div x-show="epoch < publicSaleStartEpoch && preSaleRemain > 0 && preSaleLimit > reserved">
+																<!-- buy steps ui -->
+																<div class="b-steps py-3">
+																	<nav class="steps">
+																		<ul class="step-items">
+																			<template x-for="i in 5">
+																				<li class="step-item" :class="i == buyAmount && 'active'">
+																					<a class="step-link" @click="buyAmount = i">
+																					<div class="step-marker"></div>
+																					<div class="step-details"><span class="step-title" x-text="i + 'x'"></span></div>
+																					</a>
+																				</li>
+																			</template>
+																		</ul>
+																	</nav>
+																</div>
+																<!-- buy button -->
+																<div>
+																	<button
+																		class="button button-3d button-small button-rounded btn-spin"
+																		:class=" buyAmount + reserved > preSaleLimit ? 'button-dark' : 'button-green' "
+																		@click="blockchain.reserveWolves(buyAmount)"
+																		:disabled="loading.RESERVE_WOLF || epoch < eligibleEpoch || buyAmount + reserved > preSaleLimit">
+																		<span>Reserve</span>
+																		<span x-text="buyAmount"></span>
+																		<span x-text="buyAmount > 1 ? 'Wolves' : 'Wolf'"></span>
+																		<span x-show="epoch < eligibleEpoch">
+																			<span x-text="`(${countdown(epoch, eligibleEpoch, true)})`"></span>
+																		</span>
+																		<div class="spinner-border spinner-border-sm ml-1" x-show="loading.RESERVE_WOLF"></div>
+																</button>
+																</div>
+															</div>
+															<!-- when player can't be able to buy a wolf -> sale closed // sold out // buy limit reached -->
+															<div x-show="epoch >= publicSaleStartEpoch || preSaleRemain == 0 || preSaleLimit == reserved">
+																<div>
+																	<button
+																		class="button button-3d button-small button-rounded btn-spin button-green"
+																		x-show="reserved > 0 && claimed == 0"
+																		@click="blockchain.claimWolves"
+																		:disabled="loading.CLAIM_WOLF || epoch < preSaleClaimEpoch">
+																		<span>Claim</span>
+																		<span x-text="reserved"></span>
+																		<span x-text="reserved > 1 ? 'Wolves' : 'Wolf'"></span>
+																		<span x-show="epoch < preSaleClaimEpoch">
+																			<span x-text="`(${countdown(epoch, preSaleClaimEpoch, true)})`"></span>
+																		</span>
+																		<div class="spinner-border spinner-border-sm ml-1" x-show="loading.CLAIM_WOLF"></div>
+																	</button>
+																	<button
+																		class="button button-3d button-small button-rounded btn-spin button-dark"
+																		x-show="reserved > 0 && claimed > 0" disabled
+																	>
+																		<span>All Wolves claimed ✅</span>
+																	</button>
+																	<button
+																		class="button button-3d button-small button-rounded btn-spin button-dark"
+																		x-show="reserved == 0"
+																		disabled
+																	>
+																		<span>Whitelist Sale has ended ❌</span>
+																	</button>
+																</div>
+															</div>
+														</div>
+													</template>
+
+													<div x-show="!wallet" class="text-center flex justify-center">
+														<button
+															x-show="epoch < wsStartEpoch || epoch >= publicSaleStartEpoch || preSaleRemain === 0"
+															class="button button-3d button-small button-rounded button-dark" disabled
+														>
+															<span x-show="epoch < wsStartEpoch">
+																<span>Sale start in</span>
+																<span x-text="countdown(epoch, wsStartEpoch, true)"></span>
+															</span>
+															<span x-show="epoch >= publicSaleStartEpoch">
+																<span>PreSale has closed ❌</span>
+															</span>
+															<span x-show="epoch < publicSaleStartEpoch && preSaleRemain == 0">
+																<span>Presale has Sold out ❌</span>
+															</span>
+														</button>
+														<button
+															class="button button-3d button-small button-rounded button-red flex justify-center items-center"
+															x-show="epoch >= wsStartEpoch && epoch < publicSaleStartEpoch && preSaleRemain > 0"
+															@click="blockchain.connectMetamask(fetchUserStats)"
+															:disabled="noMetamask || loading.CONNECT_WALLET"
+														>
+															<span>Connect Wallet to join</span>
+															<div class="spinner-border spinner-border-sm ml-1" x-show="loading.CONNECT_WALLET"></div>
+														</button>
+													</div>
+
+												</div>
+											</div>
+
+											<!-- PUBLIC SALE-->
+											<div class="tab-content clearfix ui-tabs-panel ui-corner-bottom ui-widget-content" role="tabpanel" :class="selectedTab == vm.tabs[1] ? 'd-block' : 'd-none'">
+												<div>
+													<div class="row align-items-center my-4">
+														<div class='col-3'>
+															<div class="counter color">
+																<span x-text="publicSaleRemain" :class="+publicSaleRemain > 0 ? 'text-bright' : 'text-fff8'"></span>
+															</div>
+															<h5 class="mb-0 font-body text-white-50 measurementheader">
+																<span class="text-white-50">Remaining</span>
+															</h5>
+														</div>
+														<div class='col-3'>
+															<div class="counter color">
+																<span x-text="totalBought" :class="+totalBought > 0 ? 'text-bright' : 'text-fff8'"></span>
+															</div>
+															<h5 class="mb-0 font-body text-white-50 measurementheader">
+																<span class="text-white-50">Sold</span>
+															</h5>
+														</div>
+														<div class="col-3">
+															<div
+																class="inline-flex counter color text-bright justify-center items-center w-100"
+															>
+																<span x-show="publicSalePriceBN.gt(ZeroBN)" x-text="formatEther(publicSalePriceBN)"></span>
+																<span x-show="publicSalePriceBN.eq(ZeroBN)" x-text="formatEther(publicSalePriceMaxBN)"></span>
+																<i x-html="ethSvg"></i>
+															</div>
+															<h5 class="mb-0 font-body text-white-50 measurementheader">
+																<span class="text-white-50">Price</span>
+															</h5>
+														</div>
+														<template x-if="!wallet">
+															<div class="col-3">
+																<div class="counter color">
+																	<span>♾️</span>
+																</div>
+																<h5 class="mb-0 font-body text-white-50 measurementheader">
+																	<span class="text-white-50">Per Wallet</span>
+																</h5>
+															</div>
+														</template>
+														<template x-if="wallet">
+															<div class="col-3">
+																<div class="counter color">
+																	<span x-text="bought" :class="+bought > 0 ? 'text-bright' : 'text-fff8'"></span>
+																</div>
+																<h5 class="mb-0 font-body text-white-50 measurementheader">
+																	<span class="text-white-50">Bought</span>
+																</h5>
+															</div>
+														</template>
+													</div>
+													<div class="divider m-0 py-3"></div>
+													<template x-if="wallet">
+														<div>
+															<div class="b-steps b-steps-public py-4" x-show="publicSaleRemain > 0">
+																<nav class="steps">
+																	<ul class="step-items">
+																		<template x-for="i in 10">
+																			<li class="step-item" :class="i == buyAmount && 'active'">
+																				<a class="step-link" @click="buyAmount = i">
+																				<div class="step-marker"></div>
+																				<div class="step-details"><span class="step-title" x-text="i + 'x'"></span></div>
+																				</a>
+																			</li>
+																		</template>
+																	</ul>
+																</nav>
+															</div>
+															<div class="flex justify-center">
+																<button
+																	class="button button-3d button-small button-rounded flex justify-center items-center"
+																	:class=" buyAmount > publicSaleRemain ? 'button-dark' : 'button-green' "
+																	@click="blockchain.buyWolves(buyAmount)"
+																	:disabled="loading.BUY_WOLF || epoch < publicSaleStartEpoch || buyAmount > publicSaleRemain"
+																	x-show="publicSaleRemain > 0"
+																>
+																	<span>
+																		<span>Buy</span>
+																		<span x-text="buyAmount"></span>
+																		<span x-text="buyAmount == 1 ? 'Wolf' : 'Wolves'"></span>
+																		<span x-show="epoch < publicSaleStartEpoch" x-text="`(${countdown(epoch, publicSaleStartEpoch, true)})`"></span>
+																	</span>
+																	<div class="spinner-border spinner-border-sm ml-1" x-show="loading.BUY_WOLF"></div>
+																</button>
+																<button
+																	class="button button-3d button-small button-rounded button-dark"
+																	x-show="publicSaleRemain == 0" disabled
+																>
+																	<span>Public-sale has sold-out ❌</span>
+																</button>
+															</div>
+														</div>
+													</template>
+													<template x-if="!wallet">
+														<div class="flex justify-center">
+															<button
+																class="button button-3d button-small button-rounded button-dark flex items-center justify-center"
+																x-show="epoch < publicSaleStartEpoch" disabled
+															>
+																<span>Public sale start in</span>
+																<span>&nbsp;</span>
+																<span x-text="countdown(epoch, publicSaleStartEpoch, true)"></span>
+															</button>
+															<button
+																x-show="epoch >= publicSaleStartEpoch && publicSaleRemain == 0"
+																class="button button-3d button-small button-rounded button-dark" disabled
+															>
+																<span>Public sale has sold-out ❌</span>
+															</button>
+															<button
+																class="button button-3d button-small button-rounded button-red flex justify-center items-center"
+																x-show="epoch >= publicSaleStartEpoch && publicSaleRemain > 0"
+																@click="blockchain.connectMetamask(fetchUserStats)"
+																:disabled="noMetamask || loading.CONNECT_WALLET"
+															>
+																<span>Connect Wallet to join the sale</span>
+																<div class="spinner-border spinner-border-sm ml-1" x-show="loading.CONNECT_WALLET"></div>
+															</button>
+														</div>
+													</template>
+												</div>
+											</div>
+										</div>
+
+									</div>
+
+									<!-- claiming notice -->
+									<div class="info-section mt-2" style="font-family: 'DM Sans';">
+										<div>
+											<div class="text-center" style="overflow: auto;">
+												<table class="mb-2 table table-bordered table-dark align-middle-table">
+													<thead >
+														<tr>
+														   <th>Phase</th>
+														   <th colspan="2">Sale Start</th>
+														   <th>Sale end</th>
+														   <th>Total Sale</th>
+														   <th>Price</th>
+														   <th>Buy Limit Per Wallet</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr>
+															<td rowspan="2">Pre sale</td>
+															<td>Whitelist</td>
+															<td>Community</td>
+															<td rowspan="2">
+																<span><i>n/a</i></span>
+															</td>
+															<td rowspan="2">
+																<span x-text="initialPreSaleAmount"></span>
+															</td>
+															<td rowspan="2">
+																<span x-text="formatEther(vm.preSalePriceBN)"></span>
+																<span>ETH</span>
+															</td>
+															<td rowspan="2">5</td>
+														</tr>
+														<tr>
+															<td>
+																<span x-text="formatDate(wsStartEpoch)"></span>
+															</td>
+															<td>
+																<span x-text="formatDate(preSaleStartEpoch)"></span>
+															</td>
+														</tr>
+														<tr>
+															<td>Public sale</td>
+															<td colspan="2">
+																<span x-text="formatDate(publicSaleStartEpoch)"></span>
+															</td>
+															<td>
+																<span><i>n/a</i></span>
+															</td>
+															<td>
+																<span x-text="initialPublicSaleAmount"></span>
+															</td>
+															<td>
+																<span x-text="formatEther(vm.publicSalePriceMaxBN)"></span>
+																<span>ETH</span>
+															</td>
+															<td>
+																<span>
+																	unlimited (<span title="first come first served">FCFS</span>)
+																</span>
+															</td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+											<div>
+												<b><span class="text-bright">#Notes</span></b>
+												<ul class="mb-0" style="padding-left: 1.5rem;">
+													<li>
+														<span>Connect your wallet to see if you are eligible for whitelist sale</span>
+													</li>
+													<li>
+														<span>All unsold wolves left (from pre-sale) will be recycled into public sale</span>
+													</li>
+													<li>
+														<span>All the timelines mentioned in this page has already be converted to your local time zone</span>
+													</li>
+												</ul>
+											</div>
+										</div>
+									</div>
+									<div>
+										
+									</div>
+								</div>
+							</template>
+						</div>
+					</div>
+					</div>
+					<div class="footernew" style="margin-top: 5rem">
+						<div class="footerleft">
+							<h3>About Us:</h3>
+							<address>
+								<p>
+									Fear Wolf is an NFT mascot and property
+									of
+									<a href="https://www.fear.io/" target="_blank" rel="nofollow">Fear.io</a>
+								</p>
+							</address>
+							<ul class="list-unstyled">
+								<!--<li class="mb-1"><span class="color op-07">Phone:</span> <span class="font-primary">(1) 8547 632521</span></li>
+										<li class="mb-1"><span class="color op-07">Email:</span> <span class="font-primary">noreply@canvas.com</span></li>-->
+								<li>
+									<span class="color op-07">Website:</span>
+									<a href="https://www.fearwolf.com/">
+										<span class="font-primary">fearwolf.com</span></a>
+								</li>
+							</ul>
+						</div>
+
+						<div class="footerright">
+							<img src="images/fearwolf/fear-wolf-footer.png" alt="Image" height="50" class="mb-4" />
+							<p class="text-white-50 mb-5">
+								Fear Wolf is a multi game &amp; multi chain
+								NFT that focuses on providing owners with
+								maximum entertainment and utility in all
+								Fear's major games and digital content.
+							</p>
+						</div>
+					</div>
+					<div id="gotoTop" class="icon-angle-up" style="display: block"></div>
 				</div>
-				
-
-				
-
 			</div>
-		</section><!-- #content end -->
-
-		
-
-		
-
-	</div><!-- #wrapper end -->
+		</section>
+		<!-- #content end -->
+	</div>
+	<!-- #wrapper end -->
 
 	<!-- Go To Top
 	============================================= -->
@@ -160,6 +765,7 @@
 	============================================= -->
 	<script src="js/jquery.js"></script>
 	<script src="js/plugins.min.js"></script>
+	<script src="js/bootbox@5.5.2.js"></script>
 
 	<!-- Include Date Range Picker -->
 	<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
@@ -174,23 +780,9 @@
 			altInput: true,
 			altFormat: "F j, Y  - H:i",
 			minDate: "today",
-			time_24hr: true
+			time_24hr: true,
 		});
 	</script>
-	
-	<script type="text/javascript">
-var sc_project=12743184; 
-var sc_invisible=1; 
-var sc_security="c6f6ad96"; 
-var sc_remove_link=1; 
-</script>
-<script type="text/javascript"
-src="https://www.statcounter.com/counter/counter.js"
-async></script>
-<noscript><div class="statcounter"><img class="statcounter"
-src="https://c.statcounter.com/12743184/0/c6f6ad96/1/"
-alt="Web Analytics"
-referrerPolicy="no-referrer-when-downgrade"></div></noscript>
-
 </body>
+
 </html>
