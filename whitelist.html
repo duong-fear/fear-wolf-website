@@ -254,7 +254,7 @@
 								</div>
 							</template>
 							<template x-if="ready">
-								<div style="padding: 0.75rem;">
+								<div style="padding: 0.75rem;" class="fadeIn faster animated">
 
 									<template x-if="notification">
 										<div class="style-msg" :class="notification.type + 'msg'" style="border-radius: 0.25rem;">
@@ -468,10 +468,11 @@
 													<div x-show="!wallet" class="text-center flex justify-center">
 														<button
 															x-show="epoch < wsStartEpoch || epoch >= publicSaleStartEpoch || preSaleRemain === 0"
-															class="button button-3d button-small button-rounded button-dark" disabled
+															class="button button-3d button-small button-rounded" disabled
+															:class="epoch < wsStartEpoch ? 'button-light' : 'button-dark'"
 														>
 															<span x-show="epoch < wsStartEpoch">
-																<span>Sale start in</span>
+																<span>Sale starts in</span>
 																<span x-text="countdown(epoch, wsStartEpoch, true)"></span>
 															</span>
 															<span x-show="epoch >= publicSaleStartEpoch">
@@ -597,10 +598,10 @@
 													<template x-if="!wallet">
 														<div class="flex justify-center">
 															<button
-																class="button button-3d button-small button-rounded button-dark flex items-center justify-center"
+																class="button button-3d button-small button-rounded button-light flex items-center justify-center"
 																x-show="epoch < publicSaleStartEpoch" disabled
 															>
-																<span>sale start in</span>
+																<span>sale starts in</span>
 																<span>&nbsp;</span>
 																<span x-text="countdown(epoch, publicSaleStartEpoch, true)"></span>
 															</button>
@@ -693,8 +694,8 @@
 												</table>
 											</div>
 											<div class="py-2">
-												<b><span class="text-bright">#Notes</span></b>
-												<ul class="mb-0" style="padding-left: 1.5rem;">
+												<!-- <b><span class="text-bright">#Notes</span></b> -->
+												<ul class="mb-2" style="padding-left: 1.5rem;">
 													<li>
 														<span>Connect your wallet to see if you are in the <b>INO Sale</b>'s whitelist ( Stakers and Affiliates )</span>
 													</li>
@@ -702,11 +703,14 @@
 														<span>Wolves reserved at <b>INO sale</b> will be claimable the day after the <b>Public sale</b></span>
 													</li>
 													<li>
-														<span>All unsold wolves left (from <b>INO sale</b>) will be recycled into <b>Public sale</b></span>
+														<span>All unsold wolves from the <b>INO sale</b> will be brought to <b>Public sale</b></span>
 													</li>
 												</ul>
 												<div class="pt-1">
-													<span>*<b>FCFS</b> = First Come First Served</span>
+													<div class="flex justify-between">
+														<div><span>*<b>FCFS</b> = First Come First Served</span></div>
+														<div><span>*<b>INO</b> = Initial NFT Offering</span></div>
+													</div>
 												</div>
 											</div>
 										</div>
