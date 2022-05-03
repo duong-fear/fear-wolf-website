@@ -276,7 +276,7 @@
 													<li role="tab" tabindex="0"
 														class="select-none ui-tabs-tab ui-corner-top ui-state-default ui-tab"
 														:class="selectedTab == tab && 'ui-tabs-active ui-state-active'"
-														@click="selectedTab = tab; buyAmount = selectedTab == tabs[1] ? 10 : 5;">
+														@click="selectedTab = tab; buyAmount = selectedTab == tabs[1] ? Math.min(10, publicSaleRemain) : Math.min(5, preSaleRemain, preSaleLimit - reserved);">
 														<a style="display: flex;" role="presentation" tabindex="-1" class="ui-tabs-anchor flex justify-center items-center">
 															<span x-text="tab"></span>
 															<div
@@ -409,7 +409,7 @@
 																		<div>
 																			<span x-text="buyAmount" class="text-bright"></span>
 																		</div>
-																		<div @click="increaseBuyAmount(5)">
+																		<div @click="increaseBuyAmount(Math.min(5, preSaleRemain, preSaleLimit - reserved))">
 																			<span>+</span>
 																		</div>
 																	</div>
@@ -563,7 +563,7 @@
 																		<div>
 																			<span x-text="buyAmount" class="text-bright"></span>
 																		</div>
-																		<div @click="increaseBuyAmount(10)">
+																		<div @click="increaseBuyAmount(Math.min(10, publicSaleRemain))">
 																			<span>+</span>
 																		</div>
 																	</div>
