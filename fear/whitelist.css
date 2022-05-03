@@ -318,6 +318,43 @@ button:disabled {
     font-size: 0.9rem;
 }
 
+.wolf-buy-input {
+    font-weight: 700;
+    font-family: "DM Sans" !important;
+}
+.wolf-buy-input div {
+    width: 3rem;
+    height: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #373b3e;
+    background: #212529;
+    color: white;
+    user-select: none;
+}
+.wolf-buy-input div:first-child:active,
+.wolf-buy-input div:last-child:active {
+    background-color: #373a3e;
+}
+.wolf-buy-input div:first-child {
+    border-top-left-radius: 0.25rem;
+    border-bottom-left-radius: 0.25rem;
+}
+.wolf-buy-input div:last-child {
+    border-top-right-radius: 0.25rem;
+    border-bottom-right-radius: 0.25rem;
+}
+.wolf-buy-input div:nth-child(2) {
+    background-color: #1a1d20;
+    width: 3rem;
+    height: 3rem;
+    border: 1px solid #373b3e;
+    border-left: 0px !important;
+    border-right: 0px !important;
+}
+
+
 @media (max-width: 1200px) {
     .counter {
         font-size: 2.5rem;

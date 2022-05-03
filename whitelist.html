@@ -276,7 +276,7 @@
 													<li role="tab" tabindex="0"
 														class="select-none ui-tabs-tab ui-corner-top ui-state-default ui-tab"
 														:class="selectedTab == tab && 'ui-tabs-active ui-state-active'"
-														@click="selectedTab = tab; buyAmount = 1;">
+														@click="selectedTab = tab; buyAmount = selectedTab == tabs[1] ? 10 : 5;">
 														<a style="display: flex;" role="presentation" tabindex="-1" class="ui-tabs-anchor flex justify-center items-center">
 															<span x-text="tab"></span>
 															<div
@@ -358,8 +358,8 @@
 
 													<!-- user's stats -->
 													<div>
-														<div class="divider divider-center m-0 py-3">
-															<span style="color: #ffffff88; font-size: 1rem; font-style: italic;">your stats</span>
+														<div class="divider divider-left m-0 py-3">
+															<span style="color: #ffffff88; font-size: 1rem; font-style: italic;">your stats:</span>
 														</div>
 														<div class="row align-items-center my-2">
 															<div class="col-4">
@@ -392,34 +392,27 @@
 															</div>
 														</div>
 													</div>
-
-													<div class="divider m-0 py-3" x-show="epoch < wsStartEpoch || epoch >= publicSaleStartEpoch"></div>
-													<div class="divider m-0 py-3 divider-center" x-show="epoch >= wsStartEpoch && epoch < publicSaleStartEpoch">
-														<span style="color: #ffffff88; font-size: 1rem; font-style: italic;">
-															<span>pre-sale</span>
-															<span>ends in</span>
-															<span x-text="countdown(epoch, publicSaleStartEpoch, true)"></span>
-														</span>
+													<div class="divider m-0 py-3" x-show="!wallet"></div>
+													<div class="divider m-0 py-3 pb-2 divider-left" x-show="wallet">
+														<span style="color: #ffffff88; font-size: 1rem; font-style: italic;">number of wolves to reserve:</span>
 													</div>
 													<!-- buy wolf button -->
 													<template x-if="wallet">
 														<div class="text-center">
 															<!-- when player can still able to buy a wolf -->
 															<div x-show="epoch < publicSaleStartEpoch && preSaleRemain > 0 && preSaleLimit > reserved">
-																<!-- buy steps ui -->
-																<div class="b-steps py-3">
-																	<nav class="steps">
-																		<ul class="step-items">
-																			<template x-for="i in 5">
-																				<li class="step-item" :class="i == buyAmount && 'active'">
-																					<a class="step-link" @click="buyAmount = i">
-																					<div class="step-marker"></div>
-																					<div class="step-details"><span class="step-title" x-text="i + 'x'"></span></div>
-																					</a>
-																				</li>
-																			</template>
-																		</ul>
-																	</nav>
+																<div class="py-2 flex justify-center">
+																	<div class="flex wolf-buy-input pb-2">
+																		<div @click="decreaseBuyAmount(1)">
+																			<span>-</span>
+																		</div>
+																		<div>
+																			<span x-text="buyAmount" class="text-bright"></span>
+																		</div>
+																		<div @click="increaseBuyAmount(5)">
+																			<span>+</span>
+																		</div>
+																	</div>
 																</div>
 																<!-- buy button -->
 																<div>
@@ -555,22 +548,26 @@
 															</div>
 														</template>
 													</div>
-													<div class="divider m-0 py-3"></div>
+													<div class="divider m-0 py-3" x-show="!wallet"></div>
+													<div class="divider m-0 py-3 pb-2 divider-left" x-show="wallet">
+														<span style="color: #ffffff88; font-size: 1rem; font-style: italic;">number of wolves to buy:</span>
+													</div>
 													<template x-if="wallet">
 														<div>
-															<div class="b-steps b-steps-public py-4" x-show="publicSaleRemain > 0">
-																<nav class="steps">
-																	<ul class="step-items">
-																		<template x-for="i in 10">
-																			<li class="step-item" :class="i == buyAmount && 'active'">
-																				<a class="step-link" @click="buyAmount = i">
-																				<div class="step-marker"></div>
-																				<div class="step-details"><span class="step-title" x-text="i + 'x'"></span></div>
-																				</a>
-																			</li>
-																		</template>
-																	</ul>
-																</nav>
+															<div class="b-steps b-steps-public py-2" x-show="publicSaleRemain > 0">
+																<div class="flex justify-center pb-2">
+																	<div class="flex wolf-buy-input">
+																		<div @click="decreaseBuyAmount(1)">
+																			<span>-</span>
+																		</div>
+																		<div>
+																			<span x-text="buyAmount" class="text-bright"></span>
+																		</div>
+																		<div @click="increaseBuyAmount(10)">
+																			<span>+</span>
+																		</div>
+																	</div>
+																</div>
 															</div>
 															<div class="flex justify-center">
 																<button
