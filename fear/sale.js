@@ -61,6 +61,16 @@ const fetchWolfSaleStats = async () => {
         initialPublicSaleAmount: initialPublicSaleAmountBN.toNumber(),
     });
     const epoch = getEpoch();
+    // mock 
+    Object.assign(vm, {
+        wsStartEpoch: 1652850000,
+        preSaleStartEpoch: 1652871600,
+        publicSaleStartEpoch: 1653868800,
+        preSaleRemain: 2000,
+        publicSaleRemain: 4000,
+        totalReserved: 0,
+        totalBought: 0,
+    })
     Object.assign(vm, {
         selectedTab: epoch >= vm.publicSaleStartEpoch ? tabs[1] : tabs[0],
         // buyAmount: epoch >= vm.publicSaleStartEpoch ? 10 : 5,
