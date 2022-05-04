@@ -502,7 +502,8 @@
 													<div class="row align-items-center my-4">
 														<div class='col-3'>
 															<div class="counter color">
-																<span x-text="publicSaleRemain" :class="+publicSaleRemain > 0 ? 'text-bright' : 'text-fff8'"></span>
+																<span x-show="epoch >= publicSaleStartEpoch" x-text="publicSaleRemain" :class="+publicSaleRemain > 0 ? 'text-bright' : 'text-fff8'"></span>
+																<span x-show="epoch < publicSaleStartEpoch" class="text-bright">TBA</span>
 															</div>
 															<h5 class="mb-0 font-body text-white-50 measurementheader">
 																<span class="text-white-50">Remaining</span>
@@ -675,7 +676,7 @@
 														<tr>
 															<td>Public sale</td>
 															<td colspan="2">
-																<span>30th May</span>
+																<span class="text-bright"><i>30th May</i></span>
 															</td>
 															<td>
 																<span x-text="initialPublicSaleAmount"></span>
@@ -700,10 +701,13 @@
 														<span>Connect your wallet to see if you are in the <b>INO Sale</b>'s whitelist ( Stakers and Affiliates )</span>
 													</li>
 													<li>
-														<span>Wolves reserved at <b>INO sale</b> will be claimable the day after the <b>Public sale</b></span>
+														<span>Wolves reserved at <b>INO sale</b> will be claimable on <b><i>31 May</i></b></span>
 													</li>
 													<li>
 														<span>All unsold wolves from the <b>INO sale</b> will be brought to <b>Public sale</b></span>
+													</li>
+													<li>
+														<span>Join <a style="color: #0d6efd" href="https://t.me/fearcoin">FEAR chat group, </a>subcribe to <a style="color: #0d6efd" href="https://t.me/fearnftsannouncement">FEAR ANN Channel</a> and follow lastest announcements to know how to get whitelisted</span>
 													</li>
 												</ul>
 												<div class="pt-1">
