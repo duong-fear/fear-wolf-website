@@ -679,7 +679,8 @@
 																<span class="text-bright"><i>30th May</i></span>
 															</td>
 															<td>
-																<span x-text="initialPublicSaleAmount"></span>
+																<span x-text="initialPublicSaleAmount" x-show="epoch >= publicSaleStartEpoch"></span>
+																<span x-show="epoch < publicSaleStartEpoch">TBA</span>
 															</td>
 															<td>
 																<span x-text="formatEther(vm.publicSalePriceMaxBN)"></span>
