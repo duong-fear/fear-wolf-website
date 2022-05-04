@@ -293,7 +293,7 @@
 													</li>
 												</template>
 												<!-- connect metamask button -->
-												<div class="flex-auto flex justify-end" x-show="wallet === null">
+												<div class="flex-auto flex justify-end" x-show="!wallet">
 													<button
 														@click="blockchain.connectMetamask(fetchUserStats)"
 														class="button button-mini button-teal button-rounded flex justify-center items-center"
@@ -306,7 +306,7 @@
 													</button>
 												</div>
 												<!-- wallet connected button -->
-												<div class="flex-auto flex justify-end" x-show="wallet !== null">
+												<div class="flex-auto flex justify-end" x-show="wallet">
 													<button
 														class="button button-mini button-dark button-rounded"
 														disabled style="margin: 0.5rem;margin-right: 0rem;"
@@ -327,14 +327,14 @@
 												<div>
 													<div class="row align-items-center mt-4">
 														<div class="col-3">
-															<div class="counter color text-bright">
-																<span x-text="preSaleRemain" :class="preSaleRemain == 0 && 'text-fff8'"></span>
+															<div class="counter color">
+																<span x-text="preSaleRemain" :class="+preSaleRemain > 0 ? 'text-bright' : 'text-fff8'"></span>
 															</div>
 															<h5 class="mb-0 font-body text-white-50 measurementheader">Remaining</h5>
 														</div>
 														<div class="col-3">
-															<div class="counter color text-bright">
-																<span x-text="totalReserved" :class="totalReserved == 0 && 'text-fff8'"></span>
+															<div class="counter color">
+																<span x-text="totalReserved" :class="+totalReserved > 0 ? 'text-bright' : 'text-fff8'"></span>
 															</div>
 															<h5 class="mb-0 font-body text-white-50 measurementheader">SOLD</h5>
 														</div>
@@ -363,9 +363,9 @@
 														</div>
 														<div class="row align-items-center my-2">
 															<div class="col-4">
-																<div class="counter color text-bright">
-																	<span x-show="!wallet" class="text-fff8">n/a</span>
-																	<span x-show="wallet">
+																<div class="counter color">
+																	<span x-show="!wallet || loading.CONNECT_WALLET" class="text-fff8">n/a</span>
+																	<span x-show="wallet && !loading.CONNECT_WALLET">
 																		<span x-show="wsEligible == true">✅</span>
 																		<span x-show="wsEligible == false">❌</span>
 																	</span>
@@ -458,7 +458,7 @@
 																		x-show="reserved == 0"
 																		disabled
 																	>
-																		<span>Whitelist Sale has ended ❌</span>
+																		<span>INO Sale has ended ❌</span>
 																	</button>
 																</div>
 															</div>
@@ -476,10 +476,10 @@
 																<span x-text="countdown(epoch, wsStartEpoch, true)"></span>
 															</span>
 															<span x-show="epoch >= publicSaleStartEpoch">
-																<span>PreSale has closed ❌</span>
+																<span>INO Sale has closed ❌</span>
 															</span>
 															<span x-show="epoch < publicSaleStartEpoch && preSaleRemain == 0">
-																<span>Presale has Sold out ❌</span>
+																<span>INO Sale has Sold out ❌</span>
 															</span>
 														</button>
 														<button
@@ -609,7 +609,7 @@
 																x-show="epoch >= publicSaleStartEpoch && publicSaleRemain == 0"
 																class="button button-3d button-small button-rounded button-dark" disabled
 															>
-																<span>Public sale has sold-out ❌</span>
+																<span>Public-sale has sold-out ❌</span>
 															</button>
 															<button
 																class="button button-3d button-small button-rounded button-red flex justify-center items-center"

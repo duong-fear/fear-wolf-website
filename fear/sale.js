@@ -1,7 +1,6 @@
 const fetchWolfSaleStats = async () => {
     const [
         wsStartEpochBN,
-        asStartEpochBN,
         preSaleStartEpochBN,
         publicSaleStartEpochBN,
         claimingStartEpochBN,
@@ -22,7 +21,6 @@ const fetchWolfSaleStats = async () => {
         initialPublicSaleAmountBN,
     ] = await Promise.all([
         fear.wolfDistribution.instance.whitelistedPresaleStart(),
-        fear.wolfDistribution.instance.affiliatedPresaleStart(),
         fear.wolfDistribution.instance.publicPresaleStart(),
         fear.wolfDistribution.instance.saleStart(),
         fear.wolfDistribution.instance.claimingStart(),
@@ -44,7 +42,6 @@ const fetchWolfSaleStats = async () => {
     ]);
     Object.assign(vm, {
         wsStartEpoch: wsStartEpochBN.toNumber(),
-        asStartEpoch: asStartEpochBN.toNumber(),
         preSaleStartEpoch: preSaleStartEpochBN.toNumber(),
         publicSaleStartEpoch: publicSaleStartEpochBN.toNumber(),
         preSaleRemain: preSaleRemainBN.toNumber(),
@@ -84,14 +81,12 @@ const fetchUserStats = async () => {
         wolvesBoughtBN,
         wolvesClaimedBN,
         wsEligible,
-        asEligible,
         etherBalanceBN,
     ] = await Promise.all([
         fear.wolfDistribution.instance.getMyNumberOfWolvesReserved(),
         fear.wolfDistribution.instance.getMyNumberOfWolvesBought(),
         fear.wolfDistribution.instance.getMyNumberOfWolvesClaimed(),
         fear.wolfDistribution.instance.getMyWhitelistedStatus(),
-        fear.wolfDistribution.instance.getMyAffiliatedStatus(),
         blockchain.signer.getBalance(),
     ]);
     Object.assign(vm, {
@@ -99,12 +94,11 @@ const fetchUserStats = async () => {
         bought: wolvesBoughtBN.toNumber(),
         claimed: wolvesClaimedBN.toNumber(),
         wsEligible,
-        asEligible,
         etherBalanceBN,
     });
     const epoch = getEpoch();
     Object.assign(vm, {
-        eligibleEpoch: (vm.wsEligible && vm.wsStartEpoch) || (vm.asEligible && vm.asStartEpoch) || vm.preSaleStartEpoch,
+        eligibleEpoch: (vm.wsEligible && vm.wsStartEpoch) || vm.preSaleStartEpoch,
         buyAmount: epoch >= vm.publicSaleStartEpoch ? Math.min(10, vm.publicSaleRemain) : Math.min(5, vm.preSaleRemain, vm.preSaleLimit - vm.reserved),
     });
 }
@@ -145,7 +139,6 @@ const alpineInit = async () => {
         wallet: null,
         etherBalanceBN: null,
         wsEligible: null, // eligible for whitelist sale
-        asEligible: null, // eligible for affiliate sale
         eligibleEpoch: null, // eligible time to start reserving
         reserved: null, // number of wolves bought on presale
         claimed: null, // number of wolves claimed on presale
@@ -153,7 +146,6 @@ const alpineInit = async () => {
         // pre-sale stats
         initialPreSaleAmount: null,
         wsStartEpoch: null, // whitelist sale start time
-        asStartEpoch: null, // affiliate sale start time
         preSaleStartEpoch: null, // pre-sale start time 
         preSaleClaimEpoch: null,
         preSaleRemain: null, // number of wolves remain before public sale
