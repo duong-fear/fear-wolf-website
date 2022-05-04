@@ -295,7 +295,6 @@
 												<!-- connect metamask button -->
 												<div class="flex-auto flex justify-end" x-show="!wallet">
 													<button
-														@click="blockchain.connectMetamask(fetchUserStats)"
 														class="button button-mini button-teal button-rounded flex justify-center items-center"
 														style="margin: 0.5rem;margin-right: 0rem;"
 														:disabled="noMetamask || loading.CONNECT_WALLET"
@@ -470,6 +469,7 @@
 															x-show="epoch < wsStartEpoch || epoch >= publicSaleStartEpoch || preSaleRemain === 0"
 															class="button button-3d button-small button-rounded" disabled
 															:class="epoch < wsStartEpoch ? 'button-light' : 'button-dark'"
+															style="font-size:15px;"
 														>
 															<span x-show="epoch < wsStartEpoch">
 																<span>Sale starts in</span>
@@ -702,13 +702,13 @@
 														<span>Connect your wallet to see if you are in the <b>INO Sale</b>'s whitelist ( Stakers and Affiliates )</span>
 													</li>
 													<li>
-														<span>Wolves reserved at <b>INO sale</b> will be claimable on <b><i>31 May</i></b></span>
+														<span>Wolves reserved at <strong>INO Sale</strong> will be claimable on the <strong><i>31st May</i></strong></span>
 													</li>
 													<li>
-														<span>All unsold wolves from the <b>INO sale</b> will be brought to <b>Public sale</b></span>
+														<span>All unsold wolves from the <strong>INO Sale</strong> will be added to the <strong>Public Sale</strong></span>
 													</li>
 													<li>
-														<span>Join <a style="color: #0d6efd" href="https://t.me/fearcoin">FEAR chat group, </a>subcribe to <a style="color: #0d6efd" href="https://t.me/fearnftsannouncement">FEAR ANN Channel</a> and follow lastest announcements to know how to get whitelisted</span>
+														<span>Join <a style="color: #0d6efd" href="https://t.me/fearcoin">FEAR chat group, </a>subcribe to <a style="color: #0d6efd" href="https://t.me/fearnftsannouncement">FEAR ANN Channel</a> and follow lastest announcements to find out how to get whitelisted</span>
 													</li>
 												</ul>
 												<div class="pt-1">
