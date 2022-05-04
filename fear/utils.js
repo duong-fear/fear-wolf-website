@@ -212,3 +212,17 @@ const getWeb3ActiveChainId = async () => {
 		return undefined;
 	}
 }
+
+const decreaseBuyAmount = (min = 1) => {
+	const vm = Alpine.store("vm");
+	if(vm.buyAmount > min) {
+		vm.buyAmount -= 1;
+	}
+}
+
+const increaseBuyAmount = (max = 5) => {
+	const vm = Alpine.store("vm");
+	if(vm.buyAmount < max) {
+		vm.buyAmount += 1;
+	}
+}

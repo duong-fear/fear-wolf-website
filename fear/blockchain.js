@@ -53,7 +53,7 @@ const fear = {
     wolfDistribution: {
         [KOVAN_CHAINID]: {
             // address: "0x352D1BB819f55232A7D463868D562af8756D54EB",
-            address: "0x7F39a6252D6c3171D5f819dcc138e7D2311BC41C",
+            address: "0x1F20152E230bf714a739c16a674E730a2aCaC5eb",
             abi: fearWolfDistributorABI,
         },
         // [RINKEBY_CHAINID]: {

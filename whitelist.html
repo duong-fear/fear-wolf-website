@@ -254,7 +254,7 @@
 								</div>
 							</template>
 							<template x-if="ready">
-								<div style="padding: 0.75rem;">
+								<div style="padding: 0.75rem;" class="fadeIn faster animated">
 
 									<template x-if="notification">
 										<div class="style-msg" :class="notification.type + 'msg'" style="border-radius: 0.25rem;">
@@ -276,7 +276,7 @@
 													<li role="tab" tabindex="0"
 														class="select-none ui-tabs-tab ui-corner-top ui-state-default ui-tab"
 														:class="selectedTab == tab && 'ui-tabs-active ui-state-active'"
-														@click="selectedTab = tab; buyAmount = 1;">
+														@click="selectedTab = tab; buyAmount = selectedTab == tabs[1] ? Math.min(10, publicSaleRemain) : Math.min(5, preSaleRemain, preSaleLimit - reserved);">
 														<a style="display: flex;" role="presentation" tabindex="-1" class="ui-tabs-anchor flex justify-center items-center">
 															<span x-text="tab"></span>
 															<div
@@ -293,7 +293,7 @@
 													</li>
 												</template>
 												<!-- connect metamask button -->
-												<div class="flex-auto flex justify-end" x-show="wallet === null">
+												<div class="flex-auto flex justify-end" x-show="!wallet">
 													<button
 														@click="blockchain.connectMetamask(fetchUserStats)"
 														class="button button-mini button-teal button-rounded flex justify-center items-center"
@@ -306,7 +306,7 @@
 													</button>
 												</div>
 												<!-- wallet connected button -->
-												<div class="flex-auto flex justify-end" x-show="wallet !== null">
+												<div class="flex-auto flex justify-end" x-show="wallet">
 													<button
 														class="button button-mini button-dark button-rounded"
 														disabled style="margin: 0.5rem;margin-right: 0rem;"
@@ -327,14 +327,14 @@
 												<div>
 													<div class="row align-items-center mt-4">
 														<div class="col-3">
-															<div class="counter color text-bright">
-																<span x-text="preSaleRemain" :class="preSaleRemain == 0 && 'text-fff8'"></span>
+															<div class="counter color">
+																<span x-text="preSaleRemain" :class="+preSaleRemain > 0 ? 'text-bright' : 'text-fff8'"></span>
 															</div>
 															<h5 class="mb-0 font-body text-white-50 measurementheader">Remaining</h5>
 														</div>
 														<div class="col-3">
-															<div class="counter color text-bright">
-																<span x-text="totalReserved" :class="totalReserved == 0 && 'text-fff8'"></span>
+															<div class="counter color">
+																<span x-text="totalReserved" :class="+totalReserved > 0 ? 'text-bright' : 'text-fff8'"></span>
 															</div>
 															<h5 class="mb-0 font-body text-white-50 measurementheader">SOLD</h5>
 														</div>
@@ -358,14 +358,14 @@
 
 													<!-- user's stats -->
 													<div>
-														<div class="divider divider-center m-0 py-3">
-															<span style="color: #ffffff88; font-size: 1rem; font-style: italic;">your stats</span>
+														<div class="divider divider-left m-0 py-3">
+															<span style="color: #ffffff88; font-size: 1rem; font-style: italic;">your stats:</span>
 														</div>
 														<div class="row align-items-center my-2">
 															<div class="col-4">
-																<div class="counter color text-bright">
-																	<span x-show="!wallet" class="text-fff8">n/a</span>
-																	<span x-show="wallet">
+																<div class="counter color">
+																	<span x-show="!wallet || loading.CONNECT_WALLET" class="text-fff8">n/a</span>
+																	<span x-show="wallet && !loading.CONNECT_WALLET">
 																		<span x-show="wsEligible == true">✅</span>
 																		<span x-show="wsEligible == false">❌</span>
 																	</span>
@@ -392,34 +392,27 @@
 															</div>
 														</div>
 													</div>
-
-													<div class="divider m-0 py-3" x-show="epoch < wsStartEpoch || epoch >= publicSaleStartEpoch"></div>
-													<div class="divider m-0 py-3 divider-center" x-show="epoch >= wsStartEpoch && epoch < publicSaleStartEpoch">
-														<span style="color: #ffffff88; font-size: 1rem; font-style: italic;">
-															<span>pre-sale</span>
-															<span>ends in</span>
-															<span x-text="countdown(epoch, publicSaleStartEpoch, true)"></span>
-														</span>
+													<div class="divider m-0 py-3" x-show="!wallet || epoch >= publicSaleStartEpoch || preSaleRemain == 0 || preSaleLimit == reserved"></div>
+													<div class="divider m-0 py-3 pb-2 divider-left" x-show="wallet && epoch < publicSaleStartEpoch && preSaleRemain > 0 && preSaleLimit > reserved">
+														<span style="color: #ffffff88; font-size: 1rem; font-style: italic;">number of wolves to reserve:</span>
 													</div>
 													<!-- buy wolf button -->
 													<template x-if="wallet">
 														<div class="text-center">
 															<!-- when player can still able to buy a wolf -->
 															<div x-show="epoch < publicSaleStartEpoch && preSaleRemain > 0 && preSaleLimit > reserved">
-																<!-- buy steps ui -->
-																<div class="b-steps py-3">
-																	<nav class="steps">
-																		<ul class="step-items">
-																			<template x-for="i in 5">
-																				<li class="step-item" :class="i == buyAmount && 'active'">
-																					<a class="step-link" @click="buyAmount = i">
-																					<div class="step-marker"></div>
-																					<div class="step-details"><span class="step-title" x-text="i + 'x'"></span></div>
-																					</a>
-																				</li>
-																			</template>
-																		</ul>
-																	</nav>
+																<div class="py-2 flex justify-center">
+																	<div class="flex wolf-buy-input pb-2">
+																		<div @click="decreaseBuyAmount(1)">
+																			<span>-</span>
+																		</div>
+																		<div>
+																			<span x-text="buyAmount" class="text-bright"></span>
+																		</div>
+																		<div @click="increaseBuyAmount(Math.min(5, preSaleRemain, preSaleLimit - reserved))">
+																			<span>+</span>
+																		</div>
+																	</div>
 																</div>
 																<!-- buy button -->
 																<div>
@@ -465,7 +458,7 @@
 																		x-show="reserved == 0"
 																		disabled
 																	>
-																		<span>Whitelist Sale has ended ❌</span>
+																		<span>INO Sale has ended ❌</span>
 																	</button>
 																</div>
 															</div>
@@ -475,17 +468,18 @@
 													<div x-show="!wallet" class="text-center flex justify-center">
 														<button
 															x-show="epoch < wsStartEpoch || epoch >= publicSaleStartEpoch || preSaleRemain === 0"
-															class="button button-3d button-small button-rounded button-dark" disabled
+															class="button button-3d button-small button-rounded" disabled
+															:class="epoch < wsStartEpoch ? 'button-light' : 'button-dark'"
 														>
 															<span x-show="epoch < wsStartEpoch">
-																<span>Sale start in</span>
+																<span>Sale starts in</span>
 																<span x-text="countdown(epoch, wsStartEpoch, true)"></span>
 															</span>
 															<span x-show="epoch >= publicSaleStartEpoch">
-																<span>PreSale has closed ❌</span>
+																<span>INO Sale has closed ❌</span>
 															</span>
 															<span x-show="epoch < publicSaleStartEpoch && preSaleRemain == 0">
-																<span>Presale has Sold out ❌</span>
+																<span>INO Sale has Sold out ❌</span>
 															</span>
 														</button>
 														<button
@@ -508,7 +502,8 @@
 													<div class="row align-items-center my-4">
 														<div class='col-3'>
 															<div class="counter color">
-																<span x-text="publicSaleRemain" :class="+publicSaleRemain > 0 ? 'text-bright' : 'text-fff8'"></span>
+																<span x-show="epoch >= publicSaleStartEpoch" x-text="publicSaleRemain" :class="+publicSaleRemain > 0 ? 'text-bright' : 'text-fff8'"></span>
+																<span x-show="epoch < publicSaleStartEpoch" class="text-bright">TBA</span>
 															</div>
 															<h5 class="mb-0 font-body text-white-50 measurementheader">
 																<span class="text-white-50">Remaining</span>
@@ -555,22 +550,26 @@
 															</div>
 														</template>
 													</div>
-													<div class="divider m-0 py-3"></div>
+													<div class="divider m-0 py-3" x-show="!wallet || publicSaleRemain == 0"></div>
+													<div class="divider m-0 py-3 pb-2 divider-left" x-show="wallet && publicSaleRemain > 0">
+														<span style="color: #ffffff88; font-size: 1rem; font-style: italic;">number of wolves to buy:</span>
+													</div>
 													<template x-if="wallet">
 														<div>
-															<div class="b-steps b-steps-public py-4" x-show="publicSaleRemain > 0">
-																<nav class="steps">
-																	<ul class="step-items">
-																		<template x-for="i in 10">
-																			<li class="step-item" :class="i == buyAmount && 'active'">
-																				<a class="step-link" @click="buyAmount = i">
-																				<div class="step-marker"></div>
-																				<div class="step-details"><span class="step-title" x-text="i + 'x'"></span></div>
-																				</a>
-																			</li>
-																		</template>
-																	</ul>
-																</nav>
+															<div class="b-steps b-steps-public py-2" x-show="publicSaleRemain > 0">
+																<div class="flex justify-center pb-2">
+																	<div class="flex wolf-buy-input">
+																		<div @click="decreaseBuyAmount(1)">
+																			<span>-</span>
+																		</div>
+																		<div>
+																			<span x-text="buyAmount" class="text-bright"></span>
+																		</div>
+																		<div @click="increaseBuyAmount(Math.min(10, publicSaleRemain))">
+																			<span>+</span>
+																		</div>
+																	</div>
+																</div>
 															</div>
 															<div class="flex justify-center">
 																<button
@@ -600,10 +599,10 @@
 													<template x-if="!wallet">
 														<div class="flex justify-center">
 															<button
-																class="button button-3d button-small button-rounded button-dark flex items-center justify-center"
+																class="button button-3d button-small button-rounded button-light flex items-center justify-center"
 																x-show="epoch < publicSaleStartEpoch" disabled
 															>
-																<span>Public sale start in</span>
+																<span>sale starts in</span>
 																<span>&nbsp;</span>
 																<span x-text="countdown(epoch, publicSaleStartEpoch, true)"></span>
 															</button>
@@ -611,7 +610,7 @@
 																x-show="epoch >= publicSaleStartEpoch && publicSaleRemain == 0"
 																class="button button-3d button-small button-rounded button-dark" disabled
 															>
-																<span>Public sale has sold-out ❌</span>
+																<span>Public-sale has sold-out ❌</span>
 															</button>
 															<button
 																class="button button-3d button-small button-rounded button-red flex justify-center items-center"
@@ -630,28 +629,30 @@
 
 									</div>
 
-									<!-- claiming notice -->
-									<div class="info-section mt-2" style="font-family: 'DM Sans';">
+									<div class="info-section mt-4" style="font-family: 'DM Sans';">
 										<div>
 											<div class="text-center" style="overflow: auto;">
 												<table class="mb-2 table table-bordered table-dark align-middle-table">
-													<thead >
+													<thead>
 														<tr>
-														   <th>Phase</th>
-														   <th colspan="2">Sale Start</th>
-														   <th>Sale end</th>
-														   <th>Total Sale</th>
-														   <th>Price</th>
-														   <th>Buy Limit Per Wallet</th>
+															<th>Phase</th>
+															<th colspan="2">Sale Start</th>
+															<th>Total Sale</th>
+															<th>Price</th>
+															<th>Buy Limit Per Wallet</th>
 														</tr>
 													</thead>
 													<tbody>
 														<tr>
-															<td rowspan="2">Pre sale</td>
-															<td>Whitelist</td>
-															<td>Community</td>
-															<td rowspan="2">
-																<span><i>n/a</i></span>
+															<td rowspan="2">INO sale</td>
+															<td>
+																<b>Stakers and Affiliates</b>
+															</td>
+															<td>
+																<b>
+																	<span>Public</span>
+																	<span title="first come first served">FCFS</span>
+																</b>
 															</td>
 															<td rowspan="2">
 																<span x-text="initialPreSaleAmount"></span>
@@ -660,26 +661,26 @@
 																<span x-text="formatEther(vm.preSalePriceBN)"></span>
 																<span>ETH</span>
 															</td>
-															<td rowspan="2">5</td>
+															<td rowspan="2">
+																<span x-text="preSaleLimit"></span>
+															</td>
 														</tr>
 														<tr>
 															<td>
-																<span x-text="formatDate(wsStartEpoch)"></span>
+																<span class="text-bright"><i>18th May 5am UTC</i></span>
 															</td>
 															<td>
-																<span x-text="formatDate(preSaleStartEpoch)"></span>
+																<span class="text-bright"><i>18th May 11am UTC</i></span>
 															</td>
 														</tr>
 														<tr>
 															<td>Public sale</td>
 															<td colspan="2">
-																<span x-text="formatDate(publicSaleStartEpoch)"></span>
+																<span class="text-bright"><i>30th May</i></span>
 															</td>
 															<td>
-																<span><i>n/a</i></span>
-															</td>
-															<td>
-																<span x-text="initialPublicSaleAmount"></span>
+																<span x-text="initialPublicSaleAmount" x-show="epoch >= publicSaleStartEpoch"></span>
+																<span x-show="epoch < publicSaleStartEpoch">TBA</span>
 															</td>
 															<td>
 																<span x-text="formatEther(vm.publicSalePriceMaxBN)"></span>
@@ -687,26 +688,35 @@
 															</td>
 															<td>
 																<span>
-																	unlimited (<span title="first come first served">FCFS</span>)
+																	unlimited (FCFS)
 																</span>
 															</td>
 														</tr>
 													</tbody>
 												</table>
 											</div>
-											<div>
-												<b><span class="text-bright">#Notes</span></b>
-												<ul class="mb-0" style="padding-left: 1.5rem;">
+											<div class="py-2">
+												<!-- <b><span class="text-bright">#Notes</span></b> -->
+												<ul class="mb-2" style="padding-left: 1.5rem;">
 													<li>
-														<span>Connect your wallet to see if you are eligible for whitelist sale</span>
+														<span>Connect your wallet to see if you are in the <b>INO Sale</b>'s whitelist ( Stakers and Affiliates )</span>
 													</li>
 													<li>
-														<span>All unsold wolves left (from pre-sale) will be recycled into public sale</span>
+														<span>Wolves reserved at <b>INO sale</b> will be claimable on <b><i>31 May</i></b></span>
 													</li>
 													<li>
-														<span>All the timelines mentioned in this page has already be converted to your local time zone</span>
+														<span>All unsold wolves from the <b>INO sale</b> will be brought to <b>Public sale</b></span>
+													</li>
+													<li>
+														<span>Join <a style="color: #0d6efd" href="https://t.me/fearcoin">FEAR chat group, </a>subcribe to <a style="color: #0d6efd" href="https://t.me/fearnftsannouncement">FEAR ANN Channel</a> and follow lastest announcements to know how to get whitelisted</span>
 													</li>
 												</ul>
+												<div class="pt-1">
+													<div class="flex justify-between">
+														<div><span>*<b>FCFS</b> = First Come First Served</span></div>
+														<div><span>*<b>INO</b> = Initial NFT Offering</span></div>
+													</div>
+												</div>
 											</div>
 										</div>
 									</div>
