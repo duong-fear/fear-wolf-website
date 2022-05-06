@@ -1,22 +1,22 @@
 const ETHEREUM_CHAINID = 1;
 const KOVAN_CHAINID = 42;
 const RINKEBY_CHAINID = 4
-const DEFAULT_CHAINID = KOVAN_CHAINID;
+const DEFAULT_CHAINID = ETHEREUM_CHAINID;
 
 const CHAINS = [
-    // {
-    //     mainnet: true,
-    //     chainId: `0x${ETHEREUM_CHAINID.toString(16)}`,
-    //     rpc: "https://mainnet.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161",
-    //     name: "Ethereum Mainnet",
-    //     shortName: "eth",
-    //     nativeCurrency: {
-    //         name: "Ether",
-    //         symbol: "ETH",
-    //         decimals: 18,
-    //     },
-    //     blockExplorer: "https://etherscan.io",
-    // },
+    {
+        mainnet: true,
+        chainId: `0x${ETHEREUM_CHAINID.toString(16)}`,
+        rpc: "https://mainnet.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161",
+        name: "Ethereum Mainnet",
+        shortName: "eth",
+        nativeCurrency: {
+            name: "Ether",
+            symbol: "ETH",
+            decimals: 18,
+        },
+        blockExplorer: "https://etherscan.io",
+    },
     // {
     //     mainnet: true,
     //     chainId: `0x${RINKEBY_CHAINID.toString(16)}`,
@@ -44,7 +44,7 @@ const CHAINS = [
         blockExplorer: "https://kovan.etherscan.io",
     },
 ].filter(
-    (c) => c.mainnet == true || !window.location.hostname.endsWith(".fear.io")
+    (c) => c.mainnet == true || !window.location.hostname.endsWith("fearwolf.com")
 );
 
 const SUPPORTED_CHAINS = CHAINS.map((c) => +c.chainId);
@@ -52,14 +52,13 @@ const SUPPORTED_CHAINS = CHAINS.map((c) => +c.chainId);
 const fear = {
     wolfDistribution: {
         [KOVAN_CHAINID]: {
-            // address: "0x352D1BB819f55232A7D463868D562af8756D54EB",
             address: "0x1F20152E230bf714a739c16a674E730a2aCaC5eb",
             abi: fearWolfDistributorABI,
         },
-        // [RINKEBY_CHAINID]: {
-        //     address: "0xf4797e49BDb3C89616dFf840f8584d4C6422813d",
-        //     abi: fearWolfDistributorABI,
-        // },
+        [ETHEREUM_CHAINID]: {
+            address: "0x8be7dbc73a9e1bb40d1d7741783b0a8fa003acf7",
+            abi: fearWolfDistributorABI,
+        },
         get address() {
             return this[blockchain.chainId].address;
         },
@@ -132,16 +131,18 @@ let blockchain = {
 
     reserveWolves: async (_amount) => {
         const amount = +_amount;
+        const isValidAmount = amount >= 1 && amount <= 5;
         const vm = Alpine.store("vm");
         notify();
         try {
             vm.loading.RESERVE_WOLF = true;
             await Promise.all([
                 fetchWolfSaleStats(),
-                fetchUserStats(),
+                fetchUserStats(false),
             ]);
-            if(vm.preSaleRemain == 0) throw new Error("Pre-sale has sold out");
-            if(amount < 1 || amount > 5) throw new Error(`Invalid buy amount: ${amount}`);
+            if(vm.preSaleRemain == 0) throw new Error("INO Sale has sold out");
+            if(!isValidAmount) throw new Error(`Invalid buy amount: ${amount}`);
+            if(amount > vm.preSaleRemain) throw new Error(`Not enough wolves left`);
             const etherAmount = vm.preSalePriceBN.mul(amount);
             if(vm.etherBalanceBN.lt(etherAmount)) {
                 throw new Error(`Insufficient ETH balance. Need ${formatEther(etherAmount)} ETH.`);
@@ -161,7 +162,12 @@ let blockchain = {
             notifySuccess(`${amount} ${amount > 1 ? 'Wolves' : 'Wolf'} reserved 🎉`);
         } catch (err) {
             const errMsg = getExceptionMsg(err);
-            notifyError(errMsg);
+            if(errMsg == "execution reverted: Pausable: paused") {
+                notifyError("INO Sale is not active at the moment");
+            }
+            else {
+                notifyError(errMsg);
+            }
         } finally {
             scroll2Top();
             window.vm.loading.RESERVE_WOLF = false;
@@ -171,17 +177,18 @@ let blockchain = {
 
     buyWolves: async (_amount) => {
         const amount = +_amount;
+        const isValidAmount = amount >= 1 && amount <= 10;
         const vm = Alpine.store("vm");
         notify();
         try {
             vm.loading.BUY_WOLF = true;
             await Promise.all([
                 fetchWolfSaleStats(),
-                fetchUserStats(),
+                fetchUserStats(false),
             ]);
-            if(vm.publicSaleRemain == 0) throw new Error("Public-sale has sold-out");
-            if(amount > vm.publicSaleRemain) throw new Error("Not enought Wolves in pool to buy");
-            if(amount < 1 || amount > 10) throw new Error(`Invalid buy amount: ${amount}`);
+            if(vm.publicSaleRemain == 0) throw new Error("Public Sale has sold-out");
+            if(amount > vm.publicSaleRemain) throw new Error("Not enough wolves left");
+            if(!isValidAmount) throw new Error(`Invalid buy amount: ${amount}`);
             const etherAmount = vm.publicSalePriceBN.mul(amount);
             if(vm.etherBalanceBN.lt(etherAmount)) {
                 throw new Error(`Insufficient ETH balance. Need ${formatEther(etherAmount)} ETH.`);
@@ -201,7 +208,12 @@ let blockchain = {
             notifySuccess(`${amount} ${amount > 1 ? 'Wolves' : 'Wolf'} bought 🎉✨`);
         } catch (err) {
             const errMsg = getExceptionMsg(err);
-            notifyError(errMsg);
+            if(errMsg == "execution reverted: Pausable: paused") {
+                notifyError("Public Sale is not active at the moment");
+            }
+            else {
+                notifyError(errMsg);
+            }
         } finally {
             scroll2Top();
             vm.loading.BUY_WOLF = false;

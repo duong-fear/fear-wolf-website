@@ -295,6 +295,7 @@
 												<!-- connect metamask button -->
 												<div class="flex-auto flex justify-end" x-show="!wallet">
 													<button
+														@click="blockchain.connectMetamask(fetchUserStats)"
 														class="button button-mini button-teal button-rounded flex justify-center items-center"
 														style="margin: 0.5rem;margin-right: 0rem;"
 														:disabled="noMetamask || loading.CONNECT_WALLET"
@@ -676,7 +677,7 @@
 														<tr>
 															<td>Public sale</td>
 															<td colspan="2">
-																<span class="text-bright"><i>30th May</i></span>
+																<span class="text-bright"><i>30th May 5am UTC</i></span>
 															</td>
 															<td>
 																<span x-text="initialPublicSaleAmount" x-show="epoch >= publicSaleStartEpoch"></span>
