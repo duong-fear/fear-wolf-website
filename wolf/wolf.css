@@ -733,9 +733,54 @@ a.youtubelink {color:red ! important;}
 .sociallinks a {font-size:17pt ! important;display:inline-block;padding:0 5px;text-shadow: -4px 4px 2px #000;font-family:Wolfs Bane ! important;}
 
 
+.buttonsale {font-size:26pt;font-family:DM Sans;}
+
+.whitelist .videocon {margin-top:-120px;}
+.whitelist-container {margin-top:300px;}
+
+@media (max-width: 1400px) {
+.whitelist-container {margin-top:200px;}
+}
+@media (max-width: 1200px) {
+.whitelist-container {margin-top:136px;}
+}
+@media (max-width: 1000px) {
+.whitelist-container {margin-top:136px;}
+.whitelist .videocon {margin-top:-70px;}
+}
+@media (max-width: 900px) {
+.whitelist .videocon {margin-top:-138px;}
+}
+@media (max-width: 750px) {
+.whitelist-container {margin-top:144px;}
+.whitelist .videocon {margin-top:-115px;}
+}
+@media (max-width: 550px) {
+.whitelist .videocon  {margin-top:-18px;}
+.whitelist-container {margin-top:35px;}
+}
+
+
+
+@media (max-width: 600px) {
+.buttonsale {font-size:20pt;}
+}
+
 @media (max-width: 500px) {
 .dev-content2 p {font-size:11pt;}
 .dev-content h2.main-slogan {font-size:24pt;-webkit-text-stroke:0px;}
 .dev-content {padding:0 3%;width:94%;}
 .dev-content2 {padding:20px 0;}
+}
+
+@media (max-width: 450px) {
+.buttonsale {font-size:16pt;}
+}
+
+@media (max-width: 450px) {
+.buttonsale {font-size:14pt;}
+}
+
+@media (max-width: 320px) {
+.buttonsale {font-size:12pt;}
 }
