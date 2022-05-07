@@ -58,23 +58,12 @@ const fetchWolfSaleStats = async () => {
         initialPublicSaleAmount: initialPublicSaleAmountBN.toNumber(),
     });
     const epoch = getEpoch();
-    // mock 
-    Object.assign(vm, {
-        wsStartEpoch: 1652850000,
-        preSaleStartEpoch: 1652871600,
-        publicSaleStartEpoch: 1653868800,
-        preSaleRemain: 2000,
-        publicSaleRemain: 4000,
-        totalReserved: 0,
-        totalBought: 0,
-    })
     Object.assign(vm, {
         selectedTab: epoch >= vm.publicSaleStartEpoch ? tabs[1] : tabs[0],
-        // buyAmount: epoch >= vm.publicSaleStartEpoch ? 10 : 5,
     })
 }
 
-const fetchUserStats = async () => {
+const fetchUserStats = async (updateBuyAmount = true) => {
     const vm = Alpine.store("vm");
     const [
         wolvesReservedBN,
@@ -99,8 +88,10 @@ const fetchUserStats = async () => {
     const epoch = getEpoch();
     Object.assign(vm, {
         eligibleEpoch: (vm.wsEligible && vm.wsStartEpoch) || vm.preSaleStartEpoch,
-        buyAmount: epoch >= vm.publicSaleStartEpoch ? Math.min(10, vm.publicSaleRemain) : Math.min(5, vm.preSaleRemain, vm.preSaleLimit - vm.reserved),
     });
+    if(updateBuyAmount) Object.assign(vm, {
+        buyAmount: epoch >= vm.publicSaleStartEpoch ? Math.min(10, vm.publicSaleRemain) : Math.min(5, vm.preSaleRemain, vm.preSaleLimit - vm.reserved),
+    })
 }
 
 const fetchInitialData = async (walletConnected = false) => {
