@@ -43,9 +43,7 @@ const CHAINS = [
         },
         blockExplorer: "https://kovan.etherscan.io",
     },
-].filter(
-    (c) => c.mainnet == true || !window.location.hostname.endsWith("fearwolf.com")
-);
+];
 
 const SUPPORTED_CHAINS = CHAINS.map((c) => +c.chainId);
 
@@ -78,7 +76,6 @@ const fear = {
 
 let blockchain = {
     chainId: DEFAULT_CHAINID,
-    address: null,
     _provider: null,
     signer: null,
     get provider() {
@@ -96,28 +93,63 @@ let blockchain = {
         const vm = Alpine.store("vm");
         vm.loading.CONNECT_WALLET = true;
         try {
-            if (!await getWeb3ActiveAddress()) {
-                await ethereum.request({ method: "eth_requestAccounts" });
-            }
+            const providerOptions = {
+                walletconnect: {
+                    package: WalletConnectProvider,
+                    options: {
+                        infuraId: "9aa3d95b3bc440fa88ea12eaa4456161",
+                    }
+                },
+            };
+            const web3Modal = new Web3Modal({
+                cacheProvider: false,
+                providerOptions,
+                disableInjectedProvider: false,
+            });
+            const provider = await web3Modal.connect();
+            // if (!await getWeb3ActiveAddress(provider)) {
+            //     await ethereum.request({ method: "eth_requestAccounts" });
+            // }
             const web3Provider = new ethers.providers.Web3Provider(
-                window.ethereum,
+                provider,
                 "any"
             );
-            if (!SUPPORTED_CHAINS.includes(+web3Provider.provider.chainId)) {
-                await blockchain.switchToChosenNetwork(web3Provider, DEFAULT_CHAINID);
-                window.location.reload();
-                return;
+            const address = await getWeb3ActiveAddress(provider);
+            if (+web3Provider.provider.chainId != DEFAULT_CHAINID) {
+                notifyError(`Please switch your network to ${CHAINS.find(c => +c.chainId == DEFAULT_CHAINID).name}`);
+                try {
+                    await blockchain.switchToChosenNetwork(web3Provider, DEFAULT_CHAINID);
+                }
+                catch(error) {
+                    console.error(getExceptionMsg(error));
+                    return;
+                }
             }
-            web3Provider.provider.on("chainChanged", () => {
+            web3Provider.provider.on("chainChanged", async (...params) => {
+                console.info("chainChanged", params);
+                const chainId = +params[0];
+                if(chainId == DEFAULT_CHAINID) return;
+                if(blockchain.provider.isWalletConnect) {
+                    return await blockchain.provider.close();
+                }
                 window.location.reload();
             });
-            web3Provider.provider.on("accountsChanged", () => {
+            web3Provider.provider.on("accountsChanged", async (...params) => {
+                console.info("accountsChanged", params);
+                if(address == params[0].shift()) return;
+                if(blockchain.provider.isWalletConnect) {
+                    return await blockchain.provider.close();
+                }
+                window.location.reload();
+            });
+            web3Provider.provider.on("disconnect", (...params) => { // wallet connect
+                console.info("disconnect", params);
                 window.location.reload();
             });
             blockchain.provider = web3Provider.provider;
             blockchain.signer = web3Provider.getSigner();
-            vm.wallet = await getWeb3ActiveAddress();
             if(typeof callback == 'function') await callback();
+            vm.wallet = address;
             notifySuccess("Wallet connected!");
         }
         catch (err) {
@@ -250,9 +282,12 @@ let blockchain = {
 
     switchToChosenNetwork: async function (web3Provider, chainId) {
         try {
-            await web3Provider.provider.send("wallet_switchEthereumChain", [
-                { chainId: `0x${chainId.toString(16)}` },
-            ]);
+            await web3Provider.provider.request({
+                method: "wallet_switchEthereumChain",
+                params: [
+                    { chainId: `0x${chainId.toString(16)}` },
+                ],
+            });
         } catch (e) {
             let network = CHAINS.find((c) => +c.chainId == +chainId);
             const params = [
@@ -265,13 +300,16 @@ let blockchain = {
                 },
             ];
             if (e.code === 4902) {
-                await web3Provider.provider.send(
-                    "wallet_addEthereumChain",
+                await web3Provider.provider.request({
+                    method: "wallet_addEthereumChain",
                     params
-                );
-                await web3Provider.provider.send("wallet_switchEthereumChain", [
-                    { chainId: `0x${chainId.toString(16)}` },
-                ]);
+                });
+                await web3Provider.provider.request({
+                    method: "wallet_switchEthereumChain",
+                    params: [
+                        { chainId: `0x${chainId.toString(16)}` },
+                    ]
+                });
                 return;
             }
             throw e;

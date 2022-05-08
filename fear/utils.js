@@ -1,6 +1,9 @@
 
 const MaxUint256 = ethers.constants.MaxUint256;
 const getEpoch = (d) => Math.floor((d || new Date()).getTime() / 1000);
+const hasMetamask = typeof _.get(window, "ethereum.request") == 'function';
+const Web3Modal = window.Web3Modal.default;
+const WalletConnectProvider = window.WalletConnectProvider.default
 
 const formatEther = (bn, short = true) => {
   try {
@@ -182,7 +185,7 @@ const countdown = (epoch, target, print = false) => {
 
 const getExceptionMsg = (ex) => {
 	console.error(ex);
-	const msg = _.get(ex, "error.message") || _.get(ex, "data.message") || _.get(ex, "message") || (Object.hasOwn(ex, 'toString') ? ex.toString() : 'unknown exception');
+	const msg = _.get(ex, "error.message") || _.get(ex, "data.message") || _.get(ex, "message") || (typeof ex == "string" && ex) || (Object.hasOwn(ex, 'toString') ? ex.toString() : 'unknown exception');
 	return msg;
 	//.replace(/^execution reverted\: /i, '');
 }
@@ -193,9 +196,10 @@ const scroll2Top = () => {
 
 const ZeroBN = ethers.constants.Zero;
 
-const getWeb3ActiveAddress = async () => {
+const getWeb3ActiveAddress = async (provider) => {
 	try {
-		return _.first(await ethereum.request({ method: 'eth_accounts' }));
+		const address = _.first(await provider.request({ method: 'eth_accounts' }));
+		return ethers.utils.getAddress(address);
 	}
 	catch(e) {
 		console.error(e);
@@ -203,9 +207,9 @@ const getWeb3ActiveAddress = async () => {
 	}
 }
 
-const getWeb3ActiveChainId = async () => {
+const getWeb3ActiveChainId = async (provider) => {
 	try {
-		return +(await ethereum.request({ method: 'eth_chainId' }));
+		return +(await provider.request({ method: 'eth_chainId' }));
 	}
 	catch(e) {
 		console.error(e);

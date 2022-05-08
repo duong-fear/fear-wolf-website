@@ -94,14 +94,10 @@ const fetchUserStats = async (updateBuyAmount = true) => {
     })
 }
 
-const fetchInitialData = async (walletConnected = false) => {
+const fetchInitialData = async () => {
     let vm = Alpine.store("vm");
     await fetchWolfSaleStats();
-    if(walletConnected) await fetchUserStats();
     vm.ready = true;
-    if(vm.noMetamask) {
-        notify("Please install Metamask to join the sale", "error");
-    }
 }
 
 const tabs = [
@@ -124,8 +120,6 @@ const alpineInit = async () => {
         },
         notification: null,
         tabs,
-        // selectedTab: tabs[0],
-        noMetamask: typeof _.get(window, "ethereum.request") != 'function',
         // user's stats
         wallet: null,
         etherBalanceBN: null,
@@ -160,10 +154,12 @@ const alpineInit = async () => {
     }, 1000);
     const vm = window.vm = Alpine.store("vm");
     try {
+        // clear cached creds
+        localStorage.clear("walletconnect")
+        localStorage.getItem("WEB3_CONNECT_CACHED_PROVIDER")
+
         blockchain.startEventListener();
-        const walletConnected = !vm.noMetamask && (await getWeb3ActiveChainId()) == DEFAULT_CHAINID && ethers.utils.isAddress(await getWeb3ActiveAddress());
-        if(walletConnected) await blockchain.connectMetamask();
-        await fetchInitialData(walletConnected);
+        await fetchInitialData();
     }
     catch(e) {
         vm.error = e;

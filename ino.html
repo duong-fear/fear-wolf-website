@@ -26,13 +26,15 @@
 	<meta name="description"
 		content="The Fear Wolf is everyone's favourite talk show host on NFTs. Find the latest news on NFTs on his show." />
 	<script src="https://global.transak.com/sdk/v1.1/widget.js" async></script>
-	<script src="js/lodash.js@4.17.21.js"></script>
-	<script src="js/ethers@5.6.2.js"></script>
+	<script type="text/javascript" src="https://unpkg.com/@walletconnect/web3-provider@1.7.8/dist/umd/index.min.js"></script>
+	<script type="text/javascript" src="https://unpkg.com/web3modal@1.9.7/dist/index.js"></script>
+	<script type="text/javascript" src="https://unpkg.com/lodash@4.17.21/lodash.min.js"></script>
+	<script type="text/javascript" src="https://unpkg.com/ethers@5.6.5/dist/ethers.umd.min.js"></script>
 	<script src="fear/abi.js"></script>
 	<script src="fear/utils.js"></script>
 	<script src="fear/blockchain.js"></script>
 	<script src="fear/sale.js"></script>
-	<script defer src="js/alpinejs@3.9.6.js"></script>
+	<script type="text/javascript" defer src="https://unpkg.com/alpinejs@3.9.6/dist/cdn.min.js"></script>
 	<script>
 		document.addEventListener("alpine:init", alpineInit);
 	</script>
@@ -296,13 +298,16 @@
 												<div class="flex-auto flex justify-end" x-show="!wallet">
 													<button
 														@click="blockchain.connectMetamask(fetchUserStats)"
-														class="button button-mini button-teal button-rounded flex justify-center items-center"
-														style="margin: 0.5rem;margin-right: 0rem;"
-														:disabled="noMetamask || loading.CONNECT_WALLET"
+														class="button button-mini button-red button-rounded flex justify-center items-center"
+														style="margin: 0.5rem 0rem; padding: 4px 10px;"
+														:disabled="loading.CONNECT_WALLET"
 													>
-														<div x-html="metamaskSvg"></div>
-														<span class="ml-2">Connect Wallet</span>
-														<div class="spinner-border spinner-border-sm ml-2" x-show="loading.CONNECT_WALLET"></div>
+														<!-- <div x-html="metamaskSvg"></div> -->
+														<span>Connect Wallet</span>
+														<div
+															style="width: 0.75rem; height: 0.75rem;"
+															class="spinner-border spinner-border-sm ml-1" x-show="loading.CONNECT_WALLET"
+														></div>
 													</button>
 												</div>
 												<!-- wallet connected button -->
@@ -487,7 +492,7 @@
 															class="button button-3d button-small button-rounded button-red flex justify-center items-center"
 															x-show="epoch >= wsStartEpoch && epoch < publicSaleStartEpoch && preSaleRemain > 0"
 															@click="blockchain.connectMetamask(fetchUserStats)"
-															:disabled="noMetamask || loading.CONNECT_WALLET"
+															:disabled="loading.CONNECT_WALLET"
 														>
 															<span>Connect Wallet to join</span>
 															<div class="spinner-border spinner-border-sm ml-1" x-show="loading.CONNECT_WALLET"></div>
@@ -617,7 +622,7 @@
 																class="button button-3d button-small button-rounded button-red flex justify-center items-center"
 																x-show="epoch >= publicSaleStartEpoch && publicSaleRemain > 0"
 																@click="blockchain.connectMetamask(fetchUserStats)"
-																:disabled="noMetamask || loading.CONNECT_WALLET"
+																:disabled="loading.CONNECT_WALLET"
 															>
 																<span>Connect Wallet to join the sale</span>
 																<div class="spinner-border spinner-border-sm ml-1" x-show="loading.CONNECT_WALLET"></div>
