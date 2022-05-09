@@ -50,7 +50,7 @@ const SUPPORTED_CHAINS = CHAINS.map((c) => +c.chainId);
 const fear = {
     wolfDistribution: {
         [KOVAN_CHAINID]: {
-            address: "0x1F20152E230bf714a739c16a674E730a2aCaC5eb",
+            address: "0x1403838A3C799462D657410EaE214c359d4e995f",
             abi: fearWolfDistributorABI,
         },
         [ETHEREUM_CHAINID]: {
@@ -88,7 +88,7 @@ let blockchain = {
         this._provider = _;
     },
 
-    connectMetamask: async function (callback) {
+    connectWallet: async function (callback) {
         notify();
         const vm = Alpine.store("vm");
         vm.loading.CONNECT_WALLET = true;
@@ -148,6 +148,8 @@ let blockchain = {
             });
             blockchain.provider = web3Provider.provider;
             blockchain.signer = web3Provider.getSigner();
+            vm.isMetaMask = blockchain.provider.isMetaMask;
+            vm.isWalletConnect = blockchain.provider.isWalletConnect;
             if(typeof callback == 'function') await callback();
             vm.wallet = address;
             notifySuccess("Wallet connected!");
@@ -161,10 +163,10 @@ let blockchain = {
         }
     },
 
-    reserveWolves: async (_amount) => {
-        const amount = +_amount;
-        const isValidAmount = amount >= 1 && amount <= 5;
+    reserveWolves: async () => {
         const vm = Alpine.store("vm");
+        const amount = +vm.preSaleBuyAmount;
+        const isValidAmount = amount >= 1 && amount <= 5;
         notify();
         try {
             vm.loading.RESERVE_WOLF = true;
@@ -207,10 +209,10 @@ let blockchain = {
         }
     },
 
-    buyWolves: async (_amount) => {
-        const amount = +_amount;
-        const isValidAmount = amount >= 1 && amount <= 10;
+    buyWolves: async () => {
         const vm = Alpine.store("vm");
+        const amount = +vm.publicSaleBuyAmount;
+        const isValidAmount = amount >= 1 && amount <= 10;
         notify();
         try {
             vm.loading.BUY_WOLF = true;

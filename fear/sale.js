@@ -1,4 +1,4 @@
-const fetchWolfSaleStats = async () => {
+const fetchWolfSaleStats = async (setSelectedTab = false) => {
     const [
         wsStartEpochBN,
         preSaleStartEpochBN,
@@ -58,7 +58,7 @@ const fetchWolfSaleStats = async () => {
         initialPublicSaleAmount: initialPublicSaleAmountBN.toNumber(),
     });
     const epoch = getEpoch();
-    Object.assign(vm, {
+    if(setSelectedTab) Object.assign(vm, {
         selectedTab: epoch >= vm.publicSaleStartEpoch ? tabs[1] : tabs[0],
     })
 }
@@ -85,18 +85,18 @@ const fetchUserStats = async (updateBuyAmount = true) => {
         wsEligible,
         etherBalanceBN,
     });
-    const epoch = getEpoch();
     Object.assign(vm, {
         eligibleEpoch: (vm.wsEligible && vm.wsStartEpoch) || vm.preSaleStartEpoch,
     });
     if(updateBuyAmount) Object.assign(vm, {
-        buyAmount: epoch >= vm.publicSaleStartEpoch ? Math.min(10, vm.publicSaleRemain) : Math.min(5, vm.preSaleRemain, vm.preSaleLimit - vm.reserved),
+        publicSaleBuyAmount: Math.min(10, vm.publicSaleRemain),
+        preSaleBuyAmount: Math.min(5, vm.preSaleRemain, vm.preSaleLimit - vm.reserved),
     })
 }
 
 const fetchInitialData = async () => {
     let vm = Alpine.store("vm");
-    await fetchWolfSaleStats();
+    await fetchWolfSaleStats(true);
     vm.ready = true;
 }
 
@@ -122,6 +122,8 @@ const alpineInit = async () => {
         tabs,
         // user's stats
         wallet: null,
+        isMetaMask: false,
+        isWalletConnect: false,
         etherBalanceBN: null,
         wsEligible: null, // eligible for whitelist sale
         eligibleEpoch: null, // eligible time to start reserving
@@ -137,6 +139,7 @@ const alpineInit = async () => {
         preSalePriceBN: null,
         preSaleLimit: null, // buy limit per account on presales
         totalReserved: null, // total wolves sold on presales
+        preSaleBuyAmount: 5,
         // public-sale
         initialPublicSaleAmount: null,
         publicSaleStartEpoch: null, // public-sale start time
@@ -145,8 +148,7 @@ const alpineInit = async () => {
         publicSalePriceBN: null,
         publicSalePriceMinBN: null,
         publicSalePriceMaxBN: null,
-        // buy
-        buyAmount: 1,
+        publicSaleBuyAmount: 10,
     });
     setInterval(() => {
         // vm.epoch += 1;
@@ -154,10 +156,7 @@ const alpineInit = async () => {
     }, 1000);
     const vm = window.vm = Alpine.store("vm");
     try {
-        // clear cached creds
-        localStorage.clear("walletconnect")
-        localStorage.getItem("WEB3_CONNECT_CACHED_PROVIDER")
-
+        await closeExistingWCSession();
         blockchain.startEventListener();
         await fetchInitialData();
     }

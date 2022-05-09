@@ -278,7 +278,7 @@
 													<li role="tab" tabindex="0"
 														class="select-none ui-tabs-tab ui-corner-top ui-state-default ui-tab"
 														:class="selectedTab == tab && 'ui-tabs-active ui-state-active'"
-														@click="selectedTab = tab; buyAmount = selectedTab == tabs[1] ? Math.min(10, publicSaleRemain) : Math.min(5, preSaleRemain, preSaleLimit - reserved);">
+														@click="selectedTab = tab;">
 														<a style="display: flex;" role="presentation" tabindex="-1" class="ui-tabs-anchor flex justify-center items-center">
 															<span x-text="tab"></span>
 															<div
@@ -297,13 +297,15 @@
 												<!-- connect metamask button -->
 												<div class="flex-auto flex justify-end" x-show="!wallet">
 													<button
-														@click="blockchain.connectMetamask(fetchUserStats)"
-														class="button button-mini button-red button-rounded flex justify-center items-center"
+														@click="blockchain.connectWallet(fetchUserStats)"
+														class="button button-mini button-3d button-teal button-rounded flex justify-center items-center"
 														style="margin: 0.5rem 0rem; padding: 4px 10px;"
 														:disabled="loading.CONNECT_WALLET"
 													>
 														<!-- <div x-html="metamaskSvg"></div> -->
-														<span>Connect Wallet</span>
+														<i class="icon-wallet" style="margin-right: 0.25rem;"></i>
+														<span>Connect</span>
+														<span class="d-none d-sm-inline-block">&nbsp;Wallet</span>
 														<div
 															style="width: 0.75rem; height: 0.75rem;"
 															class="spinner-border spinner-border-sm ml-1" x-show="loading.CONNECT_WALLET"
@@ -311,16 +313,16 @@
 													</button>
 												</div>
 												<!-- wallet connected button -->
-												<div class="flex-auto flex justify-end" x-show="wallet">
+												<div class="flex-auto flex justify-end items-center" x-show="wallet">
+													<img style="width: 1.5rem;height: 1.5rem;" src="images/icons/metamask.svg" x-show="isMetaMask === true"/>
+													<img style="width: 1.5rem;height: 1.5rem;" src="images/icons/walletconnect.svg" x-show="isWalletConnect === true"/>
 													<button
-														class="button button-mini button-dark button-rounded"
-														disabled style="margin: 0.5rem;margin-right: 0rem;"
+														class="button button-mini button-dark button-rounded" disabled
 													>
-														<i class="icon-wallet" style="margin-right: 0rem;"></i>
 														<span x-text="getShortAddress(wallet)"></span>
-														<span>/</span>
+														<!-- <span>/</span>
 														<span x-text="formatEther(etherBalanceBN)"></span>
-														<span>ETH</span>
+														<span>ETH</span> -->
 													</button>
 												</div>
 											</ul>
@@ -408,13 +410,13 @@
 															<div x-show="epoch < publicSaleStartEpoch && preSaleRemain > 0 && preSaleLimit > reserved">
 																<div class="py-2 flex justify-center">
 																	<div class="flex wolf-buy-input pb-2">
-																		<div @click="decreaseBuyAmount(1)">
+																		<div @click="changeAmount('preSaleBuyAmount', -1)">
 																			<span>-</span>
 																		</div>
 																		<div>
-																			<span x-text="buyAmount" class="text-bright"></span>
+																			<span x-text="preSaleBuyAmount" class="text-bright"></span>
 																		</div>
-																		<div @click="increaseBuyAmount(Math.min(5, preSaleRemain, preSaleLimit - reserved))">
+																		<div @click="changeAmount('preSaleBuyAmount', +1)">
 																			<span>+</span>
 																		</div>
 																	</div>
@@ -422,25 +424,24 @@
 																<!-- buy button -->
 																<div>
 																	<button
-																		class="button button-3d button-small button-rounded btn-spin"
-																		:class=" buyAmount + reserved > preSaleLimit ? 'button-dark' : 'button-green' "
-																		@click="blockchain.reserveWolves(buyAmount)"
-																		:disabled="loading.RESERVE_WOLF || epoch < eligibleEpoch || buyAmount + reserved > preSaleLimit">
+																		class="button button-3d button-rounded btn-spin"
+																		:class=" preSaleBuyAmount + reserved > preSaleLimit ? 'button-dark' : 'button-green' "
+																		@click="blockchain.reserveWolves()"
+																		:disabled="loading.RESERVE_WOLF || epoch < eligibleEpoch || preSaleBuyAmount + reserved > preSaleLimit">
 																		<span>Reserve</span>
-																		<span x-text="buyAmount"></span>
-																		<span x-text="buyAmount > 1 ? 'Wolves' : 'Wolf'"></span>
+																		<span x-show="epoch >= eligibleEpoch" x-text="`(${formatEther(preSalePriceBN.mul(preSaleBuyAmount))} ETH)`"></span>
 																		<span x-show="epoch < eligibleEpoch">
 																			<span x-text="`(${countdown(epoch, eligibleEpoch, true)})`"></span>
 																		</span>
 																		<div class="spinner-border spinner-border-sm ml-1" x-show="loading.RESERVE_WOLF"></div>
-																</button>
+																	</button>
 																</div>
 															</div>
 															<!-- when player can't be able to buy a wolf -> sale closed // sold out // buy limit reached -->
 															<div x-show="epoch >= publicSaleStartEpoch || preSaleRemain == 0 || preSaleLimit == reserved">
 																<div>
 																	<button
-																		class="button button-3d button-small button-rounded btn-spin button-green"
+																		class="button button-3d button-rounded btn-spin button-green"
 																		x-show="reserved > 0 && claimed == 0"
 																		@click="blockchain.claimWolves"
 																		:disabled="loading.CLAIM_WOLF || epoch < preSaleClaimEpoch">
@@ -453,14 +454,8 @@
 																		<div class="spinner-border spinner-border-sm ml-1" x-show="loading.CLAIM_WOLF"></div>
 																	</button>
 																	<button
-																		class="button button-3d button-small button-rounded btn-spin button-dark"
-																		x-show="reserved > 0 && claimed > 0" disabled
-																	>
-																		<span>All Wolves claimed ✅</span>
-																	</button>
-																	<button
-																		class="button button-3d button-small button-rounded btn-spin button-dark"
-																		x-show="reserved == 0"
+																		class="button button-3d button-rounded btn-spin button-dark"
+																		x-show="reserved == 0 || claimed > 0"
 																		disabled
 																	>
 																		<span>INO Sale has ended ❌</span>
@@ -473,25 +468,21 @@
 													<div x-show="!wallet" class="text-center flex justify-center">
 														<button
 															x-show="epoch < wsStartEpoch || epoch >= publicSaleStartEpoch || preSaleRemain === 0"
-															class="button button-3d button-small button-rounded" disabled
+															class="button button-3d button-rounded" disabled
 															:class="epoch < wsStartEpoch ? 'button-light' : 'button-dark'"
-															style="font-size:15px;"
 														>
 															<span x-show="epoch < wsStartEpoch">
 																<span>Sale starts in</span>
 																<span x-text="countdown(epoch, wsStartEpoch, true)"></span>
 															</span>
-															<span x-show="epoch >= publicSaleStartEpoch">
-																<span>INO Sale has closed ❌</span>
-															</span>
-															<span x-show="epoch < publicSaleStartEpoch && preSaleRemain == 0">
-																<span>INO Sale has Sold out ❌</span>
+															<span x-show="epoch >= publicSaleStartEpoch || preSaleRemain == 0">
+																<span>INO Sale has ended ❌</span>
 															</span>
 														</button>
 														<button
-															class="button button-3d button-small button-rounded button-red flex justify-center items-center"
+															class="button button-3d button-rounded button-red flex justify-center items-center"
 															x-show="epoch >= wsStartEpoch && epoch < publicSaleStartEpoch && preSaleRemain > 0"
-															@click="blockchain.connectMetamask(fetchUserStats)"
+															@click="blockchain.connectWallet(fetchUserStats)"
 															:disabled="loading.CONNECT_WALLET"
 														>
 															<span>Connect Wallet to join</span>
@@ -565,13 +556,13 @@
 															<div class="b-steps b-steps-public py-2" x-show="publicSaleRemain > 0">
 																<div class="flex justify-center pb-2">
 																	<div class="flex wolf-buy-input">
-																		<div @click="decreaseBuyAmount(1)">
+																		<div @click="changeAmount('publicSaleBuyAmount', -1)">
 																			<span>-</span>
 																		</div>
 																		<div>
-																			<span x-text="buyAmount" class="text-bright"></span>
+																			<span x-text="publicSaleBuyAmount" class="text-bright"></span>
 																		</div>
-																		<div @click="increaseBuyAmount(Math.min(10, publicSaleRemain))">
+																		<div @click="changeAmount('publicSaleBuyAmount', +1)">
 																			<span>+</span>
 																		</div>
 																	</div>
@@ -579,25 +570,24 @@
 															</div>
 															<div class="flex justify-center">
 																<button
-																	class="button button-3d button-small button-rounded flex justify-center items-center"
-																	:class=" buyAmount > publicSaleRemain ? 'button-dark' : 'button-green' "
-																	@click="blockchain.buyWolves(buyAmount)"
-																	:disabled="loading.BUY_WOLF || epoch < publicSaleStartEpoch || buyAmount > publicSaleRemain"
+																	class="button button-3d button-rounded flex justify-center items-center"
+																	:class=" publicSaleBuyAmount > publicSaleRemain ? 'button-dark' : 'button-green' "
+																	@click="blockchain.buyWolves()"
+																	:disabled="loading.BUY_WOLF || epoch < publicSaleStartEpoch || publicSaleBuyAmount > publicSaleRemain"
 																	x-show="publicSaleRemain > 0"
 																>
 																	<span>
 																		<span>Buy</span>
-																		<span x-text="buyAmount"></span>
-																		<span x-text="buyAmount == 1 ? 'Wolf' : 'Wolves'"></span>
+																		<span x-show="epoch >= publicSaleStartEpoch" x-text="`(${formatEther(publicSalePriceBN.mul(publicSaleBuyAmount))} ETH)`"></span>
 																		<span x-show="epoch < publicSaleStartEpoch" x-text="`(${countdown(epoch, publicSaleStartEpoch, true)})`"></span>
 																	</span>
 																	<div class="spinner-border spinner-border-sm ml-1" x-show="loading.BUY_WOLF"></div>
 																</button>
 																<button
-																	class="button button-3d button-small button-rounded button-dark"
+																	class="button button-3d button-rounded button-dark"
 																	x-show="publicSaleRemain == 0" disabled
 																>
-																	<span>Public-sale has sold-out ❌</span>
+																	<span>Public sale has ended ❌</span>
 																</button>
 															</div>
 														</div>
@@ -605,7 +595,7 @@
 													<template x-if="!wallet">
 														<div class="flex justify-center">
 															<button
-																class="button button-3d button-small button-rounded button-light flex items-center justify-center"
+																class="button button-3d button-rounded button-light flex items-center justify-center"
 																x-show="epoch < publicSaleStartEpoch" disabled
 															>
 																<span>sale starts in</span>
@@ -614,17 +604,17 @@
 															</button>
 															<button
 																x-show="epoch >= publicSaleStartEpoch && publicSaleRemain == 0"
-																class="button button-3d button-small button-rounded button-dark" disabled
+																class="button button-3d button-rounded button-dark" disabled
 															>
-																<span>Public-sale has sold-out ❌</span>
+																<span>Public sale has ended ❌</span>
 															</button>
 															<button
-																class="button button-3d button-small button-rounded button-red flex justify-center items-center"
+																class="button button-3d button-rounded button-red flex justify-center items-center"
 																x-show="epoch >= publicSaleStartEpoch && publicSaleRemain > 0"
-																@click="blockchain.connectMetamask(fetchUserStats)"
+																@click="blockchain.connectWallet(fetchUserStats)"
 																:disabled="loading.CONNECT_WALLET"
 															>
-																<span>Connect Wallet to join the sale</span>
+																<span>Connect Wallet to join</span>
 																<div class="spinner-border spinner-border-sm ml-1" x-show="loading.CONNECT_WALLET"></div>
 															</button>
 														</div>
