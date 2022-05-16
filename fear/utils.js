@@ -196,3 +196,9 @@ const closeExistingWCSession = async () => {
 		localStorage.clear("walletconnect");
 	}
 }
+
+const GAS_LIMIT_BASE = {
+	RESERVE: 100_000,
+	CLAIM: 300_000,
+	BUY: 300_000,
+}
