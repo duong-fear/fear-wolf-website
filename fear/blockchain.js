@@ -1,7 +1,7 @@
 const ETHEREUM_CHAINID = 1;
 const KOVAN_CHAINID = 42;
 const RINKEBY_CHAINID = 4
-const DEFAULT_CHAINID = ETHEREUM_CHAINID;
+const DEFAULT_CHAINID = window.location.hostname === "www.fearwolf.com" ? ETHEREUM_CHAINID : KOVAN_CHAINID;
 
 const CHAINS = [
     {
@@ -50,7 +50,7 @@ const SUPPORTED_CHAINS = CHAINS.map((c) => +c.chainId);
 const fear = {
     wolfDistribution: {
         [KOVAN_CHAINID]: {
-            address: "0x1403838A3C799462D657410EaE214c359d4e995f",
+            address: "0x0386437d4b78169f7a1176a4d61b6e591c78cc3b",
             abi: fearWolfDistributorABI,
         },
         [ETHEREUM_CHAINID]: {
@@ -171,7 +171,7 @@ let blockchain = {
         try {
             vm.loading.RESERVE_WOLF = true;
             await Promise.all([
-                fetchWolfSaleStats(),
+                fetchWolfSaleStats(false),
                 fetchUserStats(false),
             ]);
             if(vm.preSaleRemain == 0) throw new Error("INO Sale has sold out");
@@ -186,13 +186,15 @@ let blockchain = {
                 amount,
                 {
                     value: etherAmount,
+                    gasLimit: GAS_LIMIT_BASE.RESERVE,
                 }
             );
             await tx.wait();
             await Promise.all([
-                fetchWolfSaleStats(),
-                fetchUserStats(),
+                fetchWolfSaleStats(false),
+                fetchUserStats(false),
             ]);
+            vm.preSaleBuyAmount = Math.min(5, vm.preSaleRemain, vm.preSaleLimit - vm.reserved);
             notifySuccess(`${amount} ${amount > 1 ? 'Wolves' : 'Wolf'} reserved 🎉`);
         } catch (err) {
             const errMsg = getExceptionMsg(err);
@@ -217,7 +219,7 @@ let blockchain = {
         try {
             vm.loading.BUY_WOLF = true;
             await Promise.all([
-                fetchWolfSaleStats(),
+                fetchWolfSaleStats(false),
                 fetchUserStats(false),
             ]);
             if(vm.publicSaleRemain == 0) throw new Error("Public Sale has sold-out");
@@ -232,13 +234,15 @@ let blockchain = {
                 amount,
                 {
                     value: etherAmount,
+                    gasLimit: GAS_LIMIT_BASE.BUY + amount * 200_000,
                 }
             );
             await tx.wait();
             await Promise.all([
-                fetchWolfSaleStats(),
-                fetchUserStats(),
+                fetchWolfSaleStats(false),
+                fetchUserStats(false),
             ]);
+            vm.publicSaleBuyAmount = Math.min(10, vm.publicSaleRemain);
             notifySuccess(`${amount} ${amount > 1 ? 'Wolves' : 'Wolf'} bought 🎉✨`);
         } catch (err) {
             const errMsg = getExceptionMsg(err);
@@ -260,17 +264,19 @@ let blockchain = {
         try {
             vm.loading.CLAIM_WOLF = true;
             await Promise.all([
-                fetchWolfSaleStats(),
-                fetchUserStats(),
+                fetchWolfSaleStats(false),
+                fetchUserStats(false),
             ]);
             if(vm.claimed > 0 || vm.reserved == 0) throw new Error("No wolves left to claim");
             const amount = vm.reserved;
             vm.loading.MODAL = `Claiming ${amount} ${amount == 1 ? 'Wolf' : 'Wolves'} ...`;
-            const tx = await fear.wolfDistribution.instance.claimWolves();
+            const tx = await fear.wolfDistribution.instance.claimWolves({
+                gasLimit: GAS_LIMIT_BASE.CLAIM + amount * 200_000, 
+            });
             await tx.wait();
             await Promise.all([
-                fetchWolfSaleStats(),
-                fetchUserStats(),
+                fetchWolfSaleStats(false),
+                fetchUserStats(false),
             ]);
             notifySuccess(`${amount} ${amount == 1 ? 'Wolf' : 'Wolves'} claimed 🎉✨`);
         } catch (err) {

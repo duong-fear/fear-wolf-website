@@ -429,9 +429,9 @@
 																		@click="blockchain.reserveWolves()"
 																		:disabled="loading.RESERVE_WOLF || epoch < eligibleEpoch || preSaleBuyAmount + reserved > preSaleLimit">
 																		<span>Reserve</span>
-																		<span x-show="epoch >= eligibleEpoch" x-text="`(${formatEther(preSalePriceBN.mul(preSaleBuyAmount))} ETH)`"></span>
+																		<!-- <span x-show="epoch >= eligibleEpoch" x-text="`(${formatEther(preSalePriceBN.mul(preSaleBuyAmount))} ETH)`"></span> -->
 																		<span x-show="epoch < eligibleEpoch">
-																			<span x-text="`(${countdown(epoch, eligibleEpoch, true)})`"></span>
+																			<span x-text="`(available in ${countdown(epoch, eligibleEpoch, true)})`"></span>
 																		</span>
 																		<div class="spinner-border spinner-border-sm ml-1" x-show="loading.RESERVE_WOLF"></div>
 																	</button>
@@ -446,10 +446,10 @@
 																		@click="blockchain.claimWolves"
 																		:disabled="loading.CLAIM_WOLF || epoch < preSaleClaimEpoch">
 																		<span>Claim</span>
-																		<span x-text="reserved"></span>
-																		<span x-text="reserved > 1 ? 'Wolves' : 'Wolf'"></span>
+																		<!-- <span x-text="reserved"></span> -->
+																		<!-- <span x-text="reserved > 1 ? 'Wolves' : 'Wolf'"></span> -->
 																		<span x-show="epoch < preSaleClaimEpoch">
-																			<span x-text="`(${countdown(epoch, preSaleClaimEpoch, true)})`"></span>
+																			<span x-text="`(available in ${countdown(epoch, preSaleClaimEpoch, true)})`"></span>
 																		</span>
 																		<div class="spinner-border spinner-border-sm ml-1" x-show="loading.CLAIM_WOLF"></div>
 																	</button>
@@ -578,8 +578,8 @@
 																>
 																	<span>
 																		<span>Buy</span>
-																		<span x-show="epoch >= publicSaleStartEpoch" x-text="`(${formatEther(publicSalePriceBN.mul(publicSaleBuyAmount))} ETH)`"></span>
-																		<span x-show="epoch < publicSaleStartEpoch" x-text="`(${countdown(epoch, publicSaleStartEpoch, true)})`"></span>
+																		<!-- <span x-show="epoch >= publicSaleStartEpoch" x-text="`(${formatEther(publicSalePriceBN.mul(publicSaleBuyAmount))} ETH)`"></span> -->
+																		<span x-show="epoch < publicSaleStartEpoch" x-text="`(available in ${countdown(epoch, publicSaleStartEpoch, true)})`"></span>
 																	</span>
 																	<div class="spinner-border spinner-border-sm ml-1" x-show="loading.BUY_WOLF"></div>
 																</button>
