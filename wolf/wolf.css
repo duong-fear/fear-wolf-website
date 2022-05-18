@@ -658,6 +658,13 @@ span.wolfwhite, .wolfwhite span {color:white ! important;}
 #oc-testi .owl-item {border-right:none ! important;}
 #section-marketing #oc-testi {background-color: rgba(0,0,0, 0.4) !important;}
 
+
+#section-clans {background-image:url(../images/backgrounds/fear-wolf-pack-3.jpg);background-repeat:no-repeat;background-size:cover;}
+#section-clans .dark .testi-meta span {color:white ! important;}
+#section-clans #oc-testi {background-color: rgba(0,0,0, 0.4) !important;}
+#section-clans .testi-image img {height:auto ! important;}
+#section-clans .testi-image, #section-clans .testi-image a {width:100%;height:auto ! important;}
+
 .smallwolftrats {width:100%;margin-top:20px;text-align:center;}
 .smallwolftrats .col-lg-3, .smallwolftrats .col-lg-2 {display:inline-block;}
 
@@ -671,6 +678,7 @@ p.maindesc {display:inline-block ! important;}
 
 @media (max-width: 1000px) {
 #section-marketing {background-size:contain;}
+#section-clans {background-size:contain;}
 .statssec .wolfwhite span {font-size:16pt ! important;}	
 .whitelist p.maindesc {font-size:11pt ! important;width:auto ! important;display:inline-block ! important;}
 .dev-content {top:165px;}
@@ -743,6 +751,7 @@ a.youtubelink {color:red ! important;}
 }
 @media (max-width: 1200px) {
 .whitelist-container {margin-top:136px;}
+#section-meet {margin-top:50px ! important;}
 }
 @media (max-width: 1000px) {
 .whitelist-container {margin-top:136px;}
@@ -750,10 +759,21 @@ a.youtubelink {color:red ! important;}
 }
 @media (max-width: 900px) {
 .whitelist .videocon {margin-top:-138px;}
+#section-meet {margin-top:100px ! important;}
+}
+@media (max-width: 800px) {
+#section-meet {margin-top:200px ! important;}
 }
 @media (max-width: 750px) {
 .whitelist-container {margin-top:144px;}
 .whitelist .videocon {margin-top:-115px;}
+}
+@media (max-width: 700px) {
+#section-meet {margin-top:100px ! important;}
+}
+@media (max-width: 600px) {
+#section-meet {margin-top:50px ! important;}
+#section-meet p.highlightp {font-size:11pt ! important;}
 }
 @media (max-width: 550px) {
 .whitelist .videocon  {margin-top:-18px;}
