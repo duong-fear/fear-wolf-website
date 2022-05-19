@@ -373,11 +373,13 @@
 																<div class="counter color">
 																	<span x-show="!wallet || loading.CONNECT_WALLET" class="text-fff8">n/a</span>
 																	<span x-show="wallet && !loading.CONNECT_WALLET">
-																		<span x-show="wsEligible == true">✅</span>
-																		<span x-show="wsEligible == false">❌</span>
+																		<span
+																			x-text="formatEther(etherBalanceBN)"
+																			:class="etherBalanceBN && etherBalanceBN.gt(ZeroBN) ? 'text-bright' : 'text-fff8'"
+																		></span>
 																	</span>
 																</div>
-																<h5 class="mb-0 font-body text-white-50 measurementheader">Whitelisted</h5>
+																<h5 class="mb-0 font-body text-white-50 measurementheader">Balance (ETH)</h5>
 															</div>
 															<div class="col-4">
 																<div class="counter color">
