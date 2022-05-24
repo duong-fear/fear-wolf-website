@@ -58,6 +58,14 @@ const fetchWolfSaleStats = async (setSelectedTab = false) => {
         initialPublicSaleAmount: initialPublicSaleAmountBN.toNumber(),
     });
     const epoch = getEpoch();
+    if(epoch < vm.publicSaleStartEpoch) {
+        vm.preSaleRemain -= 100;
+        if(vm.preSaleRemain < 0) vm.preSaleRemain = 0;
+    }
+    else {
+        vm.publicSaleRemain -= 100;
+        if(vm.publicSaleRemain < 0) vm.publicSaleRemain = 0;
+    }
     if(setSelectedTab) Object.assign(vm, {
         selectedTab: epoch >= vm.publicSaleStartEpoch ? tabs[1] : tabs[0],
     })
