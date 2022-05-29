@@ -284,7 +284,7 @@
 															<div
 																title="live"
 																class="blob red ml-2"
-																x-show="tab == tabs[0] && epoch >= wsStartEpoch && epoch < publicSaleStartEpoch"
+																x-show="tab == tabs[0] && epoch >= wsStartEpoch && epoch < preSaleEndEpoch"
 															></div>
 															<div
 																title="live"
@@ -401,15 +401,15 @@
 															</div>
 														</div>
 													</div>
-													<div class="divider m-0 py-3" x-show="!wallet || epoch >= publicSaleStartEpoch || preSaleRemain == 0 || preSaleLimit == reserved"></div>
-													<div class="divider m-0 py-3 pb-2 divider-left" x-show="wallet && epoch < publicSaleStartEpoch && preSaleRemain > 0 && preSaleLimit > reserved">
+													<div class="divider m-0 py-3" x-show="!wallet || epoch >= preSaleEndEpoch || preSaleRemain == 0 || preSaleLimit == reserved"></div>
+													<div class="divider m-0 py-3 pb-2 divider-left" x-show="wallet && epoch < preSaleEndEpoch && preSaleRemain > 0 && preSaleLimit > reserved">
 														<span style="color: #ffffff88; font-size: 1rem; font-style: italic;">number of wolves to reserve:</span>
 													</div>
 													<!-- buy wolf button -->
 													<template x-if="wallet">
 														<div class="text-center">
 															<!-- when player can still able to buy a wolf -->
-															<div x-show="epoch < publicSaleStartEpoch && preSaleRemain > 0 && preSaleLimit > reserved">
+															<div x-show="epoch < preSaleEndEpoch && preSaleRemain > 0 && preSaleLimit > reserved">
 																<div class="py-2 flex justify-center">
 																	<div class="flex wolf-buy-input pb-2">
 																		<div @click="changeAmount('preSaleBuyAmount', -1)">
@@ -440,7 +440,7 @@
 																</div>
 															</div>
 															<!-- when player can't be able to buy a wolf -> sale closed // sold out // buy limit reached -->
-															<div x-show="epoch >= publicSaleStartEpoch || preSaleRemain == 0 || preSaleLimit == reserved">
+															<div x-show="epoch >= preSaleEndEpoch || preSaleRemain == 0 || preSaleLimit == reserved">
 																<div>
 																	<button
 																		class="button button-3d button-rounded btn-spin button-green"
@@ -469,7 +469,7 @@
 
 													<div x-show="!wallet" class="text-center flex justify-center">
 														<button
-															x-show="epoch < wsStartEpoch || epoch >= publicSaleStartEpoch || preSaleRemain === 0"
+															x-show="epoch < wsStartEpoch || epoch >= preSaleEndEpoch || preSaleRemain === 0"
 															class="button button-3d button-rounded" disabled
 															:class="epoch < wsStartEpoch ? 'button-light' : 'button-dark'"
 														>
@@ -477,13 +477,13 @@
 																<span>Sale starts in</span>
 																<span x-text="countdown(epoch, wsStartEpoch, true)"></span>
 															</span>
-															<span x-show="epoch >= publicSaleStartEpoch || preSaleRemain == 0">
+															<span x-show="epoch >= preSaleEndEpoch || preSaleRemain == 0">
 																<span>INO Sale has ended ❌</span>
 															</span>
 														</button>
 														<button
 															class="button button-3d button-rounded button-red flex justify-center items-center"
-															x-show="epoch >= wsStartEpoch && epoch < publicSaleStartEpoch && preSaleRemain > 0"
+															x-show="epoch >= wsStartEpoch && epoch < preSaleEndEpoch && preSaleRemain > 0"
 															@click="blockchain.connectWallet(fetchUserStats)"
 															:disabled="loading.CONNECT_WALLET"
 														>
@@ -674,7 +674,7 @@
 														<tr>
 															<td>Public sale</td>
 															<td colspan="2">
-																<span class="text-bright"><i>3rd June 5am UTC</i></span>
+																<span class="text-bright"><i>6th June 11am UTC</i></span>
 															</td>
 															<td>
 																<span x-text="initialPublicSaleAmount" x-show="epoch >= publicSaleStartEpoch"></span>
