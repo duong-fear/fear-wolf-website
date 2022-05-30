@@ -141,7 +141,8 @@ const alpineInit = async () => {
         // pre-sale stats
         initialPreSaleAmount: null,
         wsStartEpoch: null, // whitelist sale start time
-        preSaleStartEpoch: null, // pre-sale start time 
+        preSaleStartEpoch: null, // pre-sale start time
+        preSaleEndEpoch: 1654340400, // #hardcoded
         preSaleClaimEpoch: null,
         preSaleRemain: null, // number of wolves remain before public sale
         preSalePriceBN: null,
