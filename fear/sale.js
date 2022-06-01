@@ -69,6 +69,11 @@ const fetchWolfSaleStats = async (setSelectedTab = false) => {
     if(setSelectedTab) Object.assign(vm, {
         selectedTab: epoch >= vm.publicSaleStartEpoch ? tabs[1] : tabs[0],
     })
+
+    // // mock
+    // vm.preSaleEndEpoch = epoch + 15;
+    // vm.publicSaleStartEpoch = epoch + 30;
+    // vm.preSaleClaimEpoch = epoch + 45;
 }
 
 const fetchUserStats = async (updateBuyAmount = true) => {
@@ -162,6 +167,10 @@ const alpineInit = async () => {
     setInterval(() => {
         // vm.epoch += 1;
         vm.epoch = getEpoch();
+        if(vm.publicSaleStartEpoch && vm.epoch === vm.publicSaleStartEpoch) {
+            vm.publicSaleRemain += vm.preSaleRemain;
+            vm.preSaleRemain = 0;
+        }
     }, 1000);
     const vm = window.vm = Alpine.store("vm");
     try {

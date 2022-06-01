@@ -1,7 +1,7 @@
 const ETHEREUM_CHAINID = 1;
 const KOVAN_CHAINID = 42;
 const RINKEBY_CHAINID = 4
-const DEFAULT_CHAINID = window.location.hostname === "www.fearwolf.com" ? ETHEREUM_CHAINID : KOVAN_CHAINID;
+const DEFAULT_CHAINID = ETHEREUM_CHAINID; //window.location.hostname === "www.fearwolf.com" ? ETHEREUM_CHAINID : KOVAN_CHAINID;
 
 const CHAINS = [
     {
