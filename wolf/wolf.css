@@ -1,6 +1,6 @@
 @font-face {
   font-family: "Wolfs Bane";
-  src: url("https://www.fear.io/fonts/wolfsbane2.ttf") format("truetype");
+  src: url("https://www.fearwolf.com/fonts/wolfsbane2.ttf") format("truetype");
 }
 
 
@@ -803,4 +803,14 @@ a.youtubelink {color:red ! important;}
 
 @media (max-width: 320px) {
 .buttonsale {font-size:12pt;}
+}
+
+
+@media (max-width: 500px) {
+.home .videocon {overflow:hidden;}
+.home .videocon video {width:200% ! important;)
+}
+@media (max-width: 400px) {
+.home .videocon {overflow:hidden;}
+.home .videocon video {width:250% ! important;)
 }
