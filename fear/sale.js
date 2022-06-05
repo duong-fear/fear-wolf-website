@@ -56,6 +56,7 @@ const fetchWolfSaleStats = async (setSelectedTab = false) => {
         publicSalePriceMaxBN,
         initialPreSaleAmount: initialPreSaleAmountBN.toNumber(),
         initialPublicSaleAmount: initialPublicSaleAmountBN.toNumber(),
+        preSaleEndEpoch: publicSaleStartEpochBN.toNumber(),
     });
     const epoch = getEpoch();
     if(epoch < vm.publicSaleStartEpoch) {
@@ -147,7 +148,7 @@ const alpineInit = async () => {
         initialPreSaleAmount: null,
         wsStartEpoch: null, // whitelist sale start time
         preSaleStartEpoch: null, // pre-sale start time
-        preSaleEndEpoch: 1654340400, // #hardcoded
+        preSaleEndEpoch: null,
         preSaleClaimEpoch: null,
         preSaleRemain: null, // number of wolves remain before public sale
         preSalePriceBN: null,
