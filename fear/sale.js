@@ -64,7 +64,8 @@ const fetchWolfSaleStats = async (setSelectedTab = false) => {
         if(vm.preSaleRemain < 0) vm.preSaleRemain = 0;
     }
     else {
-        vm.publicSaleRemain -= 100;
+        vm.initialPublicSaleAmount = vm.publicSaleRemain = 1900;
+        vm.publicSaleRemain -= vm.totalBought;
         if(vm.publicSaleRemain < 0) vm.publicSaleRemain = 0;
     }
     if(setSelectedTab) Object.assign(vm, {
