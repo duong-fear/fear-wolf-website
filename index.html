@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html dir="ltr" lang="en-US">
-
 <head>
-	<title>INO | Fear Wolf</title>
+	<title>FEAR Wolf NFTs | A Cross Game NFT with Claws</title>
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 	<meta name="author" content="SemiColonWeb" />
 	<link href="https://fonts.googleapis.com/css2?family=DM+Sans&display=swap" rel="stylesheet" />
-	<link href="https://fonts.googleapis.com/css2?family=Prata&family=Roboto:wght@300;400;500;700&display=swap"
-		rel="stylesheet" />
+	<link href="https://fonts.googleapis.com/css2?family=Prata&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="css/bootstrap.css" type="text/css" />
 	<link rel="stylesheet" href="style.css?v2" type="text/css" />
 	<link rel="stylesheet" href="css/dark.css?v3" type="text/css" />
@@ -15,118 +13,56 @@
 	<link rel="stylesheet" href="css/animate.css" type="text/css" />
 	<link rel="stylesheet" href="css/magnific-popup.css" type="text/css" />
 	<link rel="stylesheet" href="css/colors.php?color=F1C77A" type="text/css" />
-	<link rel="stylesheet" href="wolf/css/flatpickr.css" />
-	<link rel="shortcut icon" href="images/fearwolf/fear-wolf-icon-dark-2.svg?v2" type="image/x-icon" />
+	<link rel="stylesheet" href="wolf/css/flatpickr.css">
+    <link rel="shortcut icon" href="images/fearwolf/fear-wolf-icon-dark-2.svg?v2" type="image/x-icon" />
 	<link rel="stylesheet" href="wolf/css/fonts.css" type="text/css" />
 	<link rel="stylesheet" href="wolf/wolf.css?v58" type="text/css" />
 	<link rel="stylesheet" href="wolf/css/fonts/spa-icons.css" type="text/css" />
 	<link rel="stylesheet" href="css/custom.css" type="text/css" />
-	<link rel="stylesheet" href="fear/whitelist.css" type="text/css" />
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<meta name="description"
-		content="The Fear Wolf is everyone's favourite talk show host on NFTs. Find the latest news on NFTs on his show." />
+	<meta name="viewport" content="width=device-width, initial-scale=1"/>
+	<meta name="description" content="The Fear Wolf is everyone's favourite talk show host on NFTs. Find the latest news on NFTs on his show."/>
 	<script src="https://global.transak.com/sdk/v1.1/widget.js" async></script>
-	<script type="text/javascript" src="https://unpkg.com/@walletconnect/web3-provider@1.7.8/dist/umd/index.min.js"></script>
-	<script type="text/javascript" src="https://unpkg.com/web3modal@1.9.7/dist/index.js"></script>
-	<script type="text/javascript" src="https://unpkg.com/lodash@4.17.21/lodash.min.js"></script>
-	<script type="text/javascript" src="https://unpkg.com/ethers@5.6.5/dist/ethers.umd.min.js"></script>
-	<script src="fear/abi.js"></script>
-	<script src="fear/utils.js"></script>
-	<script src="fear/blockchain.js"></script>
-	<script src="fear/sale.js?v2"></script>
-	<script type="text/javascript" defer src="https://unpkg.com/alpinejs@3.9.6/dist/cdn.min.js"></script>
 	<script>
-		document.addEventListener("alpine:init", alpineInit);
-	</script>
-	<script>
-		function launchTransak() {
-			let n = new TransakSDK.default({
-				apiKey: "80f00610-32cc-4d01-8eb0-dfc825c2ef53",
-				environment: "PRODUCTION",
-				defaultCryptoCurrency: "FEAR",
-				themeColor: "000000",
-				email: "",
-				redirectURL: "",
-				hostURL: window.location.origin,
-				widgetHeight: "550px",
-				widgetWidth: "450px",
-			});
-			n.init(),
-				n.on(n.EVENTS.TRANSAK_WIDGET_CLOSE, () => {
-					n.close();
-				});
-		}
-		window.onload = function () {
-			$("#transakLink").on("click", function () {
-				launchTransak();
-			});
-		};
+    function launchTransak(){let n=new TransakSDK.default({apiKey:"80f00610-32cc-4d01-8eb0-dfc825c2ef53",environment:"PRODUCTION",defaultCryptoCurrency:"FEAR",themeColor:"000000",email:"",redirectURL:"",hostURL:window.location.origin,widgetHeight:"550px",widgetWidth:"450px"});n.init(),n.on(n.EVENTS.TRANSAK_WIDGET_CLOSE,()=>{n.close()})}window.onload=function(){$("#transakLink").on("click",function(){launchTransak()})};
 	</script>
 	<script type="application/ld+json">
-            {
-                "@context": "http://schema.org",
-                "@type": "WebSite",
-                "name": "Fear Wolf: Cross Game NFT with Claws",
-                "url": "https://www.fearwolf.com/",
-                "@id": "#WebSite",
-                "inLanguage": "en-us",
-                "image": "https://www.fear.io/images/fear-wolf.jpg",
-                "sameAs": [
-                    "https://www.youtube.com/c/FEARSTUDIOS",
-                    "https://twitter.com/fearnfts"
-                ],
-                "publisher": "https://www.fearwolf.com/"
-            }
-        </script>
+	{
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "name": "Fear Wolf: Cross Game NFT with Claws",
+    "url": "https://www.fearwolf.com/",
+    "@id": "#WebSite",
+    "inLanguage": "en-us",
+    "image": "https://www.fear.io/images/fear-wolf.jpg",
+	"sameAs": ["https://www.youtube.com/c/FEARSTUDIOS", "https://twitter.com/fearnfts"],
+	"publisher": "https://www.fearwolf.com/"
+    }
+</script>
 </head>
 
-<body class="stretched page-transition whitelist" x-data="$store.vm">
-	<template x-if="!!loading.MODAL">
-		<div class="text-fab pointer-none flex items-center justify-center position-fixed h-full w-full loading-modal">
-			<div>
-				<span x-html="loading.MODAL"></span>
-			</div>
-			<div class="spinner-border spinner-border-sm m-2" />
-		</div>
-	</template>
-	<div class="videocon w-full">
-		<video loop nocontrols autoplay muted loop poster="videos/fear-wolf-hades-ino-page.jpg"
-			style="width: 100%" class="featurevideo">
-			<source src="videos/fear-wolf-hades-ino-page-2.mp4" type="video/mp4" />
-			Your browser does not support the HTML5 video tag. Try updating
-			your browser or using a different one.
-		</video>
-	</div>
+<body class="stretched page-transition home">
+<div class="videocon">
+<video loop controls autoplay muted loop poster='videos/fear-wolf-website-home-background-2.jpg' style="width:100%;" class="featurevideo"><source src='videos/fear-wolf-website-background-9.mp4' type='video/mp4' />Your browser does not support the HTML5 video tag. Try updating your browser or using a different one.</video>
+</div>
 	<!-- Document Wrapper
 	============================================= -->
 	<div id="wrapper" class="clearfix">
+
 		<!-- Header
 		============================================= -->
 		<header id="header" class="floating-header dark custom-header-size" data-sticky-shrink="false">
-			<div> <!-- id="header-wrap" -->
+			<div id="header-wrap">
 				<div class="container pe-md-0">
 					<div class="header-row">
+
 						<!-- Logo
 						============================================= -->
 						<div id="logo" class="me-lg-4 pe-lg-4">
-							<a href="https://www.fearwolf.com/" class="standard-logo" id="standard-logo"
-								style="height: auto !important"><span
-									class="textfearwolf"><img src="images/fear-wolf-logo-600.png?v2"
-										alt="Fear Wolf" /></span></a>
-							<!--<a href="https://www.fearwolf.com/" class="retina-logo"><img src="images/fearwolf/fear-wolf-logo.svg" alt="Fear Wolf"></a>-->
-						</div>
-						<!-- #logo end -->
+							<a href="https://www.fearwolf.com/" class="standard-logo" id="standard-logo" style="height:auto ! important"><!--<span><img src="images/fearwolf/fear-wolf-icon-dark-2.svg" alt="fear wolf icon" style="width:60px;" class="fearlogoicon"/></span>--><span class="textfearwolf"><img src="images/fear-wolf-logo-600.png?v2" alt="Fear Wolf"/></span></a>
+						</div><!-- #logo end -->
 
 						<div id="primary-menu-trigger">
-							<svg class="svg-trigger" viewBox="0 0 100 100">
-								<path
-									d="m 30,33 h 40 c 3.722839,0 7.5,3.126468 7.5,8.578427 0,5.451959 -2.727029,8.421573 -7.5,8.421573 h -20">
-								</path>
-								<path d="m 30,50 h 40"></path>
-								<path
-									d="m 70,67 h -40 c 0,0 -7.5,-0.802118 -7.5,-8.365747 0,-7.563629 7.5,-8.634253 7.5,-8.634253 h 20">
-								</path>
-							</svg>
+							<svg class="svg-trigger" viewBox="0 0 100 100"><path d="m 30,33 h 40 c 3.722839,0 7.5,3.126468 7.5,8.578427 0,5.451959 -2.727029,8.421573 -7.5,8.421573 h -20"></path><path d="m 30,50 h 40"></path><path d="m 70,67 h -40 c 0,0 -7.5,-0.802118 -7.5,-8.365747 0,-7.563629 7.5,-8.634253 7.5,-8.634253 h 20"></path></svg>
 						</div>
 
 						<!--<div class="header-misc ms-lg-auto">
@@ -136,642 +72,1149 @@
 						<!-- Primary Navigation
 						============================================= -->
 						<nav class="primary-menu">
+
 							<ul class="menu-container style-2 one-page-menu">
-								<li class="menu-item border-light">
-									<a class="menu-link" href="index.html#slider" data-easing="easeInOutExpo"
-										data-speed="1250" data-offset="0">
-										<div class="overflow-hidden">
-											<div data-animate="fadeInDownSmall" class="menu-button-link">
-												Home
-											</div>
-										</div>
-									</a>
-								</li>
-								<li class="menu-item border-light mid-item">
-									<a class="menu-link" href="index.html#section-meet" data-easing="easeInOutExpo"
-										data-speed="1250" data-offset="130">
-										<div class="overflow-hidden">
-											<div data-animate="fadeInDownSmall" class="menu-button-link"
-												data-delay="200">
-												Wolves
-											</div>
-										</div>
-									</a>
-								</li>
-								<li class="menu-item border-light mid-item">
-									<a class="menu-link" href="index.html#section-stats" data-easing="easeInOutExpo"
-										data-speed="1250" data-offset="130">
-										<div class="overflow-hidden">
-											<div data-animate="fadeInDownSmall" class="menu-button-link"
-												data-delay="200">
-												Stats
-											</div>
-										</div>
-									</a>
-								</li>
-								<li class="menu-item border-light mid-item">
-									<a class="menu-link" href="index.html#section-games" data-easing="easeInOutExpo"
-										data-speed="1250" data-offset="130">
-										<div class="overflow-hidden">
-											<div data-animate="fadeInDownSmall" class="menu-button-link"
-												data-delay="200">
-												Games
-											</div>
-										</div>
-									</a>
-								</li>
-								<li class="menu-item border-light mid-item">
-									<a class="menu-link" href="index.html#section-launch" data-easing="easeInOutExpo"
-										data-speed="1250" data-offset="0">
-										<div class="overflow-hidden">
-											<div data-animate="fadeInDownSmall" class="menu-button-link"
-												data-delay="400">
-												Launch
-											</div>
-										</div>
-									</a>
-								</li>
-								<li class="menu-item border-light mid-item">
-									<a class="menu-link" href="index.html#section-traits" data-easing="easeInOutExpo"
-										data-speed="1250" data-offset="130">
-										<div class="overflow-hidden">
-											<div data-animate="fadeInDownSmall" class="menu-button-link"
-												data-delay="600">
-												Traits
-											</div>
-										</div>
-									</a>
-								</li>
-								<li class="menu-item border-light mid-item">
-									<a class="menu-link" href="https://forms.gle/bGAae4F5ksjg4DUC8"
-										data-easing="easeInOutExpo" data-speed="1250" data-offset="130" target="_blank">
-										<div class="overflow-hidden">
-											<div data-animate="fadeInDownSmall" class="menu-button-link"
-												data-delay="600">
-												Affiliates
-											</div>
-										</div>
-									</a>
-								</li>
+								<li class="menu-item border-light current"><a class="menu-link" href="#" data-easing="easeInOutExpo" data-speed="1250" data-offset="0" data-href="#slider"><div class="overflow-hidden"><div data-animate="fadeInDownSmall" class="menu-button-link">Home</div></div></a></li>
+								<li class="menu-item border-light mid-item"><a class="menu-link" href="#" data-easing="easeInOutExpo" data-speed="1250" data-offset="130" data-href="#section-meet"><div class="overflow-hidden"><div data-animate="fadeInDownSmall" class="menu-button-link" data-delay="200">Wolves</div></div></a></li>
+								<li class="menu-item border-light mid-item"><a class="menu-link" href="#" data-easing="easeInOutExpo" data-speed="1250" data-offset="130" data-href="#section-stats"><div class="overflow-hidden"><div data-animate="fadeInDownSmall" class="menu-button-link" data-delay="200">Stats</div></div></a></li>
+								<li class="menu-item border-light mid-item"><a class="menu-link" href="#" data-easing="easeInOutExpo" data-speed="1250" data-offset="130" data-href="#section-games"><div class="overflow-hidden"><div data-animate="fadeInDownSmall" class="menu-button-link" data-delay="200">Games</div></div></a></li>
+								<li class="menu-item border-light mid-item"><a class="menu-link" href="#" data-easing="easeInOutExpo" data-speed="1250" data-offset="0" data-href="#section-launch"><div class="overflow-hidden"><div data-animate="fadeInDownSmall" class="menu-button-link" data-delay="400">Launch</div></div></a></li>
+								<li class="menu-item border-light mid-item"><a class="menu-link" href="#" data-easing="easeInOutExpo" data-speed="1250" data-offset="130" data-href="#section-traits"><div class="overflow-hidden"><div data-animate="fadeInDownSmall" class="menu-button-link" data-delay="600">Traits</div></div></a></li>
+								<li class="menu-item border-light mid-item"><a class="menu-link" href="https://forms.gle/bGAae4F5ksjg4DUC8" data-easing="easeInOutExpo" data-speed="1250" data-offset="130" target="_blank"><div class="overflow-hidden"><div data-animate="fadeInDownSmall" class="menu-button-link" data-delay="600">Affiliates</div></div></a></li>
 								<!--<li class="menu-item border-light mid-item">
 								<button id="transakLink">Buy Fear</button>
 								</li>-->
 							</ul>
+
 						</nav>
+
 					</div>
 				</div>
 			</div>
-		</header>
-		<!-- #header end -->
+			<div class="header-wrap-clone"></div>
+		</header><!-- #header end -->
 
 		<!-- Hero
 		============================================= -->
-		<section>
-			<div>
-				<div class="container pt-5">
-					<div class="row">
-					<div class="col-12 col-md-10 col-xl-9 container whitelist-container text-fab">
-						<div class="row">
-							<template x-if="error != null">
-								<div class="py-2">
-									<div class="py-2 text-bright">
-										<span>❌</span>
-										<span>An error occured. Please try clearing the browser's cache and try again.</span>
-									</div>
-									<div class="py-2">
-										<pre class="mb-0" x-text="_.get(error, 'message')" style="white-space: pre-wrap;font-weight: bold;"></pre>
-										<pre class="mb-0" x-text="_.get(error, 'stack')" style="white-space: pre-wrap;"></pre>
-									</div>
-								</div>
-							</template>
-							<template x-if="!ready && error == null">
-								<div class="py-2">
-									<div class="pt-4 pb-2">
-										<img src="/images/fearwolf/fear-wolf-speed-2.svg" style="width: 10rem;margin: auto;display: block;">
-									</div>
-									<div class="text-center py-2">
-										<span><b>Fetching Stats ...</b></span>
-										<div class="spinner-border spinner-border-sm ml-2" ></div>
-									</div>
-								</div>
-							</template>
-							<template x-if="ready">
-								<div style="padding: 0.75rem;" class="fadeIn faster animated">
+		<section id="slider" class="slider-element min-vh-60 min-vh-md-100 include-header border-bottom border-light dark" style="background-size: auto 100%;">
+			<div class="slider-inner">
 
-									<template x-if="notification">
-										<div class="style-msg" :class="notification.type + 'msg'" style="border-radius: 0.25rem;">
-											<div class="sb-msg">
-												<i class="icon-check" x-show="notification.type == 'success'"></i>
-												<i class="icon-info-sign" x-show="notification.type == 'info'"></i>
-												<i class="icon-remove" x-show="notification.type == 'error'"></i>
-												<!-- <strong x-text="title"></strong> -->
-												<span x-text="notification.message"></span>
-											</div>
-										</div>
-									</template>
-
-									<div class="m-0 tabs tabs-bb clearfix ui-tabs ui-corner-all ui-widget ui-widget-content" id="sales-tab">
-										<div>
-											<ul class="tab-nav clearfix ui-tabs-nav ui-corner-all ui-helper-reset ui-helper-clearfix ui-widget-header"
-												role="tablist">
-												<template x-for="tab in tabs">
-													<li role="tab" tabindex="0"
-														class="select-none ui-tabs-tab ui-corner-top ui-state-default ui-tab"
-														:class="selectedTab == tab && 'ui-tabs-active ui-state-active'"
-														@click="selectedTab = tab;">
-														<a style="display: flex;" role="presentation" tabindex="-1" class="ui-tabs-anchor flex justify-center items-center">
-															<span x-text="tab"></span>
-															<div
-																title="live"
-																class="blob red ml-2"
-																x-show="tab == tabs[0] && epoch >= wsStartEpoch && epoch < preSaleEndEpoch"
-															></div>
-															<div
-																title="live"
-																class="blob red ml-2"
-																x-show="tab == tabs[1] && epoch >= publicSaleStartEpoch"
-															></div>
-														</a>
-													</li>
-												</template>
-												<!-- connect metamask button -->
-												<div class="flex-auto flex justify-end" x-show="!wallet">
-													<button
-														@click="blockchain.connectWallet(fetchUserStats)"
-														class="button button-mini button-3d button-teal button-rounded flex justify-center items-center"
-														style="margin: 0.5rem 0rem; padding: 4px 10px;"
-														:disabled="loading.CONNECT_WALLET"
-													>
-														<!-- <div x-html="metamaskSvg"></div> -->
-														<i class="icon-wallet" style="margin-right: 0.25rem;"></i>
-														<span>Connect</span>
-														<span class="d-none d-sm-inline-block">&nbsp;Wallet</span>
-														<div
-															style="width: 0.75rem; height: 0.75rem;"
-															class="spinner-border spinner-border-sm ml-1" x-show="loading.CONNECT_WALLET"
-														></div>
-													</button>
-												</div>
-												<!-- wallet connected button -->
-												<div class="flex-auto flex justify-end items-center" x-show="wallet">
-													<img style="width: 1.5rem;height: 1.5rem;" src="images/icons/metamask.svg" x-show="isMetaMask === true"/>
-													<img style="width: 1.5rem;height: 1.5rem;" src="images/icons/walletconnect.svg" x-show="isWalletConnect === true"/>
-													<button
-														class="button button-mini button-dark button-rounded" disabled
-													>
-														<span x-text="getShortAddress(wallet)"></span>
-														<!-- <span>/</span>
-														<span x-text="formatEther(etherBalanceBN)"></span>
-														<span>ETH</span> -->
-													</button>
-												</div>
-											</ul>
-										</div>
-										<div class="tab-container">
-											
-											<!-- PRE SALE -->
-											<div class="tab-content clearfix ui-tabs-panel ui-corner-bottom ui-widget-content" role="tabpanel" :class="selectedTab == vm.tabs[0] ? 'd-block' : 'd-none'">
-												<div>
-													<div class="row align-items-center mt-4">
-														<div class="col-3">
-															<div class="counter color">
-																<span x-text="preSaleRemain" :class="+preSaleRemain > 0 ? 'text-bright' : 'text-fff8'"></span>
-															</div>
-															<h5 class="mb-0 font-body text-white-50 measurementheader">Remaining</h5>
-														</div>
-														<div class="col-3">
-															<div class="counter color">
-																<span x-text="totalReserved" :class="+totalReserved > 0 ? 'text-bright' : 'text-fff8'"></span>
-															</div>
-															<h5 class="mb-0 font-body text-white-50 measurementheader">SOLD</h5>
-														</div>
-														<div class="col-3">
-															<div class="counter color text-bright" style="
-																display: inline-flex;
-																justify-content: center;
-																align-items: center;
-																width: 100%;
-															">
-																<span x-text="formatEther(vm.preSalePriceBN)"></span>
-																<i x-html="ethSvg"></i>
-															</div>
-															<h5 class="mb-0 font-body text-white-50 measurementheader">Price</h5>
-														</div>
-														<div class="col-3">
-															<div class="counter color text-bright"><span x-text="preSaleLimit"></span></div>
-															<h5 class="mb-0 font-body text-white-50 measurementheader">per wallet</h5>
-														</div>
-													</div>
-
-													<!-- user's stats -->
-													<div>
-														<div class="divider divider-left m-0 py-3">
-															<span style="color: #ffffff88; font-size: 1rem; font-style: italic;">your stats:</span>
-														</div>
-														<div class="row align-items-center my-2">
-															<div class="col-4">
-																<div class="counter color">
-																	<span x-show="!wallet || loading.CONNECT_WALLET" class="text-fff8">n/a</span>
-																	<span x-show="wallet && !loading.CONNECT_WALLET">
-																		<span
-																			x-text="formatEther(etherBalanceBN)"
-																			:class="etherBalanceBN && etherBalanceBN.gt(ZeroBN) ? 'text-bright' : 'text-fff8'"
-																		></span>
-																	</span>
-																</div>
-																<h5 class="mb-0 font-body text-white-50 measurementheader">Balance (ETH)</h5>
-															</div>
-															<div class="col-4">
-																<div class="counter color">
-																	<span
-																		x-text="reserved == null ? 'n/a' : reserved"
-																		:class="+reserved > 0 ? 'text-bright' : 'text-fff8'"
-																	></span>
-																</div>
-																<h5 class="mb-0 font-body text-white-50 measurementheader">Reserved</h5>
-															</div>
-															<div class="col-4">
-																<div class="counter color">
-																	<span
-																		x-text="claimed == null ? 'n/a' : claimed"
-																		:class="+claimed > 0 ? 'text-bright' : 'text-fff8'"
-																	></span>
-																</div>
-																<h5 class="mb-0 font-body text-white-50 measurementheader">Claimed</h5>
-															</div>
-														</div>
-													</div>
-													<div class="divider m-0 py-3" x-show="!wallet || epoch >= preSaleEndEpoch || preSaleRemain == 0 || preSaleLimit == reserved"></div>
-													<div class="divider m-0 py-3 pb-2 divider-left" x-show="wallet && epoch < preSaleEndEpoch && preSaleRemain > 0 && preSaleLimit > reserved">
-														<span style="color: #ffffff88; font-size: 1rem; font-style: italic;">number of wolves to reserve:</span>
-													</div>
-													<!-- buy wolf button -->
-													<template x-if="wallet">
-														<div class="text-center">
-															<!-- when player can still able to buy a wolf -->
-															<div x-show="epoch < preSaleEndEpoch && preSaleRemain > 0 && preSaleLimit > reserved">
-																<div class="py-2 flex justify-center">
-																	<div class="flex wolf-buy-input pb-2">
-																		<div @click="changeAmount('preSaleBuyAmount', -1)">
-																			<span>-</span>
-																		</div>
-																		<div>
-																			<span x-text="preSaleBuyAmount" class="text-bright"></span>
-																		</div>
-																		<div @click="changeAmount('preSaleBuyAmount', +1)">
-																			<span>+</span>
-																		</div>
-																	</div>
-																</div>
-																<!-- buy button -->
-																<div>
-																	<button
-																		class="button button-3d button-rounded btn-spin"
-																		:class=" preSaleBuyAmount + reserved > preSaleLimit ? 'button-dark' : 'button-green' "
-																		@click="blockchain.reserveWolves()"
-																		:disabled="loading.RESERVE_WOLF || epoch < eligibleEpoch || preSaleBuyAmount + reserved > preSaleLimit">
-																		<span>Reserve</span>
-																		<!-- <span x-show="epoch >= eligibleEpoch" x-text="`(${formatEther(preSalePriceBN.mul(preSaleBuyAmount))} ETH)`"></span> -->
-																		<span x-show="epoch < eligibleEpoch">
-																			<span x-text="`(available in ${countdown(epoch, eligibleEpoch, true)})`"></span>
-																		</span>
-																		<div class="spinner-border spinner-border-sm ml-1" x-show="loading.RESERVE_WOLF"></div>
-																	</button>
-																</div>
-															</div>
-															<!-- when player can't be able to buy a wolf -> sale closed // sold out // buy limit reached -->
-															<div x-show="epoch >= preSaleEndEpoch || preSaleRemain == 0 || preSaleLimit == reserved">
-																<div>
-																	<button
-																		class="button button-3d button-rounded btn-spin button-green"
-																		x-show="reserved > 0 && claimed == 0"
-																		@click="blockchain.claimWolves"
-																		:disabled="loading.CLAIM_WOLF || epoch < preSaleClaimEpoch">
-																		<span>Claim</span>
-																		<!-- <span x-text="reserved"></span> -->
-																		<!-- <span x-text="reserved > 1 ? 'Wolves' : 'Wolf'"></span> -->
-																		<span x-show="epoch < preSaleClaimEpoch">
-																			<span x-text="`(available in ${countdown(epoch, preSaleClaimEpoch, true)})`"></span>
-																		</span>
-																		<div class="spinner-border spinner-border-sm ml-1" x-show="loading.CLAIM_WOLF"></div>
-																	</button>
-																	<button
-																		class="button button-3d button-rounded btn-spin button-dark"
-																		x-show="reserved == 0 || claimed > 0"
-																		disabled
-																	>
-																		<span>INO Sale has ended ❌</span>
-																	</button>
-																</div>
-															</div>
-														</div>
-													</template>
-
-													<div x-show="!wallet" class="text-center flex justify-center">
-														<button
-															x-show="epoch < wsStartEpoch || epoch >= preSaleEndEpoch || preSaleRemain === 0"
-															class="button button-3d button-rounded" disabled
-															:class="epoch < wsStartEpoch ? 'button-light' : 'button-dark'"
-														>
-															<span x-show="epoch < wsStartEpoch">
-																<span>Sale starts in</span>
-																<span x-text="countdown(epoch, wsStartEpoch, true)"></span>
-															</span>
-															<span x-show="epoch >= preSaleEndEpoch || preSaleRemain == 0">
-																<span>INO Sale has ended ❌</span>
-															</span>
-														</button>
-														<button
-															class="button button-3d button-rounded button-red flex justify-center items-center"
-															x-show="epoch >= wsStartEpoch && epoch < preSaleEndEpoch && preSaleRemain > 0"
-															@click="blockchain.connectWallet(fetchUserStats)"
-															:disabled="loading.CONNECT_WALLET"
-														>
-															<span>Connect Wallet to join</span>
-															<div class="spinner-border spinner-border-sm ml-1" x-show="loading.CONNECT_WALLET"></div>
-														</button>
-													</div>
-
-												</div>
-											</div>
-
-											<!-- PUBLIC SALE-->
-											<div class="tab-content clearfix ui-tabs-panel ui-corner-bottom ui-widget-content" role="tabpanel" :class="selectedTab == vm.tabs[1] ? 'd-block' : 'd-none'">
-												<div>
-													<div class="row align-items-center my-4">
-														<div class='col-3'>
-															<div class="counter color">
-																<span x-show="epoch >= publicSaleStartEpoch" x-text="publicSaleRemain" :class="+publicSaleRemain > 0 ? 'text-bright' : 'text-fff8'"></span>
-																<span x-show="epoch < publicSaleStartEpoch" class="text-bright">TBA</span>
-															</div>
-															<h5 class="mb-0 font-body text-white-50 measurementheader">
-																<span class="text-white-50">Remaining</span>
-															</h5>
-														</div>
-														<div class='col-3'>
-															<div class="counter color">
-																<span x-text="totalBought" :class="+totalBought > 0 ? 'text-bright' : 'text-fff8'"></span>
-															</div>
-															<h5 class="mb-0 font-body text-white-50 measurementheader">
-																<span class="text-white-50">Sold</span>
-															</h5>
-														</div>
-														<div class="col-3">
-															<div
-																class="inline-flex counter color text-bright justify-center items-center w-100"
-															>
-																<span x-show="publicSalePriceBN.gt(ZeroBN)" x-text="formatEther(publicSalePriceBN)"></span>
-																<span x-show="publicSalePriceBN.eq(ZeroBN)" x-text="formatEther(publicSalePriceMaxBN)"></span>
-																<i x-html="ethSvg"></i>
-															</div>
-															<h5 class="mb-0 font-body text-white-50 measurementheader">
-																<span class="text-white-50">Price</span>
-															</h5>
-														</div>
-														<template x-if="!wallet">
-															<div class="col-3">
-																<div class="counter color">
-																	<span>♾️</span>
-																</div>
-																<h5 class="mb-0 font-body text-white-50 measurementheader">
-																	<span class="text-white-50">Per Wallet</span>
-																</h5>
-															</div>
-														</template>
-														<template x-if="wallet">
-															<div class="col-3">
-																<div class="counter color">
-																	<span x-text="bought" :class="+bought > 0 ? 'text-bright' : 'text-fff8'"></span>
-																</div>
-																<h5 class="mb-0 font-body text-white-50 measurementheader">
-																	<span class="text-white-50">Bought</span>
-																</h5>
-															</div>
-														</template>
-													</div>
-													<div class="divider m-0 py-3" x-show="!wallet || publicSaleRemain == 0"></div>
-													<div class="divider m-0 py-3 pb-2 divider-left" x-show="wallet && publicSaleRemain > 0">
-														<span style="color: #ffffff88; font-size: 1rem; font-style: italic;">number of wolves to buy:</span>
-													</div>
-													<template x-if="wallet">
-														<div>
-															<div class="b-steps b-steps-public py-2" x-show="publicSaleRemain > 0">
-																<div class="flex justify-center pb-2">
-																	<div class="flex wolf-buy-input">
-																		<div @click="changeAmount('publicSaleBuyAmount', -1)">
-																			<span>-</span>
-																		</div>
-																		<div>
-																			<span x-text="publicSaleBuyAmount" class="text-bright"></span>
-																		</div>
-																		<div @click="changeAmount('publicSaleBuyAmount', +1)">
-																			<span>+</span>
-																		</div>
-																	</div>
-																</div>
-															</div>
-															<div class="flex justify-center">
-																<button
-																	class="button button-3d button-rounded flex justify-center items-center"
-																	:class=" publicSaleBuyAmount > publicSaleRemain ? 'button-dark' : 'button-green' "
-																	@click="blockchain.buyWolves()"
-																	:disabled="loading.BUY_WOLF || epoch < publicSaleStartEpoch || publicSaleBuyAmount > publicSaleRemain"
-																	x-show="publicSaleRemain > 0"
-																>
-																	<span>
-																		<span>Buy</span>
-																		<!-- <span x-show="epoch >= publicSaleStartEpoch" x-text="`(${formatEther(publicSalePriceBN.mul(publicSaleBuyAmount))} ETH)`"></span> -->
-																		<span x-show="epoch < publicSaleStartEpoch" x-text="`(available in ${countdown(epoch, publicSaleStartEpoch, true)})`"></span>
-																	</span>
-																	<div class="spinner-border spinner-border-sm ml-1" x-show="loading.BUY_WOLF"></div>
-																</button>
-																<button
-																	class="button button-3d button-rounded button-dark"
-																	x-show="publicSaleRemain == 0" disabled
-																>
-																	<span>Public sale has ended ❌</span>
-																</button>
-															</div>
-														</div>
-													</template>
-													<template x-if="!wallet">
-														<div class="flex justify-center">
-															<button
-																class="button button-3d button-rounded button-light flex items-center justify-center"
-																x-show="epoch < publicSaleStartEpoch" disabled
-															>
-																<span>sale starts in</span>
-																<span>&nbsp;</span>
-																<span x-text="countdown(epoch, publicSaleStartEpoch, true)"></span>
-															</button>
-															<button
-																x-show="epoch >= publicSaleStartEpoch && publicSaleRemain == 0"
-																class="button button-3d button-rounded button-dark" disabled
-															>
-																<span>Public sale has ended ❌</span>
-															</button>
-															<button
-																class="button button-3d button-rounded button-red flex justify-center items-center"
-																x-show="epoch >= publicSaleStartEpoch && publicSaleRemain > 0"
-																@click="blockchain.connectWallet(fetchUserStats)"
-																:disabled="loading.CONNECT_WALLET"
-															>
-																<span>Connect Wallet to join</span>
-																<div class="spinner-border spinner-border-sm ml-1" x-show="loading.CONNECT_WALLET"></div>
-															</button>
-														</div>
-													</template>
-												</div>
-											</div>
-										</div>
-
-									</div>
-
-									<div class="info-section mt-4" style="font-family: 'DM Sans';">
-										<div>
-											<div class="text-center" style="overflow: auto;">
-												<table class="mb-2 table table-bordered table-dark align-middle-table">
-													<thead>
-														<tr>
-															<th>Phase</th>
-															<th colspan="2">Sale Start</th>
-															<th>Total Sale</th>
-															<th>Price</th>
-															<th>Buy Limit Per Wallet</th>
-														</tr>
-													</thead>
-													<tbody>
-														<tr>
-															<td rowspan="2">INO sale</td>
-															<td>
-																<b>Stakers, Affiliates & Whitelisted Accounts</b>
-															</td>
-															<td>
-																<b>
-																	<span>Public</span>
-																	<span title="first come first served">FCFS</span>
-																</b>
-															</td>
-															<td rowspan="2">
-																<span x-text="initialPreSaleAmount - 100"></span>
-															</td>
-															<td rowspan="2">
-																<span x-text="formatEther(vm.preSalePriceBN)"></span>
-																<span>ETH</span>
-															</td>
-															<td rowspan="2">
-																<span x-text="preSaleLimit"></span>
-															</td>
-														</tr>
-														<tr>
-															<td>
-																<span class="text-bright"><i>18th May 5am UTC</i></span>
-															</td>
-															<td>
-																<span class="text-bright"><i>18th May 11am UTC</i></span>
-															</td>
-														</tr>
-														<tr>
-															<td>Public sale</td>
-															<td colspan="2">
-																<span class="text-bright"><i>6th June 11am UTC</i></span>
-															</td>
-															<td>
-																<span x-text="initialPublicSaleAmount" x-show="epoch >= publicSaleStartEpoch"></span>
-																<span x-show="epoch < publicSaleStartEpoch">TBA</span>
-															</td>
-															<td>
-																<span x-text="formatEther(vm.publicSalePriceMaxBN)"></span>
-																<span>ETH</span>
-															</td>
-															<td>
-																<span>
-																	unlimited (FCFS)
-																</span>
-															</td>
-														</tr>
-														<tr>
-															<td>
-																<span>Wolf Reveal</span>
-															</td>
-															<td colspan="5">
-																<span><span class="text-bright"><i>June</i></span> (exact date to be announced)</span>
-															</td>
-														</tr>
-													</tbody>
-												</table>
-											</div>
-											<div class="py-2">
-												<!-- <b><span class="text-bright">#Notes</span></b> -->
-												<ul class="mb-2" style="padding-left: 1.5rem;">
-													<li>
-														<span>Connect your wallet to see if you are in the <b>INO Sale</b>'s whitelist ( Stakers and Affiliates )</span>
-													</li>
-													<li>
-														<span>Wolves reserved at <strong>INO Sale</strong> will be claimable on the <strong><i>7th June 11am UTC</i></strong></span>
-													</li>
-													<li>
-														<span>All unsold wolves from the <strong>INO Sale</strong> will be added to the <strong>Public Sale</strong></span>
-													</li>
-													<li>
-														<span>Join <a style="color: #0d6efd" href="https://t.me/fearcoin">FEAR chat group, </a>subcribe to <a style="color: #0d6efd" href="https://t.me/fearnftsannouncement">FEAR ANN Channel</a> and follow lastest announcements to find out how to get whitelisted</span>
-													</li>
-												</ul>
-												<div class="pt-1">
-													<div class="flex justify-between">
-														<div><span>*<b>FCFS</b> = First Come First Served</span></div>
-														<div><span>*<b>INO</b> = Initial NFT Offering</span></div>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div>
-										
-									</div>
-								</div>
-							</template>
+				<div class="container itsshowcon">
+					<div class="row align-items-center h-100 mt-2 mt-lg-6 itsshow">
+						<div class="col-md-6 itsshowtime2">
+							<div class="overflow-hidden">
+								<h2 class="display-3 fw-normal mb-0 main-slogan" data-animate="fadeInUpSmall faster"><span class="wolfred3">An NFT with Claws</span></h2>
+							</div>
+							<div class="overflow-hidden mb-4">
+								<!--<h2 class="display-3 fw-normal mb-0" data-animate="fadeInUpSmall faster" data-delay="100">Fear's Flagship NFT</h2>-->
+							</div>
+							<div class="overflow-hidden mb-5">
+								<p class="lead mb-0 maindesc" data-animate="fadeInUpSmall faster" data-delay="200">FEAR Wolf is the World's First Cross Game &amp; Cross Chain NFT by <a href="https://www.fear.io/" target="_blank">Fear.io</a> with only <span class="wolfred">6,666 available. <!--<a href="about.html" class="storylink">What makes him special?</a>--></p>
+							</div>
+							<div class="overflow-hidden mb-4">
+								<a href="ino.html" data-animate="fadeInUpSmall faster" data-delay="300" data-easing="easeInOutExpo" data-speed="1250" data-offset="140" class="btn rounded-0 btn-border color size-lg bigbutton bigbutton2"><i class="buttonicon"><img src="images/icons/wolf-laid-down-white-outline.svg" alt="fear wolf icon"/></i><span class="questiontext" style="font-family:Wolfs Bane;">JOIN THE PUBLIC SALE!</span></a>
+								<a href="docs/fear-wolf-whitepaper.pdf?v3" data-animate="fadeInUpSmall faster" data-delay="300" data-easing="easeInOutExpo" data-speed="1250" data-offset="140" class="btn rounded-0 btn-border color size-lg bigbutton" target="_blank"><i class="buttonicon"><img src="images/icons/wolfpaper.svg" alt="wolf whitepaper"/></i><span class="questiontext" style="font-family:Wolfs Bane;">DOWNLOAD THE WHITEPAPER</span></a>
+								
+								
+							</div>
 						</div>
 					</div>
-					</div>
-					<div class="footernew" style="margin-top: 5rem">
-						<div class="footerleft">
-							<h3>About Us:</h3>
-							<address>
-								<p>
-									Fear Wolf is an NFT mascot and property
-									of
-									<a href="https://www.fear.io/" target="_blank" rel="nofollow">Fear.io</a>
-								</p>
-							</address>
-							<ul class="list-unstyled">
-								<!--<li class="mb-1"><span class="color op-07">Phone:</span> <span class="font-primary">(1) 8547 632521</span></li>
-										<li class="mb-1"><span class="color op-07">Email:</span> <span class="font-primary">noreply@canvas.com</span></li>-->
-								<li>
-									<span class="color op-07">Website:</span>
-									<a href="https://www.fearwolf.com/">
-										<span class="font-primary">fearwolf.com</span></a>
-								</li>
-							</ul>
-						</div>
-
-						<div class="footerright">
-							<img src="images/fear-wolf-logo-600.png?v2" alt="Image" height="50" class="mb-4" />
-							<p class="text-white-50 mb-5">
-								Fear Wolf is a multi game &amp; multi chain
-								NFT that focuses on providing owners with
-								maximum entertainment and utility in all
-								Fear's major games and digital content.
-							</p>
-						</div>
-					</div>
-					<div id="gotoTop" class="icon-angle-up" style="display: block"></div>
 				</div>
+
+				<div class="position-absolute d-flex socialsmall" style="top: auto; bottom: 20px; right: 20px;">
+
+					<a href="https://twitter.com/fearnfts" class="social-icon mx-1 si-border si-small border-light si-twitter" data-animate="bounceInRight" data-delay="200">
+						<i class="icon-twitter"></i>
+						<i class="icon-twitter"></i>
+					</a>
+					
+					<a href="https://www.fear.io/telegram" class="social-icon mx-1 si-border si-small border-light si-twitter" data-animate="bounceInRight">
+						<i class="icon-telegram"></i>
+						<i class="icon-telegram"></i>
+					</a>
+
+					<a href="https://www.instagram.com/fearnfts/" class="social-icon mx-1 si-border si-small border-light si-instagram" data-animate="bounceInRight" data-delay="100">
+						<i class="icon-instagram"></i>
+						<i class="icon-instagram"></i>
+					</a>
+				</div>
+
 			</div>
-		</section>
-		<!-- #content end -->
-	</div>
-	<!-- #wrapper end -->
+		</section><!-- #content end -->
+
+		<!-- Content
+		============================================= -->
+		<section id="content">
+		
+		
+
+
+		
+		
+		
+		<div id="section-meet" style="margin-top:200px;">
+		
+		<h3 class="display-4 color mb-0 featuredgamesheader meetthewolves" data-animate="fadeInUpSmall fast"><i><img src="images/fearwolf/claw-marks-rouge.svg?v2" alt="meet the wolves" style="width:50px;"/></i> <span>Meet the Wolves</span></h3>
+		
+		<blockquote class="border-light border-width-2 font-primary fearwolfdesc"><p class="highlightp" style="padding-top:0;"><span class="secondcolor">There are 40 breeds of wolves belonging to 5 distinct clans. Each wolf looks real to life and stunning in the upcoming Open World horror game: Blood Realms with 100's of customisations.</span></p><!--<p>His enhanced interoperability &amp; utility will help owners Achieve to Earn in many Fear Games.</p>--></blockquote>
+		
+		
+				<div id="related-portfolio" class="owl-carousel owl-carousel-full portfolio-carousel carousel-widget" data-margin="0" data-pagi="false" data-items-xs="1" data-items-sm="2" data-items-md="3" data-items-lg="4">
+				
+				
+
+					<article class="portfolio-item pf-graphics pf-illustrations">
+						<div class="grid-inner">
+							<div class="portfolio-image">
+								<div class="fslider" data-arrows="false">
+									<div class="flexslider">
+										<div class="slider-wrap">
+											<div class="slide"><a href="#"><img src="images/wolves/thumbs/fear-wolf-celestials-omni-thumb.jpg" alt="Omni"></a></div>
+											<div class="slide"><a href="#"><img src="images/wolves/thumbs/fear-wolf-celestials-astraeus-thumb.jpg" alt="Astraeus"></a></div>
+											<div class="slide"><a href="#"><img src="images/wolves/thumbs/fear-wolf-celestials-skyholder-thumb.jpg" alt="Astraeus"></a></div>
+										</div>
+									</div>
+								</div>
+								<div class="bg-overlay" data-lightbox="gallery">
+									<div class="bg-overlay-content dark flex-column" data-hover-animate="fadeIn">
+										<div class="portfolio-desc pt-0 center" data-hover-animate="fadeInDownSmall" data-hover-animate-out="fadeOutUpSmall" data-hover-speed="350">
+											<h3 style="color:white ! important;">Clan: Celestials</h3>
+											<span></span>
+										</div>
+
+										<div class="d-flex">
+											<a href="images/wolves/fear-wolf-celestials-omni.jpg?v2" class="overlay-trigger-icon bg-light text-dark" data-hover-animate="fadeInUpSmall" data-hover-animate-out="fadeOutDownSmall" data-hover-speed="350" data-lightbox="gallery-item"><i class="icon-line-stack-2"></i></a>
+											<a href="images/wolves/fear-wolf-celestials-astraeus.jpg?v2" class="d-none" data-lightbox="gallery-item"></a>
+											<a href="images/wolves/fear-wolf-celestials-skyholder.jpg?v2" class="d-none" data-lightbox="gallery-item"></a>
+										</div>
+									</div>
+									<div class="bg-overlay-bg dark" data-hover-animate="fadeIn"></div>
+								</div>
+							</div>
+						</div>
+					</article>
+					
+					
+
+					<article class="portfolio-item pf-icons pf-illustrations">
+						<div class="grid-inner">
+							<div class="portfolio-image">
+								<div class="fslider" data-arrows="false" data-speed="400" data-pause="4000">
+									<div class="flexslider">
+										<div class="slider-wrap">
+											<div class="slide"><a href="#"><img src="images/wolves/thumbs/fear-wolf-fallen-hades-thumb.jpg" alt="Hades"></a></div>
+											<div class="slide"><a href="#"><img src="images/wolves/thumbs/fear-wolf-fallen-mefitis-thumb.jpg" alt="Mefitis"></a></div>
+											<div class="slide"><a href="#"><img src="images/wolves/thumbs/fear-wolf-fallen-ruohtta-thumb.jpg" alt="Ruohtta"></a></div>
+										</div>
+									</div>
+								</div>
+								<div class="bg-overlay" data-lightbox="gallery">
+									<div class="bg-overlay-content dark flex-column" data-hover-animate="fadeIn">
+										<div class="portfolio-desc pt-0 center" data-hover-animate="fadeInDownSmall" data-hover-animate-out="fadeOutUpSmall" data-hover-speed="350">
+											<h3 style="color:white ! important;">Clan: Fallen</h3>
+											<span></span>
+										</div>
+
+									<div class="d-flex">
+											<a href="images/wolves/fear-wolf-fallen-hades.jpg?v2" class="overlay-trigger-icon bg-light text-dark" data-hover-animate="fadeInUpSmall" data-hover-animate-out="fadeOutDownSmall" data-hover-speed="350" data-lightbox="gallery-item"><i class="icon-line-stack-2"></i></a>
+											<a href="images/wolves/fear-wolf-fallen-mefitis.jpg?v2" class="d-none" data-lightbox="gallery-item"></a>
+											<a href="images/wolves/fear-wolf-fallen-ruohtta.jpg?v2" class="d-none" data-lightbox="gallery-item"></a>
+										</div>
+									</div>
+									<div class="bg-overlay-bg dark" data-hover-animate="fadeIn"></div>
+								</div>
+							</div>
+						</div>
+					</article>
+
+						<article class="portfolio-item pf-icons pf-illustrations">
+						<div class="grid-inner">
+							<div class="portfolio-image">
+								<div class="fslider" data-arrows="false" data-speed="400" data-pause="4000">
+									<div class="flexslider">
+										<div class="slider-wrap">
+											<div class="slide"><a href="#"><img src="images/wolves/thumbs/fear-wolf-primordials-morozko-thumb.jpg?v2" alt="Morozko"></a></div>
+											<div class="slide"><a href="#"><img src="images/wolves/thumbs/fear-wolf-primordials-phantom-thumb-2.jpg?v2" alt="Phantom"></a></div>
+											<div class="slide"><a href="#"><img src="images/wolves/thumbs/fear-wolf-primordials-vulcan-thumb.jpg?v2" alt="Vulcan"></a></div>
+											
+										</div>
+									</div>
+								</div>
+								<div class="bg-overlay" data-lightbox="gallery">
+									<div class="bg-overlay-content dark flex-column" data-hover-animate="fadeIn">
+										<div class="portfolio-desc pt-0 center" data-hover-animate="fadeInDownSmall" data-hover-animate-out="fadeOutUpSmall" data-hover-speed="350">
+											<h3 style="color:white ! important;">Clan: Primordials</h3>
+											<span></span>
+										</div>
+
+										<div class="d-flex">
+											<a href="images/wolves/fear-wolf-primordials-morozko.jpg?v2" class="overlay-trigger-icon bg-light text-dark" data-hover-animate="fadeInUpSmall" data-hover-animate-out="fadeOutDownSmall" data-hover-speed="350" data-lightbox="gallery-item"><i class="icon-line-stack-2"></i></a>
+											<a href="images/wolves/fear-wolf-primordials-phantom-2.jpg?v2" class="d-none" data-lightbox="gallery-item"></a>
+											<a href="images/wolves/fear-wolf-primordials-vulcan.jpg?v2" class="d-none" data-lightbox="gallery-item"></a>
+										</div>
+									</div>
+									<div class="bg-overlay-bg dark" data-hover-animate="fadeIn"></div>
+								</div>
+							</div>
+						</div>
+					</article>
+
+					<article class="portfolio-item pf-graphics pf-illustrations">
+						<div class="grid-inner">
+							<div class="portfolio-image">
+								<div class="fslider" data-arrows="false">
+									<div class="flexslider">
+										<div class="slider-wrap">
+											<div class="slide"><a href="#"><img src="images/wolves/thumbs/fear-wolf-vanguard-lionheart-thumb.jpg?v2" alt="Lionheart"></a></div>
+											<div class="slide"><a href="#"><img src="images/wolves/thumbs/fear-wolf-vanguard-sun-tzu.jpg?v2" alt="Sun Tzu"></a></div>
+											<div class="slide"><a href="#"><img src="images/wolves/thumbs/fear-wolf-vanguard-talos-thumb.jpg?v2" alt="Talos"></a></div>
+										</div>
+									</div>
+								</div>
+								<div class="bg-overlay" data-lightbox="gallery">
+									<div class="bg-overlay-content dark flex-column" data-hover-animate="fadeIn">
+										<div class="portfolio-desc pt-0 center" data-hover-animate="fadeInDownSmall" data-hover-animate-out="fadeOutUpSmall" data-hover-speed="350">
+											<h3 style="color:white ! important;">Clan: Vanguard</h3>
+											<span></span>
+										</div>
+
+										<div class="d-flex">
+											<a href="images/wolves/fear-wolf-vanguard-lionheart-2.jpg?v2" class="overlay-trigger-icon bg-light text-dark" data-hover-animate="fadeInUpSmall" data-hover-animate-out="fadeOutDownSmall" data-hover-speed="350" data-lightbox="gallery-item"><i class="icon-line-stack-2"></i></a>
+											<a href="images/wolves/fear-wolf-vanguard-sun-tzu.jpg?v2" class="d-none" data-lightbox="gallery-item"></a>
+											<a href="images/wolves/fear-wolf-vanguard-talos.jpg?v2" class="d-none" data-lightbox="gallery-item"></a>
+										</div>
+									</div>
+									<div class="bg-overlay-bg dark" data-hover-animate="fadeIn"></div>
+								</div>
+							</div>
+						</div>
+					</article>
+
+						<article class="portfolio-item pf-graphics pf-illustrations">
+						<div class="grid-inner">
+							<div class="portfolio-image">
+								<div class="fslider" data-arrows="false">
+									<div class="flexslider">
+										<div class="slider-wrap">
+											<div class="slide"><a href="#"><img src="images/wolves/thumbs/fear-wolf-gains-robigus-thumb.jpg?v2" alt="Robigus"></a></div>
+											<div class="slide"><a href="#"><img src="images/wolves/thumbs/fear-wolf-gains-soma-thumb.jpg?v2" alt="Soma"></a></div>
+											<div class="slide"><a href="#"><img src="images/wolves/thumbs/fear-wolf-gains-alicanto-thumb.jpg?v2" alt="Alicanto"></a></div>
+											
+										</div>
+									</div>
+								</div>
+								<div class="bg-overlay" data-lightbox="gallery">
+									<div class="bg-overlay-content dark flex-column" data-hover-animate="fadeIn">
+										<div class="portfolio-desc pt-0 center" data-hover-animate="fadeInDownSmall" data-hover-animate-out="fadeOutUpSmall" data-hover-speed="350">
+											<h3 style="color:white ! important;">Clan: Gaians</h3>
+											<span></span>
+										</div>
+
+										<div class="d-flex">
+											<a href="images/wolves/fear-wolf-gains-robigus.jpg?v2" class="overlay-trigger-icon bg-light text-dark" data-hover-animate="fadeInUpSmall" data-hover-animate-out="fadeOutDownSmall" data-hover-speed="350" data-lightbox="gallery-item"><i class="icon-line-stack-2"></i></a>
+											<a href="images/wolves/fear-wolf-gains-soma.jpg?v2" class="d-none" data-lightbox="gallery-item"></a>
+											<a href="images/wolves/fear-wolf-gains-alicanto.jpg?v2" class="d-none" data-lightbox="gallery-item"></a>
+										</div>
+									</div>
+									<div class="bg-overlay-bg dark" data-hover-animate="fadeIn"></div>
+								</div>
+							</div>
+						</div>
+					</article>
+
+					
+
+					
+
+					
+
+					
+
+				</div><!-- .portfolio-carousel end -->
+				</div>
+				
+		
+		
+		<div class="overflow-hidden mb-4" id="section-stats">
+
+<h3 class="display-4 color mb-0 featuredgamesheader" data-animate="fadeInUpSmall fast"><i><img src="images/fearwolf/stats-rouge.svg?v2" alt="fear wolf stats" style="width:50px;"/></i> <span>Wolf Stats</span></h3>
+
+		
+		
+
+					<div class="row counter-wrap align-items-center mt-4 statssec">
+									<div class="col-4 col-lg-3">
+										<div class="counter color"><span data-from="1" data-to="6666" data-speed="1000"></span></div>
+										<h5 class="mb-0 font-body text-white-50 measurementheader">WOLVES</h5>
+									</div>
+									
+									<div class="col-4 col-lg-3">
+										<div class="counter color"><span data-from="1" data-to="666" data-refresh-interval="50" data-speed="666"></span></div>
+										<h5 class="mb-0 font-body text-white-50 measurementheader">ALPHA</span></h5>
+									</div>
+
+									<div class="col-4 col-lg-3">
+										<div class="counter color"><span data-from="1" data-to="2000" data-refresh-interval="50" data-speed="666"></span></div>
+										<h5 class="mb-0 font-body text-white-50 measurementheader">BETA</h5>
+									</div>
+
+									<div class="col-4 col-lg-3">
+										<div class="counter color"><span data-from="1" data-to="4000" data-refresh-interval="50" data-speed="666"></span></div>
+										<h5 class="mb-0 font-body text-white-50 measurementheader">OMEGA</h5>
+									</div>
+									
+								</div>
+								
+								
+								
+								
+								
+					<div class="row counter-wrap align-items-center mt-4 statssec" style="text-align:center">
+
+									<div class="counter color wolfwhite"><span data-from="1" data-to="5" data-refresh-interval="50" data-speed="5"></span></div>
+										<h5 class="mb-0 font-body text-white-50 measurementheader">CLANS</h5>
+									</div>
+									
+									</div>
+									
+									
+												<div id="section-clans" class="section page-section bg-transparent mt-0" style="margin-top:50px !important;">
+					<div class="container">
+						<div class="row justify-content-center text-center" data-animate="fadeIn">
+							<div class="col-12">
+								<div class="overflow-hidden">
+									<div class="text-white-50 mb-2 text-uppercase ls3" data-animate="fadeInUpSmall" data-delay="100" style="color:white ! important;"><!--Blood Realms Unleashes:--></div>
+									
+									<h3 class="display-4 color mb-0 headericon featuredgamesheader" data-animate="fadeInUpSmall fast"><img src="images/icons/fear-wolf-icon-4.svg" alt="Wolf Traits" style="width:60px;"/> <span>5 Godly Wolf Clans</span></h3>
+								</div>
+							</div>
+						</div>
+					
+					</div>
+					<blockquote class="border-light border-width-2 font-primary fearwolfdesc wolfwhite"><p class="highlightp">Each clan of wolves draws power from a different energy source in the universe.</p><!--<p><a href="#">Find out more</a></p>--></blockquote>
+					
+					<div id="oc-testi" class="owl-carousel carousel-widget dark topmargin border-bottom border-top border-light wolftraitscarousel" data-items-xl="5" data-items-lg="5" data-items-md="2" data-items-xs="1" data-pagi="false" data-loop="true" data-margin="0">
+
+						<div class="oc-item p-5 d-flex flex-column text-center">
+							<div class="testi-image mx-auto overflow-hidden">
+								<a href="#" class="data-animate"><img src="images/clans/celestials-clan.png" alt="Celestials Clan"></a>
+							</div>
+							<div class="testi-content">
+								<div class="overflow-hidden">
+									<!--<p class="data-animate">Description</p>-->
+								</div>
+								<div class="testi-meta data-animate">
+									
+									<span>Deriving their power from cosmic energy</span>
+								</div>
+							</div>
+						</div>
+
+
+						<div class="oc-item p-5 d-flex flex-column text-center">
+							<div class="testi-image mx-auto overflow-hidden">
+								<a href="#" class="data-animate"><img src="images/clans/fallen-clan.png" alt="Fallen Clan"></a>
+							</div>
+							<div class="testi-content">
+								<div class="overflow-hidden">
+									<!--<p class="data-animate">Description</p>-->
+								</div>
+								<div class="testi-meta data-animate">
+									
+									<span>Summoning dark energy from what human's define as the "underworld"</span>
+								</div>
+							</div>
+						</div>
+
+						<div class="oc-item p-5 d-flex flex-column text-center">
+							<div class="testi-image mx-auto overflow-hidden">
+								<a href="#" class="data-animate"><img src="images/clans/primordials-clan.png" alt="Primordials Clan"></a>
+							</div>
+							<div class="testi-content">
+								<div class="overflow-hidden">
+									<!--<p class="data-animate">Description</p>-->
+								</div>
+								<div class="testi-meta data-animate">
+									
+									<span>Calling upon the elemental power of the earth &amp; beyond</span>
+								</div>
+							</div>
+						</div>
+
+						<div class="oc-item p-5 d-flex flex-column text-center">
+							<div class="testi-image mx-auto overflow-hidden">
+								<a href="#" class="data-animate"><img src="images/clans/gaians-clan.png" alt="Gaians Clan"></a>
+							</div>
+							<div class="testi-content">
+								<div class="overflow-hidden">
+									<!--<p class="data-animate">Description</p>-->
+								</div>
+								<div class="testi-meta data-animate">
+									
+									<span>Drawing power from the life force of earth's abundant forests</span>
+								</div>
+							</div>
+						</div>
+
+						<div class="oc-item p-5 d-flex flex-column text-center">
+							<div class="testi-image mx-auto overflow-hidden">
+								<a href="#" class="data-animate"><img src="images/clans/vanguard-clan.png" alt="Vanguard Clan"></a>
+							</div>
+							<div class="testi-content">
+								<div class="overflow-hidden">
+									<!--<p class="data-animate">Description</p>-->
+								</div>
+								<div class="testi-meta data-animate">
+									
+									<span>Summoning the spirits of legendary warriors of the past</span>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+								
+								
+								
+		
+		
+			<div class="content-wrap multiplegamessection">
+			
+			
+			
+			
+	
+<div class="overflow-hidden mb-4" id="section-games" style="margin-top:50px !important;">
+<h3 class="display-4 color mb-0 featuredgamesheader" data-animate="fadeInUpSmall fast"><i><img src="images/fearwolf/fear-wolf-spotlight-games-3.svg" alt="fear wolf multiple games" style="width:50px;"/></i> <span>Used in Multiple Games &amp; Media</span></h3>
+<div class="textaligncenter">
+<span class="wrapimage150" style="margin-top:20px;"><img src="images/fearwolf/fear-wolf-pose-1-red-outline.svg?v3" alt="Fear Wolf" class="fearphantom" style="width:150px ! important;margin-top:20px;max-width:150px ! important;"></span>
+</div>	
+<blockquote class="border-light border-width-2 font-primary fearwolfdesc"><p class="highlightp"><span class="secondcolor">The FEAR Wolf has Seemingly Supernatural Powers that transcend multiple AA horror verse games!</span></p><!--<p>His enhanced interoperability &amp; utility will help owners Achieve to Earn in many Fear Games.</p>--></blockquote>
+</div>
+
+
+
+
+
+
+					<div id="oc-portfolio" class="owl-carousel portfolio-carousel carousel-widget" data-pagi="false" data-items-xs="1" data-items-sm="2" data-items-md="3" data-items-lg="4">
+						
+						<div class="portfolio-item">
+							<div class="portfolio-image">
+								<a href="#">
+									<img src="images/fearwolf/games/clucking-hell-frostbite-menu.jpg" alt="Fear Wolf Arena">
+								</a>
+								<div class="bg-overlay">
+									<div class="bg-overlay-content dark" data-hover-animate="fadeIn" data-hover-speed="350">
+										<a href="images/fearwolf/games/clucking-hell-frostbite-menu.jpg" class="overlay-trigger-icon bg-light text-dark" data-hover-animate="fadeInDownSmall" data-hover-animate-out="fadeInUpSmall" data-hover-speed="350" data-lightbox="image"><i class="icon-line-plus"></i></a>
+									</div>
+									<div class="bg-overlay-bg dark" data-hover-animate="fadeIn" data-hover-speed="350"></div>
+								</div>
+							</div>
+							<div class="portfolio-desc">
+								<h3>Clucking Hell (Q2)</h3>
+								<span>Turn your German Shepherd dog into a ferocious damage dealing Wolf!</span>
+							</div>
+						</div>
+					
+					<div class="portfolio-item">
+							<div class="portfolio-image">
+								<a href="#">
+									<img src="images/games/fear-wolf-blood-realms-thumb.jpg" alt="Blood Realms">
+								</a>
+								<div class="bg-overlay">
+									<div class="bg-overlay-content dark" data-hover-animate="fadeIn" data-hover-speed="350">
+										<a href="images/games/fear-wolf-blood-realms.jpg" class="overlay-trigger-icon bg-light text-dark" data-hover-animate="fadeInDownSmall" data-hover-animate-out="fadeInUpSmall" data-hover-speed="350" data-lightbox="image"><i class="icon-line-plus"></i></a>
+									</div>
+									<div class="bg-overlay-bg dark" data-hover-animate="fadeIn" data-hover-speed="350"></div>
+								</div>
+							</div>
+							<div class="portfolio-desc">
+								<h3>Blood Realms (Q3)</h3>
+								<span>Rescue your Dire Wolf in Blood Realms who will act as your loyal companion.</span>
+							</div>
+						</div>
+						
+						<div class="portfolio-item">
+							<div class="portfolio-image">
+								<a href="#">
+									<img src="images/fearwolf/games/the-crypt-thumb.jpg" alt="The Crypt">
+								</a>
+								<div class="bg-overlay">
+									<div class="bg-overlay-content dark" data-hover-animate="fadeIn" data-hover-speed="350">
+										<a href="images/fearwolf/games/the-crypt-screenshot-2.jpg" class="overlay-trigger-icon bg-light text-dark" data-hover-animate="fadeInDownSmall" data-hover-animate-out="fadeInUpSmall" data-hover-speed="350" data-lightbox="image"><i class="icon-line-plus"></i></a>
+									</div>
+									<div class="bg-overlay-bg dark" data-hover-animate="fadeIn" data-hover-speed="350"></div>
+								</div>
+							</div>
+							<div class="portfolio-desc">
+								<h3>The Crypt (Q3)</h3>
+								<span>Fear Wolf holders will benefit from a substantial boost within the soul harvesting process of humans.</span>
+							</div>
+						</div>
+						
+						
+
+					<div class="portfolio-item">
+							<div class="portfolio-image">
+								<a href="#">
+									<img src="images/fearwolf/secret-nft-thumb.jpg" alt="Fear Wolf Arena">
+								</a>
+								<div class="bg-overlay">
+									<div class="bg-overlay-content dark" data-hover-animate="fadeIn" data-hover-speed="350">
+										<a href="images/fearwolf/secret-nft.jpg" class="overlay-trigger-icon bg-light text-dark" data-hover-animate="fadeInDownSmall" data-hover-animate-out="fadeInUpSmall" data-hover-speed="350" data-lightbox="image"><i class="icon-line-plus"></i></a>
+									</div>
+									<div class="bg-overlay-bg dark" data-hover-animate="fadeIn" data-hover-speed="350"></div>
+								</div>
+							</div>
+							<div class="portfolio-desc">
+								<h3>Mystery Use Case (Q4)</h3>
+								<span>A yet to be revealed use case in media beyond gaming!</span>
+							</div>
+						</div>
+					
+
+					</div>
+					
+					
+								
+								
+
+
+				<div class="clear"></div>
+
+
+				<div id="section-chains" class="section page-section dark bg-transparent m-0 pb-0" style="margin-top:50px !important;">
+					<div class="container">
+						<div class="row justify-content-center text-center">
+							<div class="col-12">
+								<div class="overflow-hidden">
+									<div class="text-white-50 mb-2 text-uppercase ls3" data-animate="fadeInUpSmall" data-delay="10"><span class="wolfwhite" style="letter-spacing:2px;">Featured On...</span></div>
+									<h3 class="display-4 color mb-0 headericon featuredgamesheader" data-animate="fadeInUpSmall fast"><img src="images/fearwolf/chains-icon.svg" alt="mutliple chains" style="width:60px;"/> <span style="color:#f70202 ! important;">Multiple Chains</span></h3>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="row dark align-content-stretch grid-border topmargin">
+						<div class="col-lg-4 col-md-6 col-padding">
+							<div class="feature-box flex-column fbox-plain">
+								<div class="fbox-icon mb-3">
+								<img src="images/icons/ethereum-logo.svg" alt="Ethereum Chain" style="width:170px;"/>
+								</div>
+								<div class="fbox-content">
+									<div class="overflow-hidden">
+										<p class="mb-0" data-animate="fadeInUpSmall fast" data-delay="200">The FEAR Wolf will be launched on Ethereum.</p>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-lg-4 col-md-6 col-padding">
+							<div class="feature-box flex-column fbox-plain">
+								<div class="fbox-icon mb-3">
+								<img src="images/fearwolf/muon-network.svg" alt="MUON NFT Bridge" style="width:170px;"/>
+								</div>
+								<div class="fbox-content">
+									
+									<div class="overflow-hidden mb-3">
+										<p class="mb-0" data-animate="fadeInUpSmall fast" data-delay="200">Muon are our cross chain partner who enable the Fear Wolf to work via multiple chains.</p>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-lg-4 col-md-6 col-padding">
+							<div class="feature-box flex-column fbox-plain">
+								<div class="fbox-icon mb-3">
+									<img src="images/icons/chains.svg" alt="multiple chains" style="width:200px;"/>
+								</div>
+								<div class="fbox-content">
+									<div class="overflow-hidden mb-3">
+										<p class="mb-0" data-animate="fadeInUpSmall fast" data-delay="200">The FEAR Wolf will be fully compatible with multiple chains.</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="clear"></div>
+
+				<!-- Section Launch
+				============================================= -->
+				<div id="section-launch" class="section sectionmoon page-section dark mt-0 pb-0 overflow-visible" style="background: linear-gradient(rgba(0,0,0,.3), transparent), url('images/backgrounds/omni-wolf-moon-background.jpg?v2') no-repeat center left / contain; margin-top:200px !important;">
+					<div class="container">
+						<div class="row justify-content-end mx-auto mw-md " style="transform: translateY(70px);">
+							<div class="col-md-7">
+								<p class="border border-light p-2 d-inline text-smaller auctionphrase"><span>On a Full Moon!</span></p>
+								<h3 class="display-4 mt-2 text-white headericon"><img src="images/icons/wolf-moon-icon-chosen.svg" alt="Wolf Launch" style="width:100px;"/><span>The Wolf Launches</span></h3>
+								<div class="card bg-color border-light shadow-lg moonlaunch">
+									<div class="card-body p-4">
+										<div class="overflow-hidden">
+											<div class="row align-items-center"  data-animate="fadeInUpSmall faster">
+												<div class="col-3">
+													<img src="images/icons/tree-wolf-silouhette-white-outline.svg" alt="fear wolf" class="rounded">
+												</div>
+												<div class="col-9 wolfnumbers">
+													<h4 class="mb-2"><span style="color:white ! important;font-size:18px ! important;">Whitelist Period</span>:<br/> < 18th May</h4>
+													
+												</div>
+											</div>
+										</div>
+										<div class="line my-4"></div>
+										<div class="overflow-hidden">
+											<div class="row align-items-center" data-animate="fadeInUpSmall faster" data-delay="100">
+												<div class="col-3">
+													<img src="images/icons/wolf-tree-head-white-outline.svg" alt="fear wolf beta" class="rounded" style="max-width:70px ! important;">
+												</div>
+												<div class="col-9 wolfnumbers">
+													<h4 class="mb-2"><span style="color:white ! important;font-size:18px ! important;">INO 0.1 ETH:<br/></span> 18th May</h4>
+													<div class="d-flex align-middle text-smaller">
+														
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="line my-4"></div>
+										<div class="overflow-hidden">
+											<div class="row align-items-center" data-animate="fadeInUpSmall faster" data-delay="50">
+												<div class="col-3">
+													<img src="images/icons/robot-wolf-white-outline.svg" alt="fear wolf hell hound" class="rounded">
+												</div>
+												<div class="col-9 wolfnumbers">
+													<h4 class="mb-2"><span style="color:white ! important;font-size:18px ! important;">Public Sale 0.2ETH:</span><br/> 3rd June</h4>
+													<div class="d-flex align-middle text-smaller">
+														
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="line my-4"></div>
+										<div class="aligncenter">
+										<a href="ino.html" class="button button-border button-rounded button-fill fill-from-bottom button-black wolfbutton"><i class="icon-plus-sign"></i><span>JOIN THE INO!</span></a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+				<div class="clear"></div>
+
+				<!-- Section Wolf Traits
+				============================================= -->
+				<div id="section-traits" class="section page-section bg-transparent mt-0" style="margin-top:50px !important;">
+					<div class="container">
+						<div class="row justify-content-center text-center" data-animate="fadeIn">
+							<div class="col-12">
+								<div class="overflow-hidden">
+									<div class="text-white-50 mb-2 text-uppercase ls3" data-animate="fadeInUpSmall" data-delay="100"><span class="wolfwhite">7 In-Game...</span></div>
+									
+									<h3 class="display-4 color mb-0 headericon featuredgamesheader" data-animate="fadeInUpSmall fast"><img src="images/icons/fear-wolf-icon-3-red.svg" alt="Wolf Traits" style="width:60px;"/> <span>Wolf Traits</span></h3>
+								</div>
+							</div>
+						</div>
+					
+					</div>
+					<blockquote class="border-light border-width-2 font-primary fearwolfdesc"><p class="highlightp"><span class="secondcolor">Upgradable traits are forged into Wolf NFTs on chain. The speed at which you can upgrade each trait is weighted based on one of three Wolf types: Alpha, Beta or Omega.</span> </p><!--<p><a href="#">Find out more</a></p>--></blockquote>
+					
+					<div id="oc-testi" class="owl-carousel carousel-widget dark topmargin border-bottom border-top border-light wolftraitscarousel" data-items-xl="4" data-items-lg="4" data-items-md="2" data-items-xs="1" data-pagi="false" data-loop="true" data-margin="0">
+
+						<div class="oc-item p-5 d-flex flex-column text-center">
+							<div class="testi-image mx-auto overflow-hidden">
+								<a href="#" class="data-animate"><img src="images/fearwolf/fear-loyalty.svg" alt="Loyalty"></a>
+							</div>
+							<div class="testi-content">
+								<div class="overflow-hidden">
+									<!--<p class="data-animate">Description</p>-->
+								</div>
+								<div class="testi-meta data-animate">
+									Loyalty
+									<span>for Defense &amp; Protection</span>
+								</div>
+							</div>
+						</div>
+
+
+						<div class="oc-item p-5 d-flex flex-column text-center">
+							<div class="testi-image mx-auto overflow-hidden">
+								<a href="#" class="data-animate"><img src="images/fearwolf/intelligence.svg" alt="intelligence"></a>
+							</div>
+							<div class="testi-content">
+								<div class="overflow-hidden">
+									<!--<p class="data-animate">Description</p>-->
+								</div>
+								<div class="testi-meta data-animate">
+									Intelligence
+									<span>for Problem Solving &amp; Adaptation</span>
+								</div>
+							</div>
+						</div>
+
+						<div class="oc-item p-5 d-flex flex-column text-center">
+							<div class="testi-image mx-auto overflow-hidden">
+								<a href="#" class="data-animate"><img src="images/fearwolf/howl-2.svg" alt="Howl"></a>
+							</div>
+							<div class="testi-content">
+								<div class="overflow-hidden">
+									<!--<p class="data-animate">Description</p>-->
+								</div>
+								<div class="testi-meta data-animate">
+									Howl
+									<span>for Special Boosts &amp; Immunity</span>
+								</div>
+							</div>
+						</div>
+
+						<div class="oc-item p-5 d-flex flex-column text-center">
+							<div class="testi-image mx-auto overflow-hidden">
+								<a href="#" class="data-animate"><img src="images/fearwolf/fear-wolf-speed-2.svg" alt="Speed"></a>
+							</div>
+							<div class="testi-content">
+								<div class="overflow-hidden">
+									<!--<p class="data-animate">Description</p>-->
+								</div>
+								<div class="testi-meta data-animate">
+									Speed
+									<span>for Acceleration, Avoidance &amp; Pace of Movement</span>
+								</div>
+							</div>
+						</div>
+
+						<div class="oc-item p-5 d-flex flex-column text-center">
+							<div class="testi-image mx-auto overflow-hidden">
+								<a href="#" class="data-animate"><img src="images/fearwolf/wolf-spirit-2.svg" alt="Spirit"></a>
+							</div>
+							<div class="testi-content">
+								<div class="overflow-hidden">
+									<!--<p class="data-animate">Description</p>-->
+								</div>
+								<div class="testi-meta data-animate">
+									Spirit
+									<span>for Bravery &amp; Determination</span>
+								</div>
+							</div>
+						</div>
+
+						<div class="oc-item p-5 d-flex flex-column text-center">
+							<div class="testi-image mx-auto overflow-hidden">
+								<a href="#" class="data-animate"><img src="images/fearwolf/wolf-strength.svg" alt="Strength"></a>
+							</div>
+							<div class="testi-content">
+								<div class="overflow-hidden">
+									<!--<p class="data-animate">Description</p>-->
+								</div>
+								<div class="testi-meta data-animate">
+									Strength
+									<span>for Vigor &amp; Damage</span>
+								</div>
+							</div>
+						</div>
+
+						<div class="oc-item p-5 d-flex flex-column text-center">
+							<div class="testi-image mx-auto overflow-hidden">
+								<a href="#" class="data-animate"><img src="images/fearwolf/fear-wolf-endurance.svg" alt="Endurance"></a>
+							</div>
+							<div class="testi-content">
+								<div class="overflow-hidden">
+									<!--<p class="data-animate">Description</p>-->
+								</div>
+								<div class="testi-meta data-animate">
+									Endurance
+									<span>for Lastability &amp; Tenacity</span>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+				
+				
+				
+				
+				
+	
+				<div id="section-marketing" class="section page-section bg-transparent mt-0" style="margin-top:50px !important;">
+					<div class="container">
+						<div class="row justify-content-center text-center" data-animate="fadeIn">
+							<div class="col-12">
+								<div class="overflow-hidden">
+									<div class="text-white-50 mb-2 text-uppercase ls3" data-animate="fadeInUpSmall" data-delay="100" style="color:white ! important;">Packed Schedule...</div>
+									
+									<h3 class="display-4 color mb-0 headericon featuredgamesheader" data-animate="fadeInUpSmall fast"><img src="images/icons/fear-wolf-icon-4.svg" alt="Wolf Traits" style="width:60px;"/> <span>Marketing Events to Howl About!</span></h3>
+								</div>
+							</div>
+						</div>
+					
+					</div>
+					<blockquote class="border-light border-width-2 font-primary fearwolfdesc wolfwhite"><p class="highlightp">We have many big marketing events scheduled to launch the Wolf into the World of NFTs and Games! </p><!--<p><a href="#">Find out more</a></p>--></blockquote>
+					
+					<div id="oc-testi" class="owl-carousel carousel-widget dark topmargin border-bottom border-top border-light wolftraitscarousel" data-items-xl="4" data-items-lg="4" data-items-md="2" data-items-xs="1" data-pagi="false" data-loop="true" data-margin="0">
+
+						<div class="oc-item p-5 d-flex flex-column text-center">
+							<div class="testi-image mx-auto overflow-hidden">
+								<a href="#" class="data-animate"><img src="images/icons/celebrities.svg" alt="Celebrities"></a>
+							</div>
+							<div class="testi-content">
+								<div class="overflow-hidden">
+									<!--<p class="data-animate">Description</p>-->
+								</div>
+								<div class="testi-meta data-animate">
+									Celebrity Coverage
+									<span>Huge personality exposure</span>
+								</div>
+							</div>
+						</div>
+
+
+						<div class="oc-item p-5 d-flex flex-column text-center">
+							<div class="testi-image mx-auto overflow-hidden">
+								<a href="#" class="data-animate"><img src="images/icons/magazine.svg" alt="Wolf Magazine Coverage"></a>
+							</div>
+							<div class="testi-content">
+								<div class="overflow-hidden">
+									<!--<p class="data-animate">Description</p>-->
+								</div>
+								<div class="testi-meta data-animate">
+									Mainstream Magazine
+									<span>Crypto focused, Wolf reviewed and displayed</span>
+								</div>
+							</div>
+						</div>
+
+						<div class="oc-item p-5 d-flex flex-column text-center">
+							<div class="testi-image mx-auto overflow-hidden">
+								<a href="#" class="data-animate"><img src="images/icons/tech.svg" alt="Wolf Tech"></a>
+							</div>
+							<div class="testi-content">
+								<div class="overflow-hidden">
+									<!--<p class="data-animate">Description</p>-->
+								</div>
+								<div class="testi-meta data-animate">
+									Wolf Tech
+									<span>Partner promotion</span>
+								</div>
+							</div>
+						</div>
+
+						<div class="oc-item p-5 d-flex flex-column text-center">
+							<div class="testi-image mx-auto overflow-hidden">
+								<a href="#" class="data-animate"><img src="images/icons/ambassadors.svg" alt="Ambassadors"></a>
+							</div>
+							<div class="testi-content">
+								<div class="overflow-hidden">
+									<!--<p class="data-animate">Description</p>-->
+								</div>
+								<div class="testi-meta data-animate">
+									Wolf Ambassadors
+									<span>Unleashed</span>
+								</div>
+							</div>
+						</div>
+
+						<div class="oc-item p-5 d-flex flex-column text-center">
+							<div class="testi-image mx-auto overflow-hidden">
+								<a href="#" class="data-animate"><img src="images/icons/affiliate.svg" alt="Affiliate"></a>
+							</div>
+							<div class="testi-content">
+								<div class="overflow-hidden">
+									<!--<p class="data-animate">Description</p>-->
+								</div>
+								<div class="testi-meta data-animate">
+									Affiliation Program
+									<span>Spread the Word to Earn!</span>
+								</div>
+							</div>
+						</div>
+
+						<div class="oc-item p-5 d-flex flex-column text-center">
+							<div class="testi-image mx-auto overflow-hidden">
+								<a href="#" class="data-animate"><img src="images/icons/amas.svg" alt="Amas"></a>
+							</div>
+							<div class="testi-content">
+								<div class="overflow-hidden">
+									<!--<p class="data-animate">Description</p>-->
+								</div>
+								<div class="testi-meta data-animate">
+									AMAs
+									<span>Big AMA Coverage</span>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+				
+				
+				
+				
+				
+					<!-- Section Partners
+				============================================= -->
+				<div id="section-partners" class="section page-section bg-transparent mt-0" style="margin-top:50px !important;">
+					<div class="container">
+						<div class="row justify-content-center text-center" data-animate="fadeIn">
+							<div class="col-12">
+								<div class="overflow-hidden">
+									<div class="text-white-50 mb-2 text-uppercase ls3" data-animate="fadeInUpSmall" data-delay="100"><span class="wolfwhite">Super Charged Performance...</span></div>
+									
+									<h3 class="display-4 color mb-0 headericon featuredgamesheader" data-animate="fadeInUpSmall fast"><img src="images/icons/robot-wolf-icon.svg" alt="Tech Partners" style="width:60px;"/> <span>Tech-Partners</span></h3>
+								</div>
+							</div>
+						</div>
+					
+					</div>
+					<blockquote class="border-light border-width-2 font-primary fearwolfdesc"><p class="highlightp"><span class="secondcolor">It takes more than one tech company to create a Wolf of such fortitude and power...</span> </p><!--<p><a href="#">Find out more</a></p>--></blockquote>
+					
+					<div id="oc-testi" class="owl-carousel carousel-widget dark topmargin border-bottom border-top border-light wolftraitscarousel" data-items-xl="4" data-items-lg="4" data-items-md="2" data-items-xs="1" data-pagi="false" data-loop="true" data-margin="0">
+
+						<div class="oc-item p-5 d-flex flex-column text-center">
+							<div class="testi-image mx-auto overflow-hidden">
+								<img src="images/partners/biconomy-icon-2.svg" alt="Biconomy">
+							</div>
+							<div class="testi-content">
+								<div class="overflow-hidden">
+									<!--<p class="data-animate">Description</p>-->
+								</div>
+								<div class="testi-meta data-animate">
+									Biconomy
+									<span>Transfer your Wolf with no fees in and out of the FEAR wallet powered by Biconomy Gasless transactions.</span>
+								</div>
+							</div>
+						</div>
+
+						<div class="oc-item p-5 d-flex flex-column text-center">
+							<div class="testi-image mx-auto overflow-hidden">
+								<a href="#" class="data-animate"><img src="images/partners/muon-icon.svg" alt="Muon"></a>
+							</div>
+							<div class="testi-content">
+								<div class="overflow-hidden">
+									<!--<p class="data-animate">Description</p>-->
+								</div>
+								<div class="testi-meta data-animate">
+									Muon
+									<span>Bridging of NFTs to any chain. Wolf randomization of in game traits on chain using Muon’s RNG</span>
+								</div>
+							</div>
+						</div>
+
+
+						<div class="oc-item p-5 d-flex flex-column text-center">
+							<div class="testi-image mx-auto overflow-hidden">
+								<a href="#" class="data-animate"><img src="images/partners/uno-re-icon.png" alt="Uno Re"></a>
+							</div>
+							<div class="testi-content">
+								<div class="overflow-hidden">
+									<!--<p class="data-animate">Description</p>-->
+								</div>
+								<div class="testi-meta data-animate">
+									Uno Re
+									<span> Insure your precious Wolf using Uno Re's groundbreaking NFT insurance model</span>
+								</div>
+							</div>
+						</div>
+
+
+						<div class="oc-item p-5 d-flex flex-column text-center">
+							<div class="testi-image mx-auto overflow-hidden">
+								<a href="#" class="data-animate"><img src="images/partners/unity-icon-white.svg" alt="Unity"></a>
+							</div>
+							<div class="testi-content">
+								<div class="overflow-hidden">
+									<!--<p class="data-animate">Description</p>-->
+								</div>
+								<div class="testi-meta data-animate">
+									Unity
+									<span> Experience world class game play with your Wolf in the Museum HorrorVerse built with Unity</span>
+								</div>
+							</div>
+						</div>
+
+						<div class="oc-item p-5 d-flex flex-column text-center">
+							<div class="testi-image mx-auto overflow-hidden">
+								<a href="#" class="data-animate"><img src="images/partners/chain-port-icon.png" alt="Chainport"></a>
+							</div>
+							<div class="testi-content">
+								<div class="overflow-hidden">
+									<!--<p class="data-animate">Description</p>-->
+								</div>
+								<div class="testi-meta data-animate">
+									Chainport
+									<span>Bridged FEAR token allows BSC token holders to move from BSC to Ethereum to get a Whitelist spot for a Wolf</span>
+								</div>
+							</div>
+						</div>
+
+						<div class="oc-item p-5 d-flex flex-column text-center">
+							<div class="testi-image mx-auto overflow-hidden">
+								<a href="#" class="data-animate"><img src="images/partners/web-3-auth-icon.svg" alt="Web 3 Auth"></a>
+							</div>
+							<div class="testi-content">
+								<div class="overflow-hidden">
+									<!--<p class="data-animate">Description</p>-->
+								</div>
+								<div class="testi-meta data-animate">
+									Web3Auth
+									<span>Social Media Managed wallets using Torus Labs. Manage your Wolf in the FEAR Wallet.</span>
+								</div>
+							</div>
+						</div>
+
+						<div class="oc-item p-5 d-flex flex-column text-center">
+							<div class="testi-image mx-auto overflow-hidden">
+								<a href="#" class="data-animate"><img src="images/partners/solidity-icon.svg" alt="Solidity"></a>
+							</div>
+							<div class="testi-content">
+								<div class="overflow-hidden">
+									<!--<p class="data-animate">Description</p>-->
+								</div>
+								<div class="testi-meta data-animate">
+									Solidity
+									<span>: NFT Minting of Wolf traits is written in blockchain’s most widely adopted language</span>
+								</div>
+							</div>
+						</div>
+
+						<div class="oc-item p-5 d-flex flex-column text-center">
+							<div class="testi-image mx-auto overflow-hidden">
+								<a href="#" class="data-animate"><img src="images/partners/transak-icon.svg" alt="Transak"></a>
+							</div>
+							<div class="testi-content">
+								<div class="overflow-hidden">
+									<!--<p class="data-animate">Description</p>-->
+								</div>
+								<div class="testi-meta data-animate">
+									Transak
+									<span>: Purchase FEAR using your credit card to get a place on the Wolf Whitelist</span>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+				
+				
+				
+				
+				
+				
+				
+
+				<div class="clear"></div>
+
+				
+
+				
+
+			</div>
+		</section><!-- #content end -->
+
+		<!-- Footer
+		============================================= -->
+		<footer id="footer" class="bg-transparent border-width-1 border-light dark">
+
+			<div class="container">
+
+				<!-- Footer Widgets
+				============================================= -->
+				<div class="footer-widgets-wrap">
+
+					<div class="row justify-content-between col-mb-30">
+						<div class="col-lg-4 col-sm-6">
+							<div class="widget clearfix" style="background: no-repeat center center; background-size: 100% auto;">
+								<div>
+									<h3>About Us:</h3>
+									<address>
+										<p>Fear Wolf is an NFT mascot and property of <a href="https://www.fear.io/" target="_blank" rel="nofollow">Fear.io</a></p>
+									</address>
+									<ul class="list-unstyled">
+										<!--<li class="mb-1"><span class="color op-07">Phone:</span> <span class="font-primary">(1) 8547 632521</span></li>
+										<li class="mb-1"><span class="color op-07">Email:</span> <span class="font-primary">noreply@canvas.com</span></li>-->
+										<li><span class="color op-07">Website:</span> <a href="https://www.fearwolf.com/"> <span class="font-primary">fearwolf.com</span></a></li>
+									</ul>
+									<!--<a href="#" class="social-icon si-small si-light si-facebook">
+										<i class="icon-facebook"></i>
+										<i class="icon-facebook"></i>
+									</a>
+
+									<a href="#" class="social-icon si-small si-light si-twitter">
+										<i class="icon-twitter"></i>
+										<i class="icon-twitter"></i>
+									</a>
+
+									<a href="#" class="social-icon si-small si-light si-gplus">
+										<i class="icon-gplus"></i>
+										<i class="icon-gplus"></i>
+									</a>
+
+									<a href="#" class="social-icon si-small si-light si-pinterest">
+										<i class="icon-pinterest"></i>
+										<i class="icon-pinterest"></i>
+									</a>-->
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-3 col-sm-6">
+
+							<!--<div class="widget widget_links clearfix">
+
+								<h4>Links</h4>
+
+								<ul>
+									<li><a href="#">Home</a></li>
+									<li><a href="#">About</a></li>
+									<li><a href="#">Testimonials</a></li>
+									<li><a href="#">Price</a></li>
+									<li><a href="#">Gallery</a></li>
+									<li><a href="#">Shop</a></li>
+									<li><a href="#">Contact</a></li>
+								</ul>
+
+							</div>-->
+
+						</div>
+						<div class="col-lg-5 col-md-12">
+							<div class="widget clearfix text-lg-end">
+								<div>
+									<img src="images/fear-wolf-logo-600.png?v2" alt="Image" height="50" class="mb-4">
+									<p class="text-white-50 mb-5">Fear Wolf is a multi game &amp; multi chain NFT that focuses on providing owners with maximum entertainment and utility in all Fear's major games and digital content.</p>
+									
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+
+			</div>
+
+			
+			<div id="copyrights" class="bg-transparent border-top border-light">
+
+				<div class="container clearfix">
+
+					<div class="row justify-content-center">
+
+						<div class="col-md-6 text-center">
+							<p class="mb-0">Copyrights &copy; 2022 All Rights Reserved by Fear.io.</p>
+							<div class="overflow-hidden">
+								<div class="copyright-links" data-animate="fadeInUpSmall faster" data-delay="200"><a href="#">Terms of Use</a> / <a href="#">Privacy Policy</a></div>
+							</div>
+						</div>
+
+					</div>
+
+
+				</div>
+
+			</div>
+
+		</footer><!-- #footer end -->
+
+	</div><!-- #wrapper end -->
 
 	<!-- Go To Top
 	============================================= -->
@@ -781,7 +1224,6 @@
 	============================================= -->
 	<script src="js/jquery.js"></script>
 	<script src="js/plugins.min.js"></script>
-	<script src="js/bootbox@5.5.2.js"></script>
 
 	<!-- Include Date Range Picker -->
 	<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
@@ -796,9 +1238,27 @@
 			altInput: true,
 			altFormat: "F j, Y  - H:i",
 			minDate: "today",
-			time_24hr: true,
+			time_24hr: true
 		});
 	</script>
-</body>
+	
 
+
+<script type="text/javascript">
+var sc_project=12743184; 
+var sc_invisible=1; 
+var sc_security="c6f6ad96"; 
+var sc_remove_link=1; 
+</script>
+<script type="text/javascript"
+src="https://www.statcounter.com/counter/counter.js"
+async></script>
+<noscript><div class="statcounter"><img class="statcounter"
+src="https://c.statcounter.com/12743184/0/c6f6ad96/1/"
+alt="Web Analytics"
+referrerPolicy="no-referrer-when-downgrade"></div></noscript>
+
+
+
+</body>
 </html>
